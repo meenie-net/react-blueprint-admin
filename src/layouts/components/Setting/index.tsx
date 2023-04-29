@@ -1,27 +1,37 @@
 import { ButtonGroup, Button, Icon } from "@blueprintjs/core";
 import EmitEventEnum from "../../../enums/emitEvent";
 import emitter from "../../../utils/EventEmitter";
+import { useDispatch } from "react-redux";
+import { changeAssemblySize } from "../../../stores/global";
+import useGlobalStore from "../../../hooks/useGlobalStore";
 
 const Setting = () => {
-  const handleClick = () => {
+  const { assemblyLarge } = useGlobalStore();
+  const dispatch = useDispatch();
+  const handSizeClick = () => {
+    dispatch(changeAssemblySize());
+  };
+  const handleThemeClick = () => {
     emitter.emit(EmitEventEnum.OpenThemeDrawer);
   };
   return (
     <>
-      <ButtonGroup minimal={true} large>
+      <ButtonGroup minimal={true} large={assemblyLarge}>
         <Button>
           <Icon icon="user" color="#f6f7f9" size={24}></Icon>
         </Button>
-        <Button>
+        <Button onClick={handSizeClick}>
           <Icon icon="settings" color="#f6f7f9" size={24}></Icon>
         </Button>
-        <Button onClick={handleClick}>
+        <Button onClick={handleThemeClick}>
           <Icon icon="control" color="#f6f7f9" size={24}></Icon>
         </Button>
         <Button>
           <img
             src="../../src/assets/avatar.png"
-            className="w-8 h-8 rounded-full"
+            className={`${
+              assemblyLarge ? "w-8 h-8 rounded-full" : "w-7 h-7 rounded-full"
+            }`}
             alt=""
           />
         </Button>

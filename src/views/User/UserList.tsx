@@ -39,7 +39,7 @@ const UserList = () => {
   );
   const OperationCellRenderer = (rowIndex: number) => (
     <Cell className="flex justify-center items-center">
-      <ButtonGroup>
+      <ButtonGroup minimal>
         <Button
           onClick={() => handleEdit(userList[rowIndex].id)}
           intent="primary"
@@ -48,15 +48,15 @@ const UserList = () => {
         </Button>
         <Button
           onClick={() => handleEdit(userList[rowIndex].id)}
-          intent="primary"
+          intent="success"
         >
           编辑
         </Button>
         <Button
           onClick={() => handleEdit(userList[rowIndex].id)}
-          intent="primary"
+          intent="danger"
         >
-          编辑
+          删除
         </Button>
       </ButtonGroup>
     </Cell>

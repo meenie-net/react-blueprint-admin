@@ -2,9 +2,11 @@ import { Button, Card, Tabs, Tab, Icon } from "@blueprintjs/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { removeTab, setTab } from "../../../stores/global";
+import { setTab } from "../../../stores/global";
+import useGlobalStore from "../../../hooks/useGlobalStore";
 
 const TabsSection = () => {
+  const { assemblyLarge, menuOpen } = useGlobalStore();
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,11 +22,12 @@ const TabsSection = () => {
   return (
     <>
       <Card className="flex justify-between p-1 border-s-2 border-gray-50">
-        <div className="overflow-x-hidden">
+        <div className="overflow-x-hidden ml-1">
           <Tabs
             id="tabs"
             animate
             fill
+            large={assemblyLarge}
             onChange={(nextTabId: string) => handleChange(nextTabId)}
             selectedTabId={location.pathname}
           >
@@ -45,8 +48,13 @@ const TabsSection = () => {
               ))}
           </Tabs>
         </div>
-        <div>
-          <Button icon="add" minimal={true} small />
+        <div className="mr-1 flex items-center">
+          <Button
+            icon="add"
+            minimal={true}
+            large={assemblyLarge}
+            small={!assemblyLarge}
+          />
         </div>
       </Card>
     </>

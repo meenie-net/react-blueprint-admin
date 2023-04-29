@@ -1,49 +1,37 @@
-import { Menu, MenuDivider, MenuItem, Icon, Collapse } from "@blueprintjs/core";
+import { Menu, Icon } from "@blueprintjs/core";
 import menu from "../../../../config/menu";
 import { useNavigate } from "react-router-dom";
+import CollapseMenu from "./components/CollapseMenu";
+import { MenuItem2 } from "@blueprintjs/popover2";
+import useGlobalStore from "../../../../hooks/useGlobalStore";
 
 const ClassicSider = () => {
+  const { assemblyLarge, menuOpen } = useGlobalStore();
   const navigate = useNavigate();
   const handleClick = (path: string) => {
     navigate(path);
   };
   return (
     <>
-      <Menu large className="min-w-[160px]">
+      <Menu
+        large={assemblyLarge}
+        className="min-w-[50px] flex flex-col content-center"
+      >
         {menu.map((item) => {
           if (item.children && item.children.length > 0) {
-            return (
-              <div key={item.path}>
-                <MenuDivider />
-                <MenuItem
-                  text={item.meta.title}
-                  className="justify-center"
-                  icon={item.meta.icon}
-                  labelElement={<Icon icon="caret-down" />}
-                ></MenuItem>
-                <Collapse isOpen={true}>
-                  <Menu large={false} className="min-w-[145px] bg-slate-100">
-                    {item.children.map((sub) => (
-                      <MenuItem
-                        key={sub.path}
-                        icon={sub.meta.icon}
-                        onClick={() => handleClick(sub.path)}
-                        text={sub.meta.title}
-                      ></MenuItem>
-                    ))}
-                  </Menu>
-                </Collapse>
-              </div>
-            );
+            return <CollapseMenu key={item.path} item={item} />;
           } else {
             return (
-              <MenuItem
+              <MenuItem2
                 key={item.path}
                 icon={item.meta.icon}
-                text={item.meta.title}
+                title={menuOpen ? "" : item.meta.title}
+                text={menuOpen ? item.meta.title : ""}
                 onClick={() => handleClick(item.path)}
-                className="justify-center"
-                labelElement={<Icon icon="star-empty" className="invisible" />}
+                className="self-center"
+                labelElement={
+                  menuOpen && <Icon icon="star-empty" className="invisible" />
+                }
               />
             );
           }

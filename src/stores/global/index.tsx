@@ -5,6 +5,8 @@ import { flapMenu } from "../../utils";
 
 const initialState: globalStoreState = {
   layoutType: "CLASSIC",
+  menuOpen: true,
+  assemblyLarge: true,
   tabList: [],
   flapedMenu: flapMenu(menu),
 };
@@ -44,9 +46,22 @@ const globalStore = createSlice({
     removeAllTab: (state) => {
       state.tabList = [];
     },
+    changeAssemblySize: (state) => {
+      state.assemblyLarge = !state.assemblyLarge;
+    },
+    changeMenuOpen: (state) => {
+      state.menuOpen = !state.menuOpen;
+    },
   },
 });
 
-export const { setLayoutType, setTab, addTab, removeTab, removeAllTab } =
-  globalStore.actions;
+export const {
+  setLayoutType,
+  setTab,
+  addTab,
+  removeTab,
+  removeAllTab,
+  changeAssemblySize,
+  changeMenuOpen,
+} = globalStore.actions;
 export default globalStore;

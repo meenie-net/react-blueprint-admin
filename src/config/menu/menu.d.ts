@@ -1,4 +1,4 @@
-interface Menu {
+interface MenuType {
   path: string;
   name: string;
   element?: JSX.Element;
@@ -7,5 +7,5 @@ interface Menu {
     title: string;
     icon: BlueprintIcons_16Id | MaybeElement;
   };
-  children?: Menu[];
+  children?: MenuType[];
 }

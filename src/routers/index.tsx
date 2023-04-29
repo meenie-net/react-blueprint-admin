@@ -2,9 +2,9 @@ import { createHashRouter } from "react-router-dom";
 import menu from "../config/menu";
 import { Layout } from "../layouts";
 
-const generateRoutes = (menu: Menu[]): Route[] => {
+const generateRoutes = (menu: MenuType[]): RouteType[] => {
   return menu.map((route) => {
-    let children: Route[] = [];
+    let children: RouteType[] = [];
     if (route.children) {
       children = generateRoutes(route.children);
       return {

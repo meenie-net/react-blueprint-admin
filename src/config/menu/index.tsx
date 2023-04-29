@@ -3,7 +3,7 @@ import Welcome from "../../views/Welcome";
 import GoodsList from "../../views/Goods/GoodsList";
 import { createRef } from "react";
 
-const menu: Menu[] = [
+const menu: MenuType[] = [
   {
     path: "/home",
     name: "home",
