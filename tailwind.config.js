@@ -13,6 +13,16 @@ export default {
         "classic-close-right": "calc(100% - 50px)",
         "classic-large-close-right": "calc(100% - 60px)",
       },
+      minWidth: {
+        "classic-open-left": "160px",
+        "classic-large-open-left": "160px",
+        "classic-close-left": "50px",
+        "classic-large-close-left": "60px",
+        "classic-open-right": "calc(100% - 160px)",
+        "classic-large-open-right": "calc(100% - 160px)",
+        "classic-close-right": "calc(100% - 50px)",
+        "classic-large-close-right": "calc(100% - 60px)",
+      },
       height: {
         "classic-header": "45px",
         "classic-large-header": "55px",

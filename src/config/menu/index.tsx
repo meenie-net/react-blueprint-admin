@@ -5,7 +5,7 @@ import { createRef } from "react";
 
 const menu: MenuType[] = [
   {
-    path: "/home",
+    path: "/",
     name: "home",
     element: <Welcome />,
     nodeRef: createRef(),

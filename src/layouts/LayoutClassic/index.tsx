@@ -77,14 +77,15 @@ const LayoutClassic = () => {
       <div className="flex w-full flex-auto">
         {/* SiderMenu */}
         <div
+          id="sider-menu-container"
           className={`${
             assemblyLarge
               ? menuOpen
-                ? "w-classic-large-open-left"
-                : "w-classic-large-close-left"
+                ? "w-classic-large-open-left min-w-classic-large-open-left"
+                : "w-classic-large-close-left min-w-classic-large-close-left"
               : menuOpen
-              ? "w-classic-open-left"
-              : "w-classic-close-left"
+              ? "w-classic-open-left min-w-classic-open-left"
+              : "w-classic-close-left min-w-classic-close-left"
           }`}
         >
           <ClassicSider />
@@ -94,7 +95,10 @@ const LayoutClassic = () => {
           {/* Tabs */}
           <Tabs />
           {/* Content */}
-          <div className="flex-auto p-3 bg-slate-200 h-classic-container">
+          <div
+            id="content"
+            className="flex-auto p-3 bg-slate-200 h-classic-container"
+          >
             <Content />
           </div>
         </div>

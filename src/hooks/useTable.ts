@@ -1,54 +1,87 @@
-import { Table2 } from "@blueprintjs/table";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { Table2, TableLoadingOption } from "@blueprintjs/table";
+import { MutableRefObject, RefObject, useEffect, useRef, useState } from "react";
+import useGlobalStore from "./useGlobalStore";
+import { generateArray, generateColumnWidth } from "../utils";
 
 /**
  * 
  * @param defaultValue 表格的初始值, 例：[{}]
  * @param cb 获取表格数据的方法，例：api.getList
- * @param req 请求参数（分页，查询等）
+ * @param config 配置   
+ * 
  * 默认：{   
-        pageSize: 10,   
-        pageNum: 1,   
-        param: {},   
-      }  
+ ***********widthAyy: [] , // 列宽度数组   
+ ***********param: { // 请求参数（分页，查询等）   
+ ***************pageSize?: number = 10,   
+ ***************pageNum?: number = 1,   
+ ***************param?: object = {},   
+ ***********}   
+ *******}   
  * @returns [tableData,wrapperRef,tableRef,update]
  */
 function useTable<T>(
-  defaultValue: T[],
   cb: { (req: PaginationRequest): Promise<{ code: 200 | 400; msg: "成功" | "失败"; data: T[]; }>;},
-  req?: PaginationRequest
-): [T[], RefObject<HTMLDivElement>, RefObject<Table2>, (args0:PaginationRequest)=>void]{
-  const [tableData, setTableData] = useState<T[]>(defaultValue);
-  const update = async (customReq?:PaginationRequest) => {
-    const param = customReq || req || {
+  config?: {
+    widthArr?:Array<number>
+    param?:PaginationRequest
+  } 
+): {
+    tableData: T[],
+    tableRef: RefObject<Table2>,
+    updateTable: (args0?: PaginationRequest) => void,
+    loading: MutableRefObject<TableLoadingOption[]>
+}{
+  const [tableData, setTableData] = useState<T[]>([
+    ...generateArray(() => {
+      return {};
+    }, 10),
+  ]);
+  const loading = useRef<TableLoadingOption[]>([
+    TableLoadingOption.CELLS,
+    TableLoadingOption.COLUMN_HEADERS,
+    TableLoadingOption.ROW_HEADERS,
+  ]);
+  const { assemblyLarge, menuOpen } = useGlobalStore();
+  const tableRef = useRef<Table2>(null);
+  const updateTable = async (customReq?: PaginationRequest) => {
+    const param = customReq || config?.param || {
       pageSize:10,
       pageNum:1
     }
     const { data } = await cb(param)
     if (data) {
       setTableData(data)
+      loading.current = []
     }
   }
-  update()
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const tableRef = useRef<Table2>(null);
+  updateTable()
+  const left = menuOpen ? 160 : (assemblyLarge ? 60 : 50)
   useEffect(() => {
-    const wrapperElem = wrapperRef.current;
-    if (!wrapperElem) return;
+    console.log('1',1)
     const resizeObserver = new ResizeObserver(() => {
       if (!tableRef.current) return;
       const table = tableRef.current;
       if (!table.locator) return;
-      const tableRect = table.locator.getViewportRect();
-      table.setState({ ...table.state, viewportRect: tableRect });
-      table.scrollToRegion({ cols: [0, 0] });
+      const tableRect = table.locator.getViewportRect()
+      const containerWidth = document.body.clientWidth - left - 64
+      const finalWidth = containerWidth < 700 ? 700 : containerWidth
+      tableRect.width = finalWidth
+      setTimeout(() => {
+        if (config?.widthArr)
+        table.setState({
+          ...table.state,
+          viewportRect: tableRect,
+          columnWidths: generateColumnWidth(config?.widthArr, tableRect.width),
+        })
+        table.componentDidMount()
+      },10)
     });
-    resizeObserver.observe(wrapperElem);
+    resizeObserver.observe(document.body);
     return () => {
       resizeObserver.disconnect();
     };
-  }, []);
-  return [tableData,wrapperRef,tableRef,update];
+  }, [tableData,left]);
+  return { tableData, tableRef, updateTable, loading };
 };
 
 export default useTable;

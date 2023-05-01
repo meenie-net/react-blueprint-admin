@@ -14,7 +14,7 @@ function mockFetch<T>(data:T[]){
 }
 export const api = {
   getUser(req: PaginationRequest) {
-    console.log('req',req)
+    // console.log('req',req)
     return mockFetch<User>(users)
   },
 }

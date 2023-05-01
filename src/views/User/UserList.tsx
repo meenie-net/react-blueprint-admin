@@ -5,23 +5,31 @@ import {
   HotkeysProvider,
   InputGroup,
 } from "@blueprintjs/core";
-import { Table2, Column, Cell } from "@blueprintjs/table";
+import { Table2, Column, Cell, TableLoadingOption } from "@blueprintjs/table";
 import useTable from "../../hooks/useTable";
 import { api } from "../../api";
+import { useEffect } from "react";
+import { generateArray } from "../../utils";
 
 const UserList = () => {
-  const [userList, wrapperRef, tableRef, update] = useTable<User>(
-    [],
-    api.getUser
-  );
+  const {
+    tableData: userList,
+    tableRef,
+    updateTable,
+    loading,
+  } = useTable<User>(api.getUser, {
+    widthArr: [0.2, 0.1, 0.4, 0.3],
+  });
   const handleEdit = (index: number) => {
-    update({
+    updateTable({
       pageSize: 1,
       pageNum: 1,
       param: {},
     });
-    console.log(index);
   };
+  useEffect(() => {
+    // updateTable();
+  }, []);
   const IDCellRenderer = (rowIndex: number) => (
     <Cell className="flex justify-center items-center">
       {userList[rowIndex].id}
@@ -100,28 +108,21 @@ const UserList = () => {
         </div>
       </div>
       <HotkeysProvider>
-        <div ref={wrapperRef}>
-          <Table2
-            ref={tableRef}
-            numRows={userList.length}
-            rowHeights={userList.map((_) => 40)}
-            defaultColumnWidth={100}
-            columnWidths={[100, 80, 100, 200]}
-          >
-            <Column id="user-id" name="ID" cellRenderer={IDCellRenderer} />
-            <Column
-              id="user-nick"
-              name="昵称"
-              cellRenderer={NickCellRenderer}
-            />
-            <Column id="user-tel" name="电话" cellRenderer={TelCellRenderer} />
-            <Column
-              id="user-operation"
-              name="操作"
-              cellRenderer={OperationCellRenderer}
-            />
-          </Table2>
-        </div>
+        <Table2
+          ref={tableRef}
+          numRows={userList.length}
+          rowHeights={generateArray(() => 40, userList.length)}
+          loadingOptions={loading.current}
+        >
+          <Column id="user-id" name="ID" cellRenderer={IDCellRenderer} />
+          <Column id="user-nick" name="昵称" cellRenderer={NickCellRenderer} />
+          <Column id="user-tel" name="电话" cellRenderer={TelCellRenderer} />
+          <Column
+            id="user-operation"
+            name="操作"
+            cellRenderer={OperationCellRenderer}
+          />
+        </Table2>
       </HotkeysProvider>
     </div>
   );
