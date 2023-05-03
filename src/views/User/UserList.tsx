@@ -1,15 +1,25 @@
 import {
   Button,
   ButtonGroup,
+  Card,
   FormGroup,
   HotkeysProvider,
   InputGroup,
 } from "@blueprintjs/core";
-import { Table2, Column, Cell, TableLoadingOption } from "@blueprintjs/table";
+import {
+  Table2,
+  Column,
+  Cell,
+  SelectionModes,
+  Region,
+} from "@blueprintjs/table";
 import useTable from "../../hooks/useTable";
 import { api } from "../../api";
-import { useEffect } from "react";
+import { useState } from "react";
 import { generateArray } from "../../utils";
+import UserDrawer from "./UserDrawer";
+import emitter from "../../utils/EventEmitter";
+import EmitEventEnum from "../../enums/emitEvent";
 
 const UserList = () => {
   const {
@@ -17,19 +27,47 @@ const UserList = () => {
     tableRef,
     updateTable,
     loading,
-  } = useTable<User>(api.getUser, {
+    onSelection,
+    multiSelectedArr,
+  } = useTable<User, "id">(api.getUser, {
     widthArr: [0.2, 0.1, 0.4, 0.3],
   });
-  const handleEdit = (index: number) => {
-    updateTable({
-      pageSize: 1,
-      pageNum: 1,
-      param: {},
+  const [userDrawerProps, setUserDrawerProps] = useState<{
+    user: User;
+    state: "add" | "edit";
+  }>({
+    user: {
+      id: "",
+      nick: "",
+      tel: 0,
+      permission: [],
+    },
+    state: "edit",
+  });
+  const handleAdd = () => {
+    setUserDrawerProps({
+      ...userDrawerProps,
+      user: {
+        id: "",
+        nick: "",
+        tel: 0,
+        permission: [],
+      },
+      state: "add",
     });
+    emitter.emit(EmitEventEnum.OpenUserDrawer);
   };
-  useEffect(() => {
-    // updateTable();
-  }, []);
+  const handleEdit = (user: User) => {
+    setUserDrawerProps({
+      ...userDrawerProps,
+      user,
+      state: "edit",
+    });
+    emitter.emit(EmitEventEnum.OpenUserDrawer);
+  };
+  const userRowHeaderRenderer = (rowIndex: number) => (
+    <Cell className="flex justify-center items-center">{rowIndex + 1}</Cell>
+  );
   const IDCellRenderer = (rowIndex: number) => (
     <Cell className="flex justify-center items-center">
       {userList[rowIndex].id}
@@ -48,22 +86,13 @@ const UserList = () => {
   const OperationCellRenderer = (rowIndex: number) => (
     <Cell className="flex justify-center items-center">
       <ButtonGroup minimal>
-        <Button
-          onClick={() => handleEdit(userList[rowIndex].id)}
-          intent="primary"
-        >
+        <Button onClick={() => handleEdit(userList[rowIndex])} intent="primary">
           编辑
         </Button>
-        <Button
-          onClick={() => handleEdit(userList[rowIndex].id)}
-          intent="success"
-        >
+        <Button onClick={() => handleEdit(userList[rowIndex])} intent="success">
           编辑
         </Button>
-        <Button
-          onClick={() => handleEdit(userList[rowIndex].id)}
-          intent="danger"
-        >
+        <Button onClick={() => handleEdit(userList[rowIndex])} intent="danger">
           删除
         </Button>
       </ButtonGroup>
@@ -71,7 +100,7 @@ const UserList = () => {
   );
   return (
     <div>
-      <div className="flex justify-between">
+      <Card className="flex justify-between pb-0">
         <div className="flex">
           <FormGroup
             inline={true}
@@ -106,24 +135,46 @@ const UserList = () => {
             <Button icon="reset" text="重置" />
           </FormGroup>
         </div>
-      </div>
-      <HotkeysProvider>
-        <Table2
-          ref={tableRef}
-          numRows={userList.length}
-          rowHeights={generateArray(() => 40, userList.length)}
-          loadingOptions={loading.current}
-        >
-          <Column id="user-id" name="ID" cellRenderer={IDCellRenderer} />
-          <Column id="user-nick" name="昵称" cellRenderer={NickCellRenderer} />
-          <Column id="user-tel" name="电话" cellRenderer={TelCellRenderer} />
-          <Column
-            id="user-operation"
-            name="操作"
-            cellRenderer={OperationCellRenderer}
-          />
-        </Table2>
-      </HotkeysProvider>
+      </Card>
+      <Card className="mt-3">
+        <div className="flex">
+          <FormGroup inline={true} className="mr-2">
+            <Button onClick={() => handleAdd()} icon="search" text="新增用户" />
+          </FormGroup>
+          <FormGroup inline={true} className="mr-2">
+            <Button
+              icon="search"
+              text="批量删除"
+              disabled={multiSelectedArr.length === 0}
+            />
+          </FormGroup>
+        </div>
+        <HotkeysProvider>
+          <Table2
+            ref={tableRef}
+            numRows={userList.length}
+            rowHeights={generateArray(() => 40, userList.length)}
+            loadingOptions={loading.current}
+            rowHeaderCellRenderer={userRowHeaderRenderer}
+            onSelection={(_) => onSelection(_, "id")}
+            selectionModes={SelectionModes.ROWS_ONLY}
+          >
+            <Column id="user-id" name="ID" cellRenderer={IDCellRenderer} />
+            <Column
+              id="user-nick"
+              name="昵称"
+              cellRenderer={NickCellRenderer}
+            />
+            <Column id="user-tel" name="电话" cellRenderer={TelCellRenderer} />
+            <Column
+              id="user-operation"
+              name="操作"
+              cellRenderer={OperationCellRenderer}
+            />
+          </Table2>
+        </HotkeysProvider>
+      </Card>
+      <UserDrawer {...userDrawerProps} />
     </div>
   );
 };
