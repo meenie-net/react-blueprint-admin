@@ -1,7 +1,7 @@
-import { Table2, TableLoadingOption } from "@blueprintjs/table";
+import { Region, Table2, TableLoadingOption } from "@blueprintjs/table";
 import { MutableRefObject, RefObject, useEffect, useRef, useState } from "react";
 import useGlobalStore from "./useGlobalStore";
-import { generateArray, generateColumnWidth } from "../utils";
+import { generateArray, generateColumnWidth, generateRangeArray } from "../utils";
 
 /**
  * 
@@ -19,8 +19,8 @@ import { generateArray, generateColumnWidth } from "../utils";
  *******}   
  * @returns [tableData,wrapperRef,tableRef,update]
  */
-function useTable<T>(
-  cb: { (req: PaginationRequest): Promise<{ code: 200 | 400; msg: "成功" | "失败"; data: T[]; }>;},
+function useTable<T, K extends keyof T>(
+  cb: { (req: PaginationRequest): Promise<ResType>;},
   config?: {
     widthArr?:Array<number>
     param?:PaginationRequest
@@ -29,13 +29,16 @@ function useTable<T>(
     tableData: T[],
     tableRef: RefObject<Table2>,
     updateTable: (args0?: PaginationRequest) => void,
-    loading: MutableRefObject<TableLoadingOption[]>
+    loading: MutableRefObject<TableLoadingOption[]>,
+    onSelection: (regions: Region[],key:K) => void,
+    multiSelectedArr:T[K][]
 }{
   const [tableData, setTableData] = useState<T[]>([
     ...generateArray(() => {
       return {};
     }, 10),
   ]);
+  const [multiSelectedArr, setMultiSelectedArr] = useState<T[K][]>([]);
   const loading = useRef<TableLoadingOption[]>([
     TableLoadingOption.CELLS,
     TableLoadingOption.COLUMN_HEADERS,
@@ -54,10 +57,24 @@ function useTable<T>(
       loading.current = []
     }
   }
-  updateTable()
+  useEffect(() => {
+    // updateTable();
+  }, [multiSelectedArr]);
+  const onSelection = (regions: Region[], key: K) => {
+    const prev = regions
+      .map((region) => {
+        if (region.rows != undefined)
+          return generateRangeArray(region.rows[0], region.rows[1], 1);
+      })
+      .flat()
+      .map((i) => tableData[i!][key]);
+    setMultiSelectedArr(prev);
+  };
+  useEffect(() => {
+    updateTable()
+  },[])
   const left = menuOpen ? 160 : (assemblyLarge ? 60 : 50)
   useEffect(() => {
-    console.log('1',1)
     const resizeObserver = new ResizeObserver(() => {
       if (!tableRef.current) return;
       const table = tableRef.current;
@@ -81,7 +98,7 @@ function useTable<T>(
       resizeObserver.disconnect();
     };
   }, [tableData,left]);
-  return { tableData, tableRef, updateTable, loading };
+  return { tableData, tableRef, updateTable, loading, onSelection,multiSelectedArr };
 };
 
 export default useTable;

@@ -1,4 +1,3 @@
-import { Card } from "@blueprintjs/core";
 import KeepAlive from "react-activation";
 import { useLocation, useOutlet } from "react-router-dom";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
@@ -21,9 +20,9 @@ const Content = () => {
         classNames="page"
       >
         {() => (
-          <Card className="w-full h-full overflow-y-auto animate-appear_right">
+          <div className="w-full h-full overflow-y-auto animate-appear_right">
             <KeepAlive saveScrollPosition>{currentOutlet}</KeepAlive>
-          </Card>
+          </div>
         )}
       </CSSTransition>
     </SwitchTransition>

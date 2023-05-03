@@ -1,5 +1,5 @@
 type User = {
-    id: number,
+    id: string,
     nick: string,
     tel: number,
     permission: string[],
