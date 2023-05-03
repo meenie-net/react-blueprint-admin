@@ -59,7 +59,7 @@ const LayoutClassic = () => {
                 icon={menuOpen ? "menu-closed" : "menu-open"}
                 className="animate-appear_right"
                 color="#f6f7f9"
-                size={28}
+                size={assemblyLarge ? 28 : 24}
               ></Icon>
             </Button>
             {/* Breadcrumb */}

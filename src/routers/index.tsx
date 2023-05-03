@@ -11,11 +11,19 @@ const generateRoutes = (menu: MenuType[]): RouteType[] => {
         path: route.path,
         element: route.element,
         children,
+        handle: {
+          icon: route.meta.icon,
+          title: route.meta.title,
+        },
       };
     } else {
       return {
         path: route.path,
         element: route.element,
+        handle: {
+          icon: route.meta.icon,
+          title: route.meta.title,
+        },
       };
     }
   });
@@ -27,8 +35,13 @@ const routes = [
     path: "/",
     element: <Layout />,
     children: [...sub],
+    handle: {
+      icon: "home",
+      title: "首页",
+    },
   },
 ];
+console.log("routes", routes);
 
 const router = createHashRouter(routes);
 

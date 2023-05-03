@@ -17,14 +17,47 @@ const Setting = () => {
   return (
     <>
       <ButtonGroup minimal={true} large={assemblyLarge}>
-        <Button>
-          <Icon icon="user" color="#f6f7f9" size={24}></Icon>
-        </Button>
         <Button onClick={handSizeClick}>
-          <Icon icon="settings" color="#f6f7f9" size={24}></Icon>
+          <Icon
+            icon="settings"
+            color="#f6f7f9"
+            size={assemblyLarge ? 24 : 18}
+          ></Icon>
+        </Button>
+        <Button>
+          <Icon
+            icon="search"
+            color="#f6f7f9"
+            size={assemblyLarge ? 24 : 18}
+          ></Icon>
+        </Button>
+        <Button>
+          <Icon
+            icon="translate"
+            color="#f6f7f9"
+            size={assemblyLarge ? 24 : 18}
+          ></Icon>
+        </Button>
+        <Button>
+          <Icon
+            icon="zoom-to-fit"
+            color="#f6f7f9"
+            size={assemblyLarge ? 24 : 18}
+          ></Icon>
         </Button>
         <Button onClick={handleThemeClick}>
-          <Icon icon="control" color="#f6f7f9" size={24}></Icon>
+          <Icon
+            icon="contrast"
+            color="#f6f7f9"
+            size={assemblyLarge ? 24 : 18}
+          ></Icon>
+        </Button>
+        <Button>
+          <Icon
+            icon="notifications"
+            color="#f6f7f9"
+            size={assemblyLarge ? 24 : 18}
+          ></Icon>
         </Button>
         <Button>
           <img

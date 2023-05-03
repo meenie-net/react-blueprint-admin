@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { redirect } from "react-router-dom";
 import menu from "../../config/menu";
 import { flapMenu } from "../../utils";
 
@@ -7,7 +6,17 @@ const initialState: globalStoreState = {
   layoutType: "CLASSIC",
   menuOpen: true,
   assemblyLarge: true,
-  tabList: [],
+  tabList: [
+    {
+      path: "/",
+      name: "home",
+      active: true,
+      meta: {
+        title: "首页",
+        icon: "home",
+      },
+    },
+  ],
   flapedMenu: flapMenu(menu),
 };
 
@@ -19,6 +28,10 @@ const globalStore = createSlice({
       state.layoutType = payload;
     },
     setTab: (state, { payload }) => {
+      // console.log(
+      //   "state.flapedMenu",
+      //   JSON.parse(JSON.stringify(state.flapedMenu))
+      // );
       if (state.tabList.every((tab) => tab.path !== payload)) {
         state.flapedMenu.forEach((item) => {
           if (item.path === payload) {
@@ -35,13 +48,8 @@ const globalStore = createSlice({
         });
       }
     },
-    addTab: (state, { payload }) => {
-      if (state.tabList.find(payload)) {
-        redirect(payload.path);
-      }
-    },
     removeTab: (state, { payload }) => {
-      state.tabList.filter((tab) => tab.path === payload);
+      state.tabList = [...state.tabList.filter((tab) => tab.path !== payload)];
     },
     removeAllTab: (state) => {
       state.tabList = [];
@@ -58,7 +66,6 @@ const globalStore = createSlice({
 export const {
   setLayoutType,
   setTab,
-  addTab,
   removeTab,
   removeAllTab,
   changeAssemblySize,

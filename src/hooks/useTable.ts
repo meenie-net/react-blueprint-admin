@@ -5,7 +5,6 @@ import { generateArray, generateColumnWidth, generateRangeArray } from "../utils
 
 /**
  * 
- * @param defaultValue 表格的初始值, 例：[{}]
  * @param cb 获取表格数据的方法，例：api.getList
  * @param config 配置   
  * 

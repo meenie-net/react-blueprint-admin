@@ -6,13 +6,7 @@ import {
   HotkeysProvider,
   InputGroup,
 } from "@blueprintjs/core";
-import {
-  Table2,
-  Column,
-  Cell,
-  SelectionModes,
-  Region,
-} from "@blueprintjs/table";
+import { Table2, Column, Cell, SelectionModes } from "@blueprintjs/table";
 import useTable from "../../hooks/useTable";
 import { api } from "../../api";
 import { useState } from "react";

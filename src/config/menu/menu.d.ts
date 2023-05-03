@@ -5,7 +5,7 @@ interface MenuType {
   nodeRef?: React.RefObject<unknown>;
   meta: {
     title: string;
-    icon: BlueprintIcons_16Id | MaybeElement;
+    icon: IconName | MaybeElement;
   };
   children?: MenuType[];
 }
