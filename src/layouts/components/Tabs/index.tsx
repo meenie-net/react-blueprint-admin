@@ -33,7 +33,7 @@ const TabsSection = () => {
   return (
     <>
       <Card className="flex justify-between p-1 border-s-2 border-gray-50">
-        <div className="overflow-x-hidden ml-1">
+        <div className="ml-1 overflow-x-hidden">
           <Tabs
             id="tabs"
             animate
@@ -51,18 +51,19 @@ const TabsSection = () => {
                   icon={tab.meta.icon}
                   className="group"
                 >
-                  {tab.path != "/" && (
-                    <Icon
-                      icon="small-cross"
-                      className="group-hover:animate-appear_right"
-                      onClick={(e) => handleRemove(e, i)}
-                    />
-                  )}
+                  <Icon
+                    icon="small-cross"
+                    className="group-hover:animate-appear_right"
+                    style={{
+                      display: tab.path === "/" ? "none" : "block",
+                    }}
+                    onClick={(e) => handleRemove(e, i)}
+                  />
                 </Tab>
               ))}
           </Tabs>
         </div>
-        <div className="mr-1 flex items-center">
+        <div className="flex items-center mr-1">
           <Button
             icon="more"
             minimal={true}

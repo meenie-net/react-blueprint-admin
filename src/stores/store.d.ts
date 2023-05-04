@@ -1,7 +1,6 @@
 interface TabType {
   path: string;
   name: string;
-  active: boolean;
   meta: {
     title: string;
     icon: BlueprintIcons_16Id | MaybeElement;

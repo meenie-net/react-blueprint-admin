@@ -6,7 +6,7 @@ const useBreadcrumbs = () => {
   const { assemblyLarge } = useGlobalStore();
   const navigate = useNavigate();
   const matches = useMatches();
-  if (matches[1].pathname === "/") matches.shift();
+  if (matches[1]?.pathname === "/") matches.shift();
   const crumbs: BreadcrumbProps[] = matches
     .map((match) => {
       return {
@@ -27,8 +27,8 @@ const useBreadcrumbs = () => {
           text: v.handle.title,
           className: `${
             assemblyLarge
-              ? "text-text-dark hover:text-hover"
-              : "text-text-dark hover:text-hover text-xs"
+              ? "text-dark-text hover:text-hover"
+              : "text-dark-text hover:text-hover text-xs"
           }`,
         };
       }
@@ -47,12 +47,12 @@ const useBreadcrumbs = () => {
         text: v.handle.title,
         className: `${
           assemblyLarge
-            ? "text-text-dark hover:text-hover"
-            : "text-text-dark hover:text-hover text-xs"
+            ? "text-dark-text hover:text-hover"
+            : "text-dark-text hover:text-hover text-xs"
         }`,
       };
     });
-  return crumbs
-}
+  return crumbs;
+};
 
-export default useBreadcrumbs
+export default useBreadcrumbs;

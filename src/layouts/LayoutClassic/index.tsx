@@ -19,13 +19,13 @@ const LayoutClassic = () => {
 
   return (
     // ClassicLayoutContainer
-    <div className="w-full h-full flex flex-col">
+    <div className="flex flex-col w-full h-full">
       {/* Header */}
       <div
         className={`${
           assemblyLarge
-            ? "flex items-center w-full divide-x-2 border-box h-classic-large-header dark-base"
-            : "flex items-center w-full divide-x-2 border-box h-classic-header dark-base"
+            ? "flex items-center w-full divide-x-2 border-box h-classic-large-header text-dark-text bg-dark-bg"
+            : "flex items-center w-full divide-x-2 border-box h-classic-header text-dark-text bg-dark-bg"
         }`}
       >
         {/* HeaderLeft */}
@@ -74,7 +74,7 @@ const LayoutClassic = () => {
         </div>
       </div>
       {/* Body */}
-      <div className="flex w-full flex-auto">
+      <div className="flex flex-auto w-full">
         {/* SiderMenu */}
         <div
           id="sider-menu-container"

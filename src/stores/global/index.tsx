@@ -10,7 +10,6 @@ const initialState: globalStoreState = {
     {
       path: "/",
       name: "home",
-      active: true,
       meta: {
         title: "首页",
         icon: "home",
@@ -38,7 +37,6 @@ const globalStore = createSlice({
             state.tabList.push({
               path: payload,
               name: item.name,
-              active: true,
               meta: {
                 title: item.meta.title,
                 icon: item.meta.icon,

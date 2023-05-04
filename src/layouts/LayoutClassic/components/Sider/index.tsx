@@ -1,6 +1,6 @@
 import { Menu, Icon } from "@blueprintjs/core";
 import menu from "../../../../config/menu";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CollapseMenu from "./components/CollapseMenu";
 import { MenuItem2 } from "@blueprintjs/popover2";
 import useGlobalStore from "../../../../hooks/useGlobalStore";
@@ -8,6 +8,7 @@ import useGlobalStore from "../../../../hooks/useGlobalStore";
 const ClassicSider = () => {
   const { assemblyLarge, menuOpen } = useGlobalStore();
   const navigate = useNavigate();
+  const location = useLocation();
   const handleClick = (path: string) => {
     navigate(path);
   };
@@ -28,6 +29,7 @@ const ClassicSider = () => {
                 title={menuOpen ? "" : item.meta.title}
                 text={menuOpen ? item.meta.title : ""}
                 onClick={() => handleClick(item.path)}
+                active={location.pathname === item.path}
                 className="self-center"
                 labelElement={
                   menuOpen && <Icon icon="star-empty" className="invisible" />

@@ -32,8 +32,8 @@ export default {
         "classic-large-breadcrumb": "16px",
       },
       colors: {
-        "text-dark": "#f6f7f9",
-        "bg-dark": "#2f343c",
+        "dark-text": "#f6f7f9",
+        "dark-bg": "#2f343c",
         hover: "#ff9980",
       },
       keyframes: {
