@@ -3,6 +3,7 @@ import { MenuItem2 } from "@blueprintjs/popover2";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useGlobalStore from "../../../../../../hooks/useGlobalStore";
+import "./style.scss";
 
 const CollapseMenu = (props: { key: string; item: MenuType }) => {
   const { item } = props;
@@ -41,11 +42,15 @@ const CollapseMenu = (props: { key: string; item: MenuType }) => {
         ></MenuItem2>
       ) : (
         <MenuItem2
-          className="justify-center"
+          className="fix-menuicon-mr"
+          textClassName="mr-0"
           icon={item.meta.icon}
           active={collapseActive}
-          labelElement={undefined}
           onClick={handleCollapse}
+          selected={true}
+          popoverProps={{
+            popoverClassName: "fix-popmenu-min-w",
+          }}
         >
           {item.children &&
             item.children.map((sub) => (
