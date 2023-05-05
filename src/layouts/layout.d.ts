@@ -1,1 +1,1 @@
-declare type LayoutType = "CLASSIC" | "COLUMN";
+declare type LayoutType = "CLASSIC" | "COLUMN" | "VERTICAL" | "TRANSVERSE";

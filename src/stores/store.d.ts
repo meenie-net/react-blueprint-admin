@@ -12,6 +12,5 @@ interface globalStoreState {
   assemblyLarge: boolean;
   tabList: TabType[];
   flapedMenu: Menu[];
+  dark: boolean;
 }
-
-type RootState = ReturnType<typeof store.getState>;

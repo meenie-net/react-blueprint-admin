@@ -6,6 +6,7 @@ const initialState: globalStoreState = {
   layoutType: "CLASSIC",
   menuOpen: true,
   assemblyLarge: true,
+  dark: false,
   tabList: [
     {
       path: "/",
@@ -57,6 +58,9 @@ const globalStore = createSlice({
     },
     changeMenuOpen: (state) => {
       state.menuOpen = !state.menuOpen;
+    },
+    changeDarkTheme: (state) => {
+      state.dark = !state.dark;
     },
   },
 });
