@@ -1,8 +1,6 @@
 import { ButtonGroup, Button, Icon, H1 } from "@blueprintjs/core";
 import EmitEventEnum from "../../../enums/emitEvent";
 import emitter from "../../../utils/EventEmitter";
-import { useDispatch } from "react-redux";
-import { changeAssemblySize } from "../../../stores/global";
 import useGlobalStore from "../../../hooks/useGlobalStore";
 import { Classes, Popover2 } from "@blueprintjs/popover2";
 
@@ -10,17 +8,13 @@ const Setting = () => {
   const {
     setting: { assemblyLarge },
   } = useGlobalStore();
-  const dispatch = useDispatch();
-  const handSizeClick = () => {
-    dispatch(changeAssemblySize());
-  };
   const handleThemeClick = () => {
     emitter.emit(EmitEventEnum.OpenThemeDrawer);
   };
   return (
     <>
       <ButtonGroup minimal={true} large={assemblyLarge}>
-        <Button onClick={handSizeClick} title="调整大小">
+        <Button title="调整大小">
           <Icon
             icon="settings"
             color="#f6f7f9"

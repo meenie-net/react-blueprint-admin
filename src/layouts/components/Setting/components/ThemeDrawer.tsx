@@ -20,7 +20,19 @@ import { ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
 
 const ThemeDrawer = () => {
   const [open, setOpen] = useState(true);
-  const { layoutType } = useGlobalStore();
+  const {
+    layoutType,
+    setting: {
+      darkTheme,
+      menuOpen,
+      assemblyLarge,
+      showBreadcrumbs,
+      showBreadcrumbsIcon,
+      showTab,
+      showTabIcon,
+      showFooter,
+    },
+  } = useGlobalStore();
   const dispatch = useDispatch();
   emitter.on(EmitEventEnum.OpenThemeDrawer, () => {
     setOpen(true);
@@ -72,6 +84,7 @@ const ThemeDrawer = () => {
                 }`}
                 onClick={() => handleLayout("CLASSIC")}
               >
+                {/* todo 使用div画出布局 */}
                 CLASSIC
               </div>
               <div
@@ -114,6 +127,7 @@ const ThemeDrawer = () => {
               <Switch
                 alignIndicator="right"
                 labelElement={<span>暗黑主题</span>}
+                defaultChecked={darkTheme}
                 innerLabelChecked="☽"
                 innerLabel="☀"
                 onChange={() => handleClick("theme")}
@@ -128,13 +142,23 @@ const ThemeDrawer = () => {
               <Switch
                 alignIndicator="right"
                 labelElement={<span>折叠菜单</span>}
+                defaultChecked={menuOpen}
                 innerLabelChecked="on"
                 innerLabel="off"
                 onChange={() => handleClick("menu")}
               />
               <Switch
                 alignIndicator="right"
+                labelElement={<span>全局大小</span>}
+                defaultChecked={assemblyLarge}
+                innerLabelChecked="large"
+                innerLabel="normal"
+                onChange={() => handleClick("assemblyLarge")}
+              />
+              <Switch
+                alignIndicator="right"
                 labelElement={<span>面包屑</span>}
+                defaultChecked={showBreadcrumbs}
                 innerLabelChecked="on"
                 innerLabel="off"
                 onChange={() => handleClick("breadcrumbs")}
@@ -142,6 +166,7 @@ const ThemeDrawer = () => {
               <Switch
                 alignIndicator="right"
                 labelElement={<span>面包屑图标</span>}
+                defaultChecked={showBreadcrumbsIcon}
                 innerLabelChecked="on"
                 innerLabel="off"
                 onChange={() => handleClick("breadcrumbs-icon")}
@@ -149,6 +174,7 @@ const ThemeDrawer = () => {
               <Switch
                 alignIndicator="right"
                 labelElement={<span>标签栏</span>}
+                defaultChecked={showTab}
                 innerLabelChecked="on"
                 innerLabel="off"
                 onChange={() => handleClick("tab")}
@@ -156,6 +182,7 @@ const ThemeDrawer = () => {
               <Switch
                 alignIndicator="right"
                 labelElement={<span>标签栏图标</span>}
+                defaultChecked={showTabIcon}
                 innerLabelChecked="on"
                 innerLabel="off"
                 onChange={() => handleClick("tab-icon")}
@@ -163,6 +190,7 @@ const ThemeDrawer = () => {
               <Switch
                 alignIndicator="right"
                 labelElement={<span>页脚</span>}
+                defaultChecked={showFooter}
                 innerLabelChecked="on"
                 innerLabel="off"
                 onChange={() => handleClick("footer")}

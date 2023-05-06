@@ -23,7 +23,10 @@ const useBreadcrumbs = () => {
       if (k === matches.length - 2 && k == 1) {
         return {
           onClick: () => {
-            navigate(matches[matches.length - 1].pathname);
+            // todo
+            // 跳转到同级的第一个路由
+            // 使用matches[matches.length - 2].pathname到flatMenu中查找
+            //navigate(result);
           },
           icon: v.handle.icon,
           text: v.handle.title,

@@ -7,6 +7,7 @@ import globalStore from "./global";
 const persistConfig = {
   key: "root",
   storage,
+  version: 1,
 };
 
 const reducers = combineReducers({
