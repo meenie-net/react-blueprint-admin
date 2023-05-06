@@ -8,22 +8,8 @@ const Content = () => {
   const location = useLocation();
   return (
     <SwitchTransition mode="out-in">
-      <CSSTransition
-        key={location.pathname}
-        addEndListener={(node, done) =>
-          node.addEventListener("transitionend", done, false)
-        }
-        appear={true}
-        timeout={{ appear: 300, enter: 300, exit: 300 }}
-        mountOnEnter
-        unmountOnExit
-        classNames="page"
-      >
-        {() => (
-          <div className="w-full h-full overflow-y-auto animate-appear_right">
-            <KeepAlive saveScrollPosition>{currentOutlet}</KeepAlive>
-          </div>
-        )}
+      <CSSTransition key={location.pathname} timeout={300} classNames="page">
+        {() => <KeepAlive saveScrollPosition>{currentOutlet}</KeepAlive>}
       </CSSTransition>
     </SwitchTransition>
   );

@@ -8,7 +8,7 @@ import { RootState } from "../../../stores";
 
 const TabsSection = () => {
   const {
-    setting: { assemblyLarge },
+    setting: { assemblyLarge, showTab, showTabIcon },
   } = useGlobalStore();
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const TabsSection = () => {
     }
     dispatch(removeTab(path));
   };
-  return (
+  return showTab ? (
     <>
       <Card className="flex justify-between p-1 border-s-2 border-gray-50">
         <div className="ml-1 overflow-x-hidden">
@@ -51,7 +51,7 @@ const TabsSection = () => {
                   key={tab.path}
                   id={tab.path}
                   title={tab.meta.title}
-                  icon={tab.meta.icon}
+                  icon={showTabIcon && tab.meta.icon}
                   className="group"
                 >
                   <Icon
@@ -76,7 +76,7 @@ const TabsSection = () => {
         </div>
       </Card>
     </>
-  );
+  ) : null;
 };
 
 export default TabsSection;

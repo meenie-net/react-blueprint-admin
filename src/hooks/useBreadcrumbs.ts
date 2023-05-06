@@ -4,7 +4,7 @@ import useGlobalStore from "./useGlobalStore";
 
 const useBreadcrumbs = () => {
   const {
-    setting: { assemblyLarge },
+    setting: { assemblyLarge,showBreadcrumbsIcon },
   } = useGlobalStore();
   const navigate = useNavigate();
   const matches = useMatches();
@@ -28,7 +28,7 @@ const useBreadcrumbs = () => {
             // 使用matches[matches.length - 2].pathname到flatMenu中查找
             //navigate(result);
           },
-          icon: v.handle.icon,
+          icon: showBreadcrumbsIcon && v.handle.icon,
           text: v.handle.title,
           className: `${
             assemblyLarge
@@ -39,7 +39,7 @@ const useBreadcrumbs = () => {
       }
       if (k === matches.length - 1) {
         return {
-          icon: v.handle.icon,
+          icon: showBreadcrumbsIcon && v.handle.icon,
           text: v.handle.title,
           className: `${assemblyLarge ? "font-normal" : "font-normal text-xs"}`,
         };
@@ -48,7 +48,7 @@ const useBreadcrumbs = () => {
         onClick: () => {
           navigate(v.pathname);
         },
-        icon: v.handle.icon,
+        icon: showBreadcrumbsIcon && v.handle.icon,
         text: v.handle.title,
         className: `${
           assemblyLarge

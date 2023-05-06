@@ -151,6 +151,7 @@ const UserList = () => {
             rowHeaderCellRenderer={userRowHeaderRenderer}
             onSelection={(_) => onSelection(_, "id")}
             selectionModes={SelectionModes.ROWS_ONLY}
+            className="h-[800px]"
           >
             <Column id="user-id" name="ID" cellRenderer={IDCellRenderer} />
             <Column

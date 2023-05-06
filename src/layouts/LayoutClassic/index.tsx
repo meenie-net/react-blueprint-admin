@@ -8,6 +8,7 @@ import "./style.scss";
 import { useDispatch } from "react-redux";
 import { changeMenuOpen } from "../../stores/global";
 import useGlobalStore from "../../hooks/useGlobalStore";
+import Footer from "../components/Footer";
 
 const LayoutClassic = () => {
   const {
@@ -26,8 +27,8 @@ const LayoutClassic = () => {
       <div
         className={`${
           assemblyLarge
-            ? "flex items-center w-full divide-x-2 border-box h-classic-large-header text-dark-text bg-dark-bg"
-            : "flex items-center w-full divide-x-2 border-box h-classic-header text-dark-text bg-dark-bg"
+            ? "flex items-center flex-shrink-0 w-full divide-x-2 border-box h-classic-large-header text-dark-text bg-dark-bg"
+            : "flex items-center flex-shrink-0 w-full divide-x-2 border-box h-classic-header text-dark-text bg-dark-bg"
         }`}
       >
         {/* HeaderLeft */}
@@ -76,7 +77,7 @@ const LayoutClassic = () => {
         </div>
       </div>
       {/* Body */}
-      <div className="flex flex-auto w-full">
+      <div className="flex flex-auto w-full min-h-0">
         {/* SiderMenu */}
         <div
           id="sider-menu-container"
@@ -93,16 +94,17 @@ const LayoutClassic = () => {
           <ClassicSider />
         </div>
         {/* ContentContainer */}
-        <div className="flex flex-col flex-auto h-full">
+        <div className="flex flex-col flex-auto min-w-0 content-between">
           {/* Tabs */}
           <Tabs />
           {/* Content */}
           <div
             id="content"
-            className="flex-auto p-3 bg-slate-200 h-classic-container"
+            className="flex flex-col flex-auto min-h-0 p-3 bg-slate-200 overflow-x-hidden overflow-y-auto"
           >
             <Content />
           </div>
+          <Footer className="text-center py-1" />
         </div>
       </div>
     </div>

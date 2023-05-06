@@ -1,6 +1,6 @@
 const Welcome = () => {
   return (
-    <div className="w-full h-full text-center">
+    <div className="h-full text-center">
       <h1 className="text-2xl font-bold">Welcome</h1>
       <div className="my-4">
         <span className="px-4 font-serif text-6xl font-bold text-white bg-black">

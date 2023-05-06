@@ -21,7 +21,7 @@ export const Layout = () => {
   } = useGlobalStore();
   return (
     <HotkeysProvider>
-      <div className={`${darkTheme ? "bp4-dark" : ""}`}>
+      <div className={`w-full h-full ${darkTheme ? "bp4-dark" : ""}`}>
         {LAYOUT_BASE[layoutType]}
         <ThemeDrawer />
       </div>
