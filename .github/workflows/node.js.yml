@@ -30,10 +30,8 @@ jobs:
     - run: npm run build
     
     - name: Deploy to Github Pages
-      uses: crazy-max/ghaction-github-pages@v2
+      uses: JamesIves/github-pages-deploy-action@4.1.1
       with:
-        repo: ${{ GITHUB_REPOSITORY }}
-        target_branch: gh-pages
-        build_dir: dist
-      env:
-        GITHUB_TOKEN: ${{ secrets.PRESS_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        folder: dist # The folder the action should deploy.
