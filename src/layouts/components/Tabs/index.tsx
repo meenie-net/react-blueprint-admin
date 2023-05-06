@@ -7,7 +7,9 @@ import useGlobalStore from "../../../hooks/useGlobalStore";
 import { RootState } from "../../../stores";
 
 const TabsSection = () => {
-  const { assemblyLarge } = useGlobalStore();
+  const {
+    setting: { assemblyLarge },
+  } = useGlobalStore();
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();

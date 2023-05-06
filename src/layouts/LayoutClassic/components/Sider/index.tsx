@@ -6,7 +6,9 @@ import { MenuItem2 } from "@blueprintjs/popover2";
 import useGlobalStore from "../../../../hooks/useGlobalStore";
 
 const ClassicSider = () => {
-  const { assemblyLarge, menuOpen } = useGlobalStore();
+  const {
+    setting: { assemblyLarge, menuOpen },
+  } = useGlobalStore();
   const navigate = useNavigate();
   const location = useLocation();
   const handleClick = (path: string) => {

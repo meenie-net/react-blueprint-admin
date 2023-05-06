@@ -1,6 +1,7 @@
 {
   "name": "react-blueprint-admin",
   "private": true,
+  "homepage": "https://meenie-net.github.io/react-blueprint-admin/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

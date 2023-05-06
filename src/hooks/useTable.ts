@@ -53,7 +53,9 @@ function useTable<T, K extends keyof T>(
     TableLoadingOption.COLUMN_HEADERS,
     TableLoadingOption.ROW_HEADERS,
   ]);
-  const { assemblyLarge, menuOpen } = useGlobalStore();
+  const {
+    setting: { assemblyLarge, menuOpen },
+  } = useGlobalStore();
   const tableRef = useRef<Table2>(null);
   const updateTable = async (customReq?: PaginationRequest) => {
     const param = customReq ||

@@ -4,9 +4,6 @@ import { flapMenu } from "../../utils";
 
 const initialState: globalStoreState = {
   layoutType: "CLASSIC",
-  menuOpen: true,
-  assemblyLarge: true,
-  dark: false,
   tabList: [
     {
       path: "/",
@@ -18,6 +15,16 @@ const initialState: globalStoreState = {
     },
   ],
   flapedMenu: flapMenu(menu),
+  setting: {
+    darkTheme: false,
+    menuOpen: true,
+    assemblyLarge: true,
+    showBreadcrumbs: true,
+    showBreadcrumbsIcon: true,
+    showTab: true,
+    showTabIcon: true,
+    showFooter: true,
+  },
 };
 
 const globalStore = createSlice({
@@ -54,13 +61,28 @@ const globalStore = createSlice({
       state.tabList = [];
     },
     changeAssemblySize: (state) => {
-      state.assemblyLarge = !state.assemblyLarge;
+      state.setting.assemblyLarge = !state.setting.assemblyLarge;
     },
     changeMenuOpen: (state) => {
-      state.menuOpen = !state.menuOpen;
+      state.setting.menuOpen = !state.setting.menuOpen;
     },
     changeDarkTheme: (state) => {
-      state.dark = !state.dark;
+      state.setting.darkTheme = !state.setting.darkTheme;
+    },
+    changeShowBreadcrumbs: (state) => {
+      state.setting.showBreadcrumbs = !state.setting.showBreadcrumbs;
+    },
+    changeShowBreadcrumbsIcon: (state) => {
+      state.setting.showBreadcrumbsIcon = !state.setting.showBreadcrumbsIcon;
+    },
+    changeShowTab: (state) => {
+      state.setting.showTab = !state.setting.showTab;
+    },
+    changeShowTabIcon: (state) => {
+      state.setting.showTabIcon = !state.setting.showTabIcon;
+    },
+    changeShowFooter: (state) => {
+      state.setting.showFooter = !state.setting.showFooter;
     },
   },
 });
@@ -72,5 +94,11 @@ export const {
   removeAllTab,
   changeAssemblySize,
   changeMenuOpen,
+  changeDarkTheme,
+  changeShowBreadcrumbs,
+  changeShowBreadcrumbsIcon,
+  changeShowTab,
+  changeShowTabIcon,
+  changeShowFooter,
 } = globalStore.actions;
 export default globalStore;

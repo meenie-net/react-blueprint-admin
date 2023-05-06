@@ -3,7 +3,9 @@ import { useNavigate, useMatches } from "react-router-dom";
 import useGlobalStore from "./useGlobalStore";
 
 const useBreadcrumbs = () => {
-  const { assemblyLarge } = useGlobalStore();
+  const {
+    setting: { assemblyLarge },
+  } = useGlobalStore();
   const navigate = useNavigate();
   const matches = useMatches();
   if (matches[1]?.pathname === "/") matches.shift();

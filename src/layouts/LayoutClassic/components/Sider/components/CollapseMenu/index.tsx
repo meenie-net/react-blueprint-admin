@@ -7,7 +7,9 @@ import "./style.scss";
 
 const CollapseMenu = (props: { key: string; item: MenuType }) => {
   const { item } = props;
-  const { menuOpen } = useGlobalStore();
+  const {
+    setting: { menuOpen },
+  } = useGlobalStore();
   const [open, setOpen] = useState(false);
   const [collapseActive, setCollapseActive] = useState(false);
   const navigate = useNavigate();

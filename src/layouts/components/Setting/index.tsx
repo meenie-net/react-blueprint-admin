@@ -7,7 +7,9 @@ import useGlobalStore from "../../../hooks/useGlobalStore";
 import { Classes, Popover2 } from "@blueprintjs/popover2";
 
 const Setting = () => {
-  const { assemblyLarge } = useGlobalStore();
+  const {
+    setting: { assemblyLarge },
+  } = useGlobalStore();
   const dispatch = useDispatch();
   const handSizeClick = () => {
     dispatch(changeAssemblySize());

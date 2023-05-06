@@ -10,7 +10,9 @@ import { changeMenuOpen } from "../../stores/global";
 import useGlobalStore from "../../hooks/useGlobalStore";
 
 const LayoutClassic = () => {
-  const { assemblyLarge, menuOpen } = useGlobalStore();
+  const {
+    setting: { assemblyLarge, menuOpen },
+  } = useGlobalStore();
   const dispatch = useDispatch();
 
   const handleMenuOpen = () => {

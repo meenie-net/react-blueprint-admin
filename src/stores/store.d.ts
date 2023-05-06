@@ -8,9 +8,16 @@ interface TabType {
 }
 interface globalStoreState {
   layoutType: LayoutType;
-  menuOpen: boolean;
-  assemblyLarge: boolean;
   tabList: TabType[];
   flapedMenu: Menu[];
-  dark: boolean;
+  setting: {
+    darkTheme: boolean;
+    menuOpen: boolean;
+    assemblyLarge: boolean;
+    showBreadcrumbs: boolean;
+    showBreadcrumbsIcon: boolean;
+    showTab: boolean;
+    showTabIcon: boolean;
+    showFooter: boolean;
+  };
 }

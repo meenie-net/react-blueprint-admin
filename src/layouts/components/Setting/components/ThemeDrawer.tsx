@@ -5,7 +5,18 @@ import { Drawer, Switch } from "@blueprintjs/core";
 import Divider from "../../../../components/Divider";
 import useGlobalStore from "../../../../hooks/useGlobalStore";
 import { useDispatch } from "react-redux";
-import { setLayoutType } from "../../../../stores/global";
+import {
+  changeAssemblySize,
+  changeDarkTheme,
+  changeShowBreadcrumbs,
+  changeShowBreadcrumbsIcon,
+  changeShowFooter,
+  changeShowTab,
+  changeShowTabIcon,
+  setLayoutType,
+} from "../../../../stores/global";
+import { changeMenuOpen } from "../../../../stores/global";
+import { ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
 
 const ThemeDrawer = () => {
   const [open, setOpen] = useState(true);
@@ -14,8 +25,30 @@ const ThemeDrawer = () => {
   emitter.on(EmitEventEnum.OpenThemeDrawer, () => {
     setOpen(true);
   });
-  const handleClick = (layout: LayoutType) => {
+  const handleLayout = (layout: LayoutType) => {
     dispatch(setLayoutType(layout));
+  };
+  type SettingMethod =
+    | "menu"
+    | "theme"
+    | "assemblyLarge"
+    | "breadcrumbs"
+    | "breadcrumbs-icon"
+    | "tab"
+    | "tab-icon"
+    | "footer";
+  const settingMethods: Record<SettingMethod, ActionCreatorWithoutPayload> = {
+    menu: changeMenuOpen,
+    theme: changeDarkTheme,
+    assemblyLarge: changeAssemblySize,
+    breadcrumbs: changeShowBreadcrumbs,
+    "breadcrumbs-icon": changeShowBreadcrumbsIcon,
+    tab: changeShowTab,
+    "tab-icon": changeShowTabIcon,
+    footer: changeShowFooter,
+  };
+  const handleClick = (target: SettingMethod) => {
+    dispatch(settingMethods[target]());
   };
   return (
     <Drawer
@@ -37,7 +70,7 @@ const ThemeDrawer = () => {
                     ? "opacity-100"
                     : "opacity-40 hover:opacity-60"
                 }`}
-                onClick={() => handleClick("CLASSIC")}
+                onClick={() => handleLayout("CLASSIC")}
               >
                 CLASSIC
               </div>
@@ -47,7 +80,7 @@ const ThemeDrawer = () => {
                     ? "opacity-100"
                     : "opacity-40 hover:opacity-60"
                 }`}
-                onClick={() => handleClick("COLUMN")}
+                onClick={() => handleLayout("COLUMN")}
               >
                 COLUMN
               </div>
@@ -57,7 +90,7 @@ const ThemeDrawer = () => {
                     ? "opacity-100"
                     : "opacity-40 hover:opacity-60"
                 }`}
-                onClick={() => handleClick("VERTICAL")}
+                onClick={() => handleLayout("VERTICAL")}
               >
                 VERTICAL
               </div>
@@ -67,7 +100,7 @@ const ThemeDrawer = () => {
                     ? "opacity-100"
                     : "opacity-40 hover:opacity-60"
                 }`}
-                onClick={() => handleClick("TRANSVERSE")}
+                onClick={() => handleLayout("TRANSVERSE")}
               >
                 TRANSVERSE
               </div>
@@ -83,6 +116,7 @@ const ThemeDrawer = () => {
                 labelElement={<span>暗黑主题</span>}
                 innerLabelChecked="☽"
                 innerLabel="☀"
+                onChange={() => handleClick("theme")}
               />
             </div>
           </div>
@@ -96,36 +130,42 @@ const ThemeDrawer = () => {
                 labelElement={<span>折叠菜单</span>}
                 innerLabelChecked="on"
                 innerLabel="off"
+                onChange={() => handleClick("menu")}
               />
               <Switch
                 alignIndicator="right"
                 labelElement={<span>面包屑</span>}
                 innerLabelChecked="on"
                 innerLabel="off"
+                onChange={() => handleClick("breadcrumbs")}
               />
               <Switch
                 alignIndicator="right"
                 labelElement={<span>面包屑图标</span>}
                 innerLabelChecked="on"
                 innerLabel="off"
+                onChange={() => handleClick("breadcrumbs-icon")}
               />
               <Switch
                 alignIndicator="right"
                 labelElement={<span>标签栏</span>}
                 innerLabelChecked="on"
                 innerLabel="off"
+                onChange={() => handleClick("tab")}
               />
               <Switch
                 alignIndicator="right"
                 labelElement={<span>标签栏图标</span>}
                 innerLabelChecked="on"
                 innerLabel="off"
+                onChange={() => handleClick("tab-icon")}
               />
               <Switch
                 alignIndicator="right"
                 labelElement={<span>页脚</span>}
                 innerLabelChecked="on"
                 innerLabel="off"
+                onChange={() => handleClick("footer")}
               />
             </div>
           </div>
