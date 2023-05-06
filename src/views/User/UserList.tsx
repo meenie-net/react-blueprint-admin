@@ -19,7 +19,6 @@ const UserList = () => {
   const {
     tableData: userList,
     tableRef,
-    updateTable,
     loading,
     onSelection,
     multiSelectedArr,
@@ -60,25 +59,25 @@ const UserList = () => {
     emitter.emit(EmitEventEnum.OpenUserDrawer);
   };
   const userRowHeaderRenderer = (rowIndex: number) => (
-    <Cell className="flex justify-center items-center">{rowIndex + 1}</Cell>
+    <Cell className="flex items-center justify-center">{rowIndex + 1}</Cell>
   );
   const IDCellRenderer = (rowIndex: number) => (
-    <Cell className="flex justify-center items-center">
+    <Cell className="flex items-center justify-center">
       {userList[rowIndex].id}
     </Cell>
   );
   const NickCellRenderer = (rowIndex: number) => (
-    <Cell className="flex justify-center items-center">
+    <Cell className="flex items-center justify-center">
       {userList[rowIndex].nick}
     </Cell>
   );
   const TelCellRenderer = (rowIndex: number) => (
-    <Cell className="flex justify-center items-center">
+    <Cell className="flex items-center justify-center">
       {userList[rowIndex].tel}
     </Cell>
   );
   const OperationCellRenderer = (rowIndex: number) => (
-    <Cell className="flex justify-center items-center">
+    <Cell className="flex items-center justify-center">
       <ButtonGroup minimal>
         <Button onClick={() => handleEdit(userList[rowIndex])} intent="primary">
           编辑

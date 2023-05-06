@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { removeTab, setTab } from "../../../stores/global";
 import useGlobalStore from "../../../hooks/useGlobalStore";
+import { RootState } from "../../../stores";
 
 const TabsSection = () => {
   const { assemblyLarge } = useGlobalStore();

@@ -4,7 +4,7 @@ import emitter from "../../../utils/EventEmitter";
 import { useDispatch } from "react-redux";
 import { changeAssemblySize } from "../../../stores/global";
 import useGlobalStore from "../../../hooks/useGlobalStore";
-import { Classes, Popover2, Tooltip2 } from "@blueprintjs/popover2";
+import { Classes, Popover2 } from "@blueprintjs/popover2";
 
 const Setting = () => {
   const { assemblyLarge } = useGlobalStore();
