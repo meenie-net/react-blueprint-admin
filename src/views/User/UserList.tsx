@@ -18,14 +18,14 @@ import Pagination from "./../../components/Pagination/index";
 
 const UserList = () => {
   const {
-    tableData: userList,
+    tableData: userData,
     tableRef,
     updateTable,
     loading,
     onSelection,
     multiSelectedArr,
   } = useTable<User, "id">(api.getUser, {
-    widthArr: [0.2, 0.1, 0.4, 0.3],
+    widthArr: [0.2, 0.2, 0.4, 0.2],
   });
   const [userDrawerProps, setUserDrawerProps] = useState<{
     user: User;
@@ -65,29 +65,38 @@ const UserList = () => {
   );
   const IDCellRenderer = (rowIndex: number) => (
     <Cell className="flex items-center justify-center">
-      {userList[rowIndex].id}
+      {userData.data[rowIndex].id}
     </Cell>
   );
   const NickCellRenderer = (rowIndex: number) => (
     <Cell className="flex items-center justify-center">
-      {userList[rowIndex].nick}
+      {userData.data[rowIndex].nick}
     </Cell>
   );
   const TelCellRenderer = (rowIndex: number) => (
     <Cell className="flex items-center justify-center">
-      {userList[rowIndex].tel}
+      {userData.data[rowIndex].tel}
     </Cell>
   );
   const OperationCellRenderer = (rowIndex: number) => (
     <Cell className="flex items-center justify-center">
       <ButtonGroup minimal>
-        <Button onClick={() => handleEdit(userList[rowIndex])} intent="primary">
+        <Button
+          onClick={() => handleEdit(userData.data[rowIndex])}
+          intent="primary"
+        >
           编辑
         </Button>
-        <Button onClick={() => handleEdit(userList[rowIndex])} intent="success">
+        <Button
+          onClick={() => handleEdit(userData.data[rowIndex])}
+          intent="success"
+        >
           编辑
         </Button>
-        <Button onClick={() => handleEdit(userList[rowIndex])} intent="danger">
+        <Button
+          onClick={() => handleEdit(userData.data[rowIndex])}
+          intent="danger"
+        >
           删除
         </Button>
       </ButtonGroup>
@@ -149,8 +158,8 @@ const UserList = () => {
             <Table2
               ref={tableRef}
               className="h-auto overflow-x-hidden"
-              numRows={userList.length}
-              rowHeights={generateArray(() => 40, userList.length)}
+              numRows={userData.total}
+              rowHeights={generateArray(() => 40, userData.total)}
               loadingOptions={loading.current}
               rowHeaderCellRenderer={userRowHeaderRenderer}
               onSelection={(_) => onSelection(_, "id")}
@@ -176,7 +185,7 @@ const UserList = () => {
           </HotkeysProvider>
         </div>
         <div className="flex justify-center mt-4">
-          <Pagination total={userList.length} onSizeChange={updateTable} />
+          <Pagination total={userData.total} onChange={updateTable} />
         </div>
       </Card>
       <UserDrawer {...userDrawerProps} />

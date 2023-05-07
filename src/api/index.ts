@@ -1,7 +1,7 @@
 import { http } from "./http";
 import { users } from './../../mock/user';
 // 开发环境
-function mockFetch<T>(data:T[]){
+function mockFetch(data:any){
 	return new Promise<ResType>((resolve)=>{
     setTimeout(() => {
 			resolve({
@@ -15,7 +15,11 @@ function mockFetch<T>(data:T[]){
 export const api = {
   getUser(req: PaginationRequest) {
     console.log('req',req)
-    return mockFetch<User>(users)
+		return mockFetch({
+			total: users.length,
+			pageSize: 5,
+			data: users
+		})
   },
 }
 

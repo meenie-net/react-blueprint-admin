@@ -19,7 +19,7 @@ import { changeMenuOpen } from "../../../../stores/global";
 import { ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
 
 const ThemeDrawer = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const {
     layoutType,
     setting: {

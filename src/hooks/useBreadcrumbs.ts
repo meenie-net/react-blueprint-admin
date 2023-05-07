@@ -4,7 +4,7 @@ import useGlobalStore from "./useGlobalStore";
 
 const useBreadcrumbs = () => {
   const {
-    setting: { assemblyLarge,showBreadcrumbsIcon },
+    setting: { assemblyLarge, showBreadcrumbsIcon },
   } = useGlobalStore();
   const navigate = useNavigate();
   const matches = useMatches();

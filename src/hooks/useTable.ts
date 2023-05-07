@@ -36,18 +36,30 @@ function useTable<T, K extends keyof T>(
     param?: PaginationRequest;
   }
 ): {
-  tableData: T[];
+  tableData: {
+    total: number;
+    pageSize: number;
+    data: T[];
+  };
   tableRef: RefObject<Table2>;
   updateTable: (args0?: PaginationRequest) => void;
   loading: MutableRefObject<TableLoadingOption[]>;
   onSelection: (regions: Region[], key: K) => void;
   multiSelectedArr: T[K][];
 } {
-  const [tableData, setTableData] = useState<T[]>([
-    ...generateArray(() => {
-      return {};
-    }, 13),
-  ]);
+  const [tableData, setTableData] = useState<{
+    total: number;
+    pageSize: number;
+    data: T[];
+  }>({
+    total: 0,
+    pageSize: 5,
+    data: [
+      ...generateArray(() => {
+        return {};
+      }, 13),
+    ],
+  });
   const [multiSelectedArr, setMultiSelectedArr] = useState<T[K][]>([]);
   const loading = useRef<TableLoadingOption[]>([
     TableLoadingOption.CELLS,
@@ -80,7 +92,7 @@ function useTable<T, K extends keyof T>(
           return generateRangeArray(region.rows[0], region.rows[1], 1);
       })
       .flat()
-      .map((i) => tableData[i!][key]);
+      .map((i) => tableData.data[i!][key]);
     setMultiSelectedArr(prev);
   };
   useEffect(() => {
@@ -100,10 +112,7 @@ function useTable<T, K extends keyof T>(
         table.setState({
           ...table.state,
           viewportRect: tableRect,
-          columnWidths: generateColumnWidth(
-            config?.widthArr,
-            tableRect.width
-          ),
+          columnWidths: generateColumnWidth(config?.widthArr, tableRect.width),
         });
       table.componentDidMount();
     });
