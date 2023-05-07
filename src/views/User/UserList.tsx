@@ -14,11 +14,13 @@ import { generateArray } from "../../utils";
 import UserDrawer from "./UserDrawer";
 import emitter from "../../utils/EventEmitter";
 import EmitEventEnum from "../../enums/emitEvent";
+import Pagination from "./../../components/Pagination/index";
 
 const UserList = () => {
   const {
     tableData: userList,
     tableRef,
+    updateTable,
     loading,
     onSelection,
     multiSelectedArr,
@@ -92,7 +94,7 @@ const UserList = () => {
     </Cell>
   );
   return (
-    <div>
+    <div className="h-full flex flex-col">
       <Card className="flex justify-between pb-0">
         <div className="flex">
           <FormGroup
@@ -129,7 +131,7 @@ const UserList = () => {
           </FormGroup>
         </div>
       </Card>
-      <Card className="mt-3">
+      <Card className="flex flex-col flex-auto min-h-0 mt-3">
         <div className="flex">
           <FormGroup inline={true} className="mr-2">
             <Button onClick={() => handleAdd()} icon="search" text="新增用户" />
@@ -142,31 +144,40 @@ const UserList = () => {
             />
           </FormGroup>
         </div>
-        <HotkeysProvider>
-          <Table2
-            ref={tableRef}
-            numRows={userList.length}
-            rowHeights={generateArray(() => 40, userList.length)}
-            loadingOptions={loading.current}
-            rowHeaderCellRenderer={userRowHeaderRenderer}
-            onSelection={(_) => onSelection(_, "id")}
-            selectionModes={SelectionModes.ROWS_ONLY}
-            className="h-[800px]"
-          >
-            <Column id="user-id" name="ID" cellRenderer={IDCellRenderer} />
-            <Column
-              id="user-nick"
-              name="昵称"
-              cellRenderer={NickCellRenderer}
-            />
-            <Column id="user-tel" name="电话" cellRenderer={TelCellRenderer} />
-            <Column
-              id="user-operation"
-              name="操作"
-              cellRenderer={OperationCellRenderer}
-            />
-          </Table2>
-        </HotkeysProvider>
+        <div className="flex-auto min-h-0">
+          <HotkeysProvider>
+            <Table2
+              ref={tableRef}
+              className="h-auto overflow-x-hidden"
+              numRows={userList.length}
+              rowHeights={generateArray(() => 40, userList.length)}
+              loadingOptions={loading.current}
+              rowHeaderCellRenderer={userRowHeaderRenderer}
+              onSelection={(_) => onSelection(_, "id")}
+              selectionModes={SelectionModes.ROWS_ONLY}
+            >
+              <Column id="user-id" name="ID" cellRenderer={IDCellRenderer} />
+              <Column
+                id="user-nick"
+                name="昵称"
+                cellRenderer={NickCellRenderer}
+              />
+              <Column
+                id="user-tel"
+                name="电话"
+                cellRenderer={TelCellRenderer}
+              />
+              <Column
+                id="user-operation"
+                name="操作"
+                cellRenderer={OperationCellRenderer}
+              />
+            </Table2>
+          </HotkeysProvider>
+        </div>
+        <div className="flex justify-center mt-4">
+          <Pagination total={userList.length} onSizeChange={updateTable} />
+        </div>
       </Card>
       <UserDrawer {...userDrawerProps} />
     </div>

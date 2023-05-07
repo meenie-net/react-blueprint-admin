@@ -19,4 +19,9 @@ export const generateColumnWidth = (widthRateArr: number[], totalWidth: number):
   result.push(lastWidth)
   return result
 };
-export const generateRangeArray = (start:number, stop:number, step:number) => Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
+export const generateRangeArray = (start: number, stop: number, step: number) => Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
+export const getRestWidth = ():82|66 => { 
+    const content = document.querySelector("#content")
+    if(!content) return 66
+    return content?.scrollHeight > content?.clientHeight ? 82 : 66
+}

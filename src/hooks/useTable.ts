@@ -11,6 +11,7 @@ import {
   generateArray,
   generateColumnWidth,
   generateRangeArray,
+  getRestWidth,
 } from "../utils";
 
 /**
@@ -45,7 +46,7 @@ function useTable<T, K extends keyof T>(
   const [tableData, setTableData] = useState<T[]>([
     ...generateArray(() => {
       return {};
-    }, 10),
+    }, 13),
   ]);
   const [multiSelectedArr, setMultiSelectedArr] = useState<T[K][]>([]);
   const loading = useRef<TableLoadingOption[]>([
@@ -92,21 +93,19 @@ function useTable<T, K extends keyof T>(
       const table = tableRef.current;
       if (!table.locator) return;
       const tableRect = table.locator.getViewportRect();
-      const containerWidth = document.body.clientWidth - left - 64;
+      const containerWidth = document.body.offsetWidth - left - getRestWidth();
       const finalWidth = containerWidth < 700 ? 700 : containerWidth;
       tableRect.width = finalWidth;
-      setTimeout(() => {
-        if (config?.widthArr)
-          table.setState({
-            ...table.state,
-            viewportRect: tableRect,
-            columnWidths: generateColumnWidth(
-              config?.widthArr,
-              tableRect.width
-            ),
-          });
-        table.componentDidMount();
-      }, 10);
+      if (config?.widthArr)
+        table.setState({
+          ...table.state,
+          viewportRect: tableRect,
+          columnWidths: generateColumnWidth(
+            config?.widthArr,
+            tableRect.width
+          ),
+        });
+      table.componentDidMount();
     });
     resizeObserver.observe(document.body);
     return () => {
