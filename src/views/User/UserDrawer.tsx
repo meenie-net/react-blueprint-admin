@@ -31,7 +31,7 @@ const UserDrawer = () => {
       canOutsideClickClose
       onClose={handleClose}
     >
-      {/* {user.id} */}
+      {user.id}
     </Drawer>
   );
 };
