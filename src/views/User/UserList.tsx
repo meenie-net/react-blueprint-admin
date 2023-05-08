@@ -164,7 +164,11 @@ const UserList = () => {
           </HotkeysProvider>
         </div>
         <div className="flex justify-center mt-4">
-          <Pagination total={userData.total} onChange={updateTable} />
+          <Pagination
+            total={userData.total}
+            pagerCount={7}
+            onChange={updateTable}
+          />
         </div>
       </Card>
       <UserDrawer />

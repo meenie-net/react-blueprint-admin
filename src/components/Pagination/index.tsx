@@ -9,9 +9,10 @@ import { generatePagesArray } from "../../utils";
 
 const Pagination = (props: {
   total: number;
+  pagerCount: number;
   onChange: (args0?: PaginationRequest) => void;
 }) => {
-  const { onChange, total } = props;
+  const { onChange, total, pagerCount } = props;
   const [pageSize, setPageSize] = useState(5);
   const [currentPageNum, setCurrentPageNum] = useState(1);
   const [pages, setPages] = useState<number[][]>([]);
@@ -39,14 +40,14 @@ const Pagination = (props: {
       setCurrentPageNum(target);
     }
   };
+  // useEffect(() => {
+  //   onChange({
+  //     pageNum: currentPageNum,
+  //     pageSize,
+  //   });
+  // }, []);
   useEffect(() => {
-    onChange({
-      pageNum: currentPageNum,
-      pageSize,
-    });
-  }, []);
-  useEffect(() => {
-    setPages(generatePagesArray(total, pageSize));
+    setPages(generatePagesArray(total, pageSize, pagerCount));
   }, [total, pageSize]);
   useEffect(() => {
     onChange({
@@ -81,9 +82,9 @@ const Pagination = (props: {
               {v}
             </Button>
           ))}
-        {pages[0]?.length > 6 && <Button>···</Button>}
-        {pages[1] &&
-          pages[1].map((v, i) => (
+        {pages[1] && <Button>···</Button>}
+        {pages[2] &&
+          pages[2].map((v, i) => (
             <Button
               key={i}
               onClick={() => handlePage(v)}
