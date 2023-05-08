@@ -9,7 +9,6 @@ import {
 import { Table2, Column, Cell, SelectionModes } from "@blueprintjs/table";
 import useTable from "../../hooks/useTable";
 import { api } from "../../api";
-import { useState } from "react";
 import { generateArray } from "../../utils";
 import UserDrawer from "./UserDrawer";
 import emitter from "../../utils/EventEmitter";
@@ -27,38 +26,16 @@ const UserList = () => {
   } = useTable<User, "id">(api.getUser, {
     widthArr: [0.2, 0.2, 0.4, 0.2],
   });
-  const [userDrawerProps, setUserDrawerProps] = useState<{
-    user: User;
-    state: "add" | "edit";
-  }>({
-    user: {
-      id: "",
-      nick: "",
-      tel: 0,
-      permission: [],
-    },
-    state: "edit",
-  });
   const handleAdd = () => {
-    setUserDrawerProps({
-      ...userDrawerProps,
-      user: {
-        id: "",
-        nick: "",
-        tel: 0,
-        permission: [],
-      },
+    emitter.emit(EmitEventEnum.OpenUserDrawer, {
       state: "add",
     });
-    emitter.emit(EmitEventEnum.OpenUserDrawer);
   };
   const handleEdit = (user: User) => {
-    setUserDrawerProps({
-      ...userDrawerProps,
+    emitter.emit(EmitEventEnum.OpenUserDrawer, {
       user,
       state: "edit",
     });
-    emitter.emit(EmitEventEnum.OpenUserDrawer);
   };
   const userRowHeaderRenderer = (rowIndex: number) => (
     <Cell className="flex items-center justify-center">{rowIndex + 1}</Cell>
@@ -157,14 +134,21 @@ const UserList = () => {
           <HotkeysProvider>
             <Table2
               ref={tableRef}
-              className="h-auto overflow-x-hidden"
+              className="overflow-x-hidden"
               numRows={userData.total}
               rowHeights={generateArray(() => 40, userData.total)}
               loadingOptions={loading.current}
               rowHeaderCellRenderer={userRowHeaderRenderer}
               onSelection={(_) => onSelection(_, "id")}
               selectionModes={SelectionModes.ROWS_ONLY}
+              columnWidths={[180, 50, 100, 100]}
+              numFrozenColumns={1}
             >
+              <Column
+                id="user-operation"
+                name="操作"
+                cellRenderer={OperationCellRenderer}
+              />
               <Column id="user-id" name="ID" cellRenderer={IDCellRenderer} />
               <Column
                 id="user-nick"
@@ -176,11 +160,6 @@ const UserList = () => {
                 name="电话"
                 cellRenderer={TelCellRenderer}
               />
-              <Column
-                id="user-operation"
-                name="操作"
-                cellRenderer={OperationCellRenderer}
-              />
             </Table2>
           </HotkeysProvider>
         </div>
@@ -188,7 +167,7 @@ const UserList = () => {
           <Pagination total={userData.total} onChange={updateTable} />
         </div>
       </Card>
-      <UserDrawer {...userDrawerProps} />
+      <UserDrawer />
     </div>
   );
 };

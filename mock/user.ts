@@ -1,4 +1,4 @@
-export const users:User[] = [
+export const users: User[] = [
   {
     id: "1",
     nick: "Jack",
@@ -25,6 +25,12 @@ export const users:User[] = [
   },
   {
     id: "5",
+    nick: "Mike",
+    tel: 2145441,
+    permission: ["edit", "delete"],
+  },
+  {
+    id: "3",
     nick: "Mike",
     tel: 2145441,
     permission: ["edit", "delete"],

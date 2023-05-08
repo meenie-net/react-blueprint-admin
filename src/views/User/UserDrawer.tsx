@@ -3,13 +3,23 @@ import emitter from "../../utils/EventEmitter";
 import EmitEventEnum from "../../enums/emitEvent";
 import { useState } from "react";
 
-const UserDrawer = (props: { user: User; state: "add" | "edit" }) => {
-  const { user, state } = props;
+const UserDrawer = () => {
+  const [user, setUser] = useState<User>({
+    id: "",
+    nick: "",
+    tel: 0,
+    permission: [],
+  });
+  const [state, setState] = useState("add");
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
   };
-  emitter.on(EmitEventEnum.OpenUserDrawer, () => {
+  emitter.on(EmitEventEnum.OpenUserDrawer, (payload) => {
+    console.log(payload);
+
+    if (payload.state === "edit") setUser(payload.user);
+    setState(payload.state);
     setOpen(true);
   });
   return (
@@ -21,7 +31,7 @@ const UserDrawer = (props: { user: User; state: "add" | "edit" }) => {
       canOutsideClickClose
       onClose={handleClose}
     >
-      {user.id}
+      {/* {user.id} */}
     </Drawer>
   );
 };

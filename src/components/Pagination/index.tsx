@@ -40,6 +40,12 @@ const Pagination = (props: {
     }
   };
   useEffect(() => {
+    onChange({
+      pageNum: currentPageNum,
+      pageSize,
+    });
+  }, []);
+  useEffect(() => {
     setPages(generatePagesArray(total, pageSize));
   }, [total, pageSize]);
   useEffect(() => {

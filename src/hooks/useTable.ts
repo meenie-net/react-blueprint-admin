@@ -6,13 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import useGlobalStore from "./useGlobalStore";
-import {
-  generateArray,
-  generateColumnWidth,
-  generateRangeArray,
-  getRestWidth,
-} from "../utils";
+import { generateArray, generateRangeArray } from "../utils";
 
 /**
  *
@@ -66,9 +60,6 @@ function useTable<T, K extends keyof T>(
     TableLoadingOption.COLUMN_HEADERS,
     TableLoadingOption.ROW_HEADERS,
   ]);
-  const {
-    setting: { assemblyLarge, menuOpen },
-  } = useGlobalStore();
   const tableRef = useRef<Table2>(null);
   const updateTable = async (customReq?: PaginationRequest) => {
     const param = customReq ||
@@ -96,31 +87,22 @@ function useTable<T, K extends keyof T>(
     setMultiSelectedArr(prev);
   };
   useEffect(() => {
-    updateTable();
-  }, []);
-  const left = menuOpen ? 160 : assemblyLarge ? 60 : 50;
-  useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       if (!tableRef.current) return;
       const table = tableRef.current;
       if (!table.locator) return;
       const tableRect = table.locator.getViewportRect();
-      const containerWidth = document.body.offsetWidth - left - getRestWidth();
-      const finalWidth = containerWidth < 700 ? 700 : containerWidth;
-      tableRect.width = finalWidth;
       if (config?.widthArr)
         table.setState({
           ...table.state,
           viewportRect: tableRect,
-          columnWidths: generateColumnWidth(config?.widthArr, tableRect.width),
         });
-      table.componentDidMount();
     });
     resizeObserver.observe(document.body);
     return () => {
       resizeObserver.disconnect();
     };
-  }, [tableData, left]);
+  }, [tableData]);
   return {
     tableData,
     tableRef,

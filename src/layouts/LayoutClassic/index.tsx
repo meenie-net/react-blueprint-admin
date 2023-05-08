@@ -77,7 +77,7 @@ const LayoutClassic = () => {
         </div>
       </div>
       {/* Body */}
-      <div className="flex flex-auto w-full min-h-0">
+      <div className="flex flex-auto min-h-0">
         {/* SiderMenu */}
         <div
           id="sider-menu-container"
@@ -100,7 +100,7 @@ const LayoutClassic = () => {
           {/* Content */}
           <div
             id="content"
-            className="flex flex-col flex-auto min-h-0 p-3 bg-slate-200 overflow-x-hidden overflow-y-auto"
+            className="flex flex-col flex-auto min-h-0 p-3 bg-slate-200"
           >
             <Content />
           </div>
