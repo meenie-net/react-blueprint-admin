@@ -12,9 +12,8 @@ export const generateArray = (
 ): any[] => {
   return Array.from(Array(len), (v, k) => cb(v, k));
 };
-export const generateRowHeight = (height: number, len: number): number[] => {
-  return Array.from(Array(len), () => height);
-};
+export const generateRowHeight = (height: number, len: number): number[] =>
+  generateArray(() => height, len);
 export const generateColumnWidth = (
   widthRateArr: number[],
   totalWidth: number
@@ -26,19 +25,52 @@ export const generateColumnWidth = (
   return result;
 };
 export const generateRangeArray = (start: number, stop: number, step: number) =>
-  Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
+  generateArray((_, i) => start + i * step, (stop - start) / step + 1);
 export const generatePagesArray = (
-  total: number,
-  pageSize: number,
-  pagerCount: number
+  totalPage: number,
+  pagerCount: number,
+  currentPage: number
 ) => {
-  const totalPage = Math.ceil(total / pageSize);
   let pages: number[][] = [];
-  if (totalPage <= 6) {
+
+  if (totalPage <= pagerCount) {
     pages = [[...generateRangeArray(1, totalPage, 1)]];
   }
-  if (totalPage > 6) {
-    pages = [[1, 2, 3], [0], [totalPage - 1, totalPage]];
+  if (totalPage > pagerCount) {
+    if (0 < currentPage && currentPage <= Math.ceil(pagerCount / 2)) {
+      pages = [
+        [1],
+        [],
+        [...generateRangeArray(2, pagerCount - 1, 1)],
+        [0],
+        [totalPage],
+      ];
+    } else if (
+      totalPage - pagerCount + 1 < currentPage &&
+      currentPage <= totalPage
+    ) {
+      pages = [
+        [1],
+        [0],
+        [...generateRangeArray(totalPage - pagerCount + 1, totalPage - 1, 1)],
+        [],
+        [totalPage],
+      ];
+    } else {
+      pages = [
+        [1],
+        [0],
+        [
+          ...generateRangeArray(
+            currentPage - Math.floor(pagerCount / 2),
+            currentPage + Math.floor(pagerCount / 2),
+            1
+          ),
+        ],
+        [0],
+        [totalPage],
+      ];
+    }
   }
 
   //todo

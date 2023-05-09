@@ -4,63 +4,42 @@ import {
   HTMLSelect,
   InputGroup,
 } from "@blueprintjs/core";
-import { useEffect, useState } from "react";
 import { generatePagesArray } from "../../utils";
 
 const Pagination = (props: {
   total: number;
+  pageSize?: number;
   pagerCount: number;
-  onChange: (args0?: PaginationRequest) => void;
+  pageSizeArr: number[];
+  onChange: (currentPage: number, pageSize: number) => void;
 }) => {
-  const { onChange, total, pagerCount } = props;
-  const [pageSize, setPageSize] = useState(5);
-  const [currentPageNum, setCurrentPageNum] = useState(1);
-  const [pages, setPages] = useState<number[][]>([]);
+  const { onChange, pageSizeArr, pageSize = 5, total, pagerCount = 7 } = props;
+  let _pageSize = pageSize;
+  const totalPage = Math.ceil(total / _pageSize);
+  let currentPage = 1;
+  const pages = generatePagesArray(totalPage, pagerCount, currentPage);
   const handleSelect = (event: React.FormEvent<HTMLElement>) => {
-    setPageSize(parseInt((event.target as HTMLInputElement).value));
+    _pageSize = parseInt((event.target as HTMLInputElement).value);
+    onChange(currentPage, _pageSize);
   };
   const handlePage = (index: number) => {
-    if (
-      index === currentPageNum ||
-      index === 0 ||
-      index === Math.ceil(total / pageSize) + 1
-    )
-      return;
-    setCurrentPageNum(index);
+    if (index === currentPage || index === 0 || index === totalPage + 1) return;
+    onChange(currentPage, _pageSize);
   };
   const handleGoto = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const target = parseInt((e.target as HTMLInputElement).value);
-      if (
-        target < 0 ||
-        target > Math.ceil(total / pageSize) ||
-        target === currentPageNum
-      )
-        return;
-      setCurrentPageNum(target);
+      if (target < 0 || target > totalPage || target === currentPage) return;
+      currentPage = target;
+      onChange(currentPage, _pageSize);
     }
   };
-  // useEffect(() => {
-  //   onChange({
-  //     pageNum: currentPageNum,
-  //     pageSize,
-  //   });
-  // }, []);
-  useEffect(() => {
-    setPages(generatePagesArray(total, pageSize, pagerCount));
-  }, [total, pageSize]);
-  useEffect(() => {
-    onChange({
-      pageNum: currentPageNum,
-      pageSize,
-    });
-  }, [currentPageNum, pageSize]);
   return (
     <div className="flex items-center">
       {`共${total}条`}
       <ControlGroup className="ml-4">
         <HTMLSelect
-          options={[5, 10, 15, 20, 50, 100, 500].map((v) => {
+          options={pageSizeArr.map((v) => {
             return { labal: v, value: `${v}条/页` };
           })}
           fill={true}
@@ -70,32 +49,43 @@ const Pagination = (props: {
       <ControlGroup className="ml-4">
         <Button
           icon="caret-left"
-          onClick={() => handlePage(currentPageNum - 1)}
+          onClick={() => handlePage(currentPage - 1)}
         ></Button>
         {pages[0] &&
           pages[0].map((v, i) => (
             <Button
               key={i}
               onClick={() => handlePage(v)}
-              intent={currentPageNum === v ? "primary" : "none"}
+              intent={currentPage === v ? "primary" : "none"}
             >
               {v}
             </Button>
           ))}
-        {pages[1] && <Button>···</Button>}
+        {pages[1] && pages[1].length > 0 && <Button>···</Button>}
         {pages[2] &&
           pages[2].map((v, i) => (
             <Button
               key={i}
               onClick={() => handlePage(v)}
-              intent={currentPageNum === v ? "primary" : "none"}
+              intent={currentPage === v ? "primary" : "none"}
+            >
+              {v}
+            </Button>
+          ))}
+        {pages[3] && pages[3].length > 0 && <Button>···</Button>}
+        {pages[4] &&
+          pages[4].map((v, i) => (
+            <Button
+              key={i}
+              onClick={() => handlePage(v)}
+              intent={currentPage === v ? "primary" : "none"}
             >
               {v}
             </Button>
           ))}
         <Button
           icon="caret-right"
-          onClick={() => handlePage(currentPageNum + 1)}
+          onClick={() => handlePage(currentPage + 1)}
         ></Button>
       </ControlGroup>
       <div className="flex items-center ml-4">

@@ -74,8 +74,8 @@ function useTable<T, K extends keyof T>(
     }
   };
   useEffect(() => {
-    // updateTable();
-  }, [multiSelectedArr]);
+    updateTable();
+  }, []);
   const onSelection = (regions: Region[], key: K) => {
     const prev = regions
       .map((region) => {

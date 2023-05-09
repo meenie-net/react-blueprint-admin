@@ -37,6 +37,9 @@ const UserList = () => {
       state: "edit",
     });
   };
+  const paginationChange = (currentPage: number, pageSize: number) => {
+    updateTable({ pageNum: currentPage, pageSize });
+  };
   const userRowHeaderRenderer = (rowIndex: number) => (
     <Cell className="flex items-center justify-center">{rowIndex + 1}</Cell>
   );
@@ -80,7 +83,7 @@ const UserList = () => {
     </Cell>
   );
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col h-full">
       <Card className="flex justify-between pb-0">
         <div className="flex">
           <FormGroup
@@ -167,7 +170,8 @@ const UserList = () => {
           <Pagination
             total={userData.total}
             pagerCount={7}
-            onChange={updateTable}
+            pageSizeArr={[5, 10, 15, 20, 50, 100, 500]}
+            onChange={paginationChange}
           />
         </div>
       </Card>
