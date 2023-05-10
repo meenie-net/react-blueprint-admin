@@ -1,7 +1,7 @@
 import { Drawer } from "@blueprintjs/core";
 import emitter from "../../utils/EventEmitter";
 import EmitEventEnum from "../../enums/emitEvent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserDrawer = () => {
   const [user, setUser] = useState<User>({
@@ -12,16 +12,22 @@ const UserDrawer = () => {
   });
   const [state, setState] = useState("add");
   const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  emitter.on(EmitEventEnum.OpenUserDrawer, (payload) => {
-    console.log(payload);
-
-    if (payload.state === "edit") setUser(payload.user);
+  const init = (payload: { state: "add" | "edit"; user?: User }) => {
+    if (payload.state === "edit" && payload.user) setUser(payload.user);
     setState(payload.state);
     setOpen(true);
+  };
+  const handleClose = () => {
+    emitter.off(EmitEventEnum.OpenUserDrawer, init);
+    setOpen(false);
+  };
+  emitter.on(EmitEventEnum.OpenUserDrawer, init);
+  useEffect(() => {
+    return () => {
+      emitter.off(EmitEventEnum.OpenUserDrawer, init);
+    };
   });
+
   return (
     <Drawer
       isOpen={open}

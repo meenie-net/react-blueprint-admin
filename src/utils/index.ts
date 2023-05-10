@@ -1,4 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ *
+ * @param menu 用户配置的menu数据
+ * @returns 打平的menu
+ */
 export const flapMenu = (menu: MenuType[]): MenuType[] => {
   const serializedMenu: MenuType[] = JSON.parse(JSON.stringify(menu));
   return serializedMenu.flatMap((item) => [
@@ -6,14 +11,32 @@ export const flapMenu = (menu: MenuType[]): MenuType[] => {
     ...(item.children ? flapMenu(item.children) : []),
   ]);
 };
+/**
+ *
+ * @param cb 生成数组的回调函数
+ * @param len 生成的数组长度
+ * @returns 生成的数组
+ */
 export const generateArray = (
   cb: (v: any, k: number) => any,
   len: number
 ): any[] => {
   return Array.from(Array(len), (v, k) => cb(v, k));
 };
+/**
+ *
+ * @param height 表格行高
+ * @param len 表格行数
+ * @returns 生成的行高数组
+ */
 export const generateRowHeight = (height: number, len: number): number[] =>
   generateArray(() => height, len);
+/**
+ *
+ * @param widthRateArr 宽度数组
+ * @param totalWidth 总宽度
+ * @returns 生成的列宽数组
+ */
 export const generateColumnWidth = (
   widthRateArr: number[],
   totalWidth: number
@@ -24,8 +47,22 @@ export const generateColumnWidth = (
   result.push(lastWidth);
   return result;
 };
+/**
+ *
+ * @param start 数组第一项的值
+ * @param stop 数组最后一项的值
+ * @param step 等差数组的差
+ * @returns
+ */
 export const generateRangeArray = (start: number, stop: number, step: number) =>
   generateArray((_, i) => start + i * step, (stop - start) / step + 1);
+/**
+ *
+ * @param totalPage 总页数
+ * @param pagerCount 显示的最大页码数
+ * @param currentPage 当前页码
+ * @returns 生成的页码数组
+ */
 export const generatePagesArray = (
   totalPage: number,
   pagerCount: number,
@@ -72,21 +109,6 @@ export const generatePagesArray = (
       ];
     }
   }
-
-  //todo
-  //7                                                                                              0 < current <= Math.ceil(pagerSize/2)          current在中间           (totalPage - pagerSize + 1) < current <= totalPage
-  //[[1]]                                           ->  [[1]]
-  //[[1, 2]];                                       ->  [[1, 2]]
-  //[[1, 2, 3]];                                    ->  [[1, 2, 3]]
-  //[[1, 2, 3, 4]];                                 ->  [[1, 2, 3, 4]]
-  //[[1, 2, 3, 4, 5]];                              ->  [[1, 2, 3, 4, 5]]
-  //[[1, 2, 3, 4, 5, 6]];                           ->  [[1, 2, 3, 4, 5, 6]]
-  //[[1, 2, 3, 4, 5, 6, 7]];                        ->  [[1, 2, 3, 4, 5, 6, 7]]
-  //[[1, 2, 3, 4, 5, 6, 7, 8]];                     ->  [[1, 2, 3, 4, 5, 6, 7, 8]]                   [[1, 2, '3', 4, ···, 6, 7, 8]]            [[1, ···, 3, 4, '5', 6, 7, 8]]            [[1, 2, 3, 4, ···, '6', 7, 8]]
-  //[[1, 2, 3, 4, 5, 6, 7, 8, 9]];                  ->  [[1, 2, 3, 4, 5, 6, 7, 8, 9]]                [[1, 2, '3', 4, ···, 7, 8, 9]]            [[1, ···, 4, '5', 6, 7, 8, 9]]            [[1, 2, 3, 4, ···, '7', 8, 9]]
-  //[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]];              ->  [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]]            [[1, 2, '3', 4, ···, 8, 9, 10]]           [[1, ···,'5', 6, 7, 8, 9, 10]]            [[1, 2, '3', 4, ···,8, 9, 10]]
-  //[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]];          ->  [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]]
-  //[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]];      ->  [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]]
   console.log("pages", pages);
   return pages;
 };

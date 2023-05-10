@@ -30,52 +30,63 @@ function useTable<T, K extends keyof T>(
     param?: PaginationRequest;
   }
 ): {
-  tableData: {
-    total: number;
-    pageSize: number;
-    data: T[];
-  };
+  tableData: T[];
   tableRef: RefObject<Table2>;
   updateTable: (args0?: PaginationRequest) => void;
   loading: MutableRefObject<TableLoadingOption[]>;
+  pager: PagerState;
   onSelection: (regions: Region[], key: K) => void;
   multiSelectedArr: T[K][];
 } {
-  const [tableData, setTableData] = useState<{
-    total: number;
-    pageSize: number;
-    data: T[];
-  }>({
-    total: 0,
+  // 分页器页码数组
+  const [pager, setPager] = useState<PagerState>({
     pageSize: 5,
-    data: [
-      ...generateArray(() => {
-        return {};
-      }, 13),
-    ],
+    currentPage: 1,
+    total: 0,
   });
+  // 表格数据
+  const [tableData, setTableData] = useState<T[]>([
+    ...generateArray(() => {
+      return {};
+    }, 13),
+  ]);
+  // 多选数组
   const [multiSelectedArr, setMultiSelectedArr] = useState<T[K][]>([]);
+  // 表格loading状态
   const loading = useRef<TableLoadingOption[]>([
     TableLoadingOption.CELLS,
     TableLoadingOption.COLUMN_HEADERS,
     TableLoadingOption.ROW_HEADERS,
   ]);
+  // 表格Ref
   const tableRef = useRef<Table2>(null);
+  // 表格更新函数
   const updateTable = async (customReq?: PaginationRequest) => {
+    loading.current = [
+      TableLoadingOption.CELLS,
+      TableLoadingOption.COLUMN_HEADERS,
+      TableLoadingOption.ROW_HEADERS,
+    ];
     const param = customReq ||
       config?.param || {
-        pageSize: 10,
-        pageNum: 1,
+        pageSize: pager.pageSize,
+        pageNum: pager.currentPage,
       };
     const { data } = await cb(param);
-    if (data) {
-      setTableData(data);
+    if (data.data) {
+      setTableData([...data.data]);
+      setPager({
+        pageSize: data.pageSize || param.pageSize,
+        currentPage: data.pageNum || param.pageNum,
+        total: data.total || data.data.length,
+      });
       loading.current = [];
     }
   };
   useEffect(() => {
     updateTable();
   }, []);
+  // 表格多选回调
   const onSelection = (regions: Region[], key: K) => {
     const prev = regions
       .map((region) => {
@@ -83,9 +94,10 @@ function useTable<T, K extends keyof T>(
           return generateRangeArray(region.rows[0], region.rows[1], 1);
       })
       .flat()
-      .map((i) => tableData.data[i!][key]);
+      .map((i) => tableData[i!][key]);
     setMultiSelectedArr(prev);
   };
+  // 修复BluePrint Table只显示4条数据的BUG
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       if (!tableRef.current) return;
@@ -97,6 +109,7 @@ function useTable<T, K extends keyof T>(
           ...table.state,
           viewportRect: tableRect,
         });
+      table.componentDidMount();
     });
     resizeObserver.observe(document.body);
     return () => {
@@ -108,6 +121,7 @@ function useTable<T, K extends keyof T>(
     tableRef,
     updateTable,
     loading,
+    pager,
     onSelection,
     multiSelectedArr,
   };

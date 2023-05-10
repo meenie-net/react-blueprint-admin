@@ -41,7 +41,6 @@ const routes = [
     },
   },
 ];
-console.log("routes", routes);
 
 const router = createHashRouter(routes);
 
