@@ -48,11 +48,11 @@ export const generateColumnWidth = (
   return result;
 };
 /**
- *
+ *  生成等差数组
  * @param start 数组第一项的值
  * @param stop 数组最后一项的值
  * @param step 等差数组的差
- * @returns
+ * @returns 生成的等差数组
  */
 export const generateRangeArray = (start: number, stop: number, step: number) =>
   generateArray((_, i) => start + i * step, (stop - start) / step + 1);
@@ -69,12 +69,14 @@ export const generatePagesArray = (
   currentPage: number
 ) => {
   let pages: number[][] = [];
-
+  // 总页数小于等于显示页数
   if (totalPage <= pagerCount) {
     pages = [[...generateRangeArray(1, totalPage, 1)]];
   }
-  if (totalPage > pagerCount) {
-    if (0 < currentPage && currentPage <= Math.ceil(pagerCount / 2)) {
+  // 页数大于显示数但小于显示数+2
+  if (pagerCount < totalPage && totalPage <= pagerCount + 2) {
+    // 当前页小于等于显示页数的一半
+    if (currentPage <= Math.ceil(pagerCount / 2)) {
       pages = [
         [1],
         [],
@@ -82,10 +84,30 @@ export const generatePagesArray = (
         [0],
         [totalPage],
       ];
-    } else if (
-      totalPage - pagerCount + 1 < currentPage &&
-      currentPage <= totalPage
-    ) {
+    } else {
+      // 当前页大于显示页数的一半
+      pages = [
+        [1],
+        [0],
+        [...generateRangeArray(totalPage - pagerCount + 1, totalPage - 1, 1)],
+        [],
+        [totalPage],
+      ];
+    }
+  }
+  // 页数大于显示数+2
+  if (totalPage > pagerCount + 2) {
+    // 当前页小于等于显示页数的一半
+    if (currentPage <= Math.ceil(pagerCount / 2)) {
+      pages = [
+        [1],
+        [],
+        [...generateRangeArray(2, pagerCount - 1, 1)],
+        [0],
+        [totalPage],
+      ];
+    } else if (totalPage - pagerCount + 1 < currentPage) {
+      // 当前页离末页的页数大于显示页数的一半
       pages = [
         [1],
         [0],
@@ -94,6 +116,7 @@ export const generatePagesArray = (
         [totalPage],
       ];
     } else {
+      // 当前页处于中间
       pages = [
         [1],
         [0],

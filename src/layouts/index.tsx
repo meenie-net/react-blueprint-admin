@@ -6,6 +6,7 @@ import LayoutColumn from "./LayoutColumn";
 import LayoutTransverse from "./LayoutTransverse";
 import LayoutVertical from "./LayoutVertical";
 import useGlobalStore from "../hooks/useGlobalStore";
+import "./style.scss";
 
 const LAYOUT_BASE: Record<LayoutType, ReactElement> = {
   CLASSIC: <LayoutClassic></LayoutClassic>,
