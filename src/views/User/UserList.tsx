@@ -14,6 +14,7 @@ import UserDrawer from "./UserDrawer";
 import emitter from "../../utils/EventEmitter";
 import EmitEventEnum from "../../enums/emitEvent";
 import Pagination from "./../../components/Pagination/index";
+import { useHandleConfirm } from "../../hooks/useHandleConfirm";
 
 const UserList = () => {
   // 使用useTable Hooks获取table数据及相关方法
@@ -25,7 +26,7 @@ const UserList = () => {
     pager, // 表格数据分页器数据
     onSelection, // 多选回调函数
     multiSelectedArr, //多选结果数组
-  } = useTable<User, "id">(
+  } = useTable<User, "id">( // 泛型参数：第一个代表泛型T，第二个参数代表多选数组的值对应的key
     api.getUserList, // 表格数据接口
     {} // 表格配置
   );
@@ -35,11 +36,37 @@ const UserList = () => {
       state: "add",
     });
   };
+  // 点击“查看”按钮操作
+  const handleView = (user: User) => {
+    emitter.emit(EmitEventEnum.OpenUserDrawer, {
+      user,
+      state: "edit",
+    });
+  };
   // 点击“编辑”按钮操作
   const handleEdit = (user: User) => {
     emitter.emit(EmitEventEnum.OpenUserDrawer, {
       user,
       state: "edit",
+    });
+  };
+  // 点击“重置密码”按钮操作
+  const handleResetPassword = async (user: User) => {
+    await useHandleConfirm({
+      handler: api.deleteUser,
+      param: { id: user.id },
+      message: `确认重置${user.nick}的密码吗？`,
+      intent: "warning",
+    });
+  };
+  // 点击“删除”按钮操作
+  const handleDelete = async (user: User) => {
+    await useHandleConfirm({
+      handler: api.deleteUser,
+      param: { id: user.id },
+      message: `确认删除${user.nick}吗？`,
+      icon: "trash",
+      intent: "danger",
     });
   };
   // Pagination组件的回调函数
@@ -54,13 +81,32 @@ const UserList = () => {
   const OperationCellRenderer = (rowIndex: number) => (
     <Cell className="flex items-center justify-center">
       <ButtonGroup minimal>
-        <Button onClick={() => handleEdit(userData[rowIndex])} intent="primary">
+        <Button
+          onClick={() => handleView(userData[rowIndex])}
+          intent="primary"
+          icon="eye-open"
+        >
+          查看
+        </Button>
+        <Button
+          onClick={() => handleEdit(userData[rowIndex])}
+          intent="primary"
+          icon="edit"
+        >
           编辑
         </Button>
-        <Button onClick={() => handleEdit(userData[rowIndex])} intent="success">
-          编辑
+        <Button
+          onClick={() => handleResetPassword(userData[rowIndex])}
+          intent="success"
+          icon="refresh"
+        >
+          重置密码
         </Button>
-        <Button onClick={() => handleEdit(userData[rowIndex])} intent="danger">
+        <Button
+          onClick={() => handleDelete(userData[rowIndex])}
+          intent="danger"
+          icon="delete"
+        >
           删除
         </Button>
       </ButtonGroup>
@@ -153,10 +199,11 @@ const UserList = () => {
               rowHeaderCellRenderer={userRowHeaderRenderer}
               onSelection={(_) => onSelection(_, "id")} // 多选数组值对应的key
               selectionModes={SelectionModes.ROWS_ONLY}
-              columnWidths={[180, 50, 100, 100]} // 列宽
+              columnWidths={[350, 50, 100, 100]} // 列宽
               numFrozenColumns={1} // 首列（操作列）冻结
               cellRendererDependencies={[userData]}
             >
+              {/* 操作列，置左！！！ */}
               <Column
                 id="user-operation"
                 name="操作"
@@ -180,7 +227,7 @@ const UserList = () => {
         <div className="flex justify-center mt-4">
           <Pagination
             {...pager}
-            pagerCount={7} // 分页器页码按钮最大显示数
+            pagerCount={7} // 分页器页码按钮最大显示数：奇数 || 偶数--
             pageSizeArr={[5, 10, 15, 20, 50, 100, 500]} // 每页条数配置数组
             onChange={paginationChange}
           />

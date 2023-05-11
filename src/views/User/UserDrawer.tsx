@@ -13,6 +13,7 @@ const UserDrawer = () => {
   const [state, setState] = useState("add");
   const [open, setOpen] = useState(false);
   const init = (payload: { state: "add" | "edit"; user?: User }) => {
+    console.log("payload", payload);
     if (payload.state === "edit" && payload.user) setUser(payload.user);
     setState(payload.state);
     setOpen(true);
@@ -21,8 +22,8 @@ const UserDrawer = () => {
     emitter.off(EmitEventEnum.OpenUserDrawer, init);
     setOpen(false);
   };
-  emitter.on(EmitEventEnum.OpenUserDrawer, init);
   useEffect(() => {
+    emitter.on(EmitEventEnum.OpenUserDrawer, init);
     return () => {
       emitter.off(EmitEventEnum.OpenUserDrawer, init);
     };

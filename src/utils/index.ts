@@ -67,17 +67,22 @@ export const generatePagesArray = (
   totalPage: number,
   pagerCount: number,
   currentPage: number
-) => {
-  let pages: number[][] = [];
+): number[][] => {
+  // 显示页数如果是偶数，处理成-1之后的奇数
+  if (pagerCount % 2 === 0 && pagerCount !== 1) pagerCount--;
+  // 显示页数等于1
+  if (pagerCount === 1) {
+    return [[currentPage]];
+  }
   // 总页数小于等于显示页数
   if (totalPage <= pagerCount) {
-    pages = [[...generateRangeArray(1, totalPage, 1)]];
+    return [[...generateRangeArray(1, totalPage, 1)]];
   }
-  // 页数大于显示数但小于显示数+2
-  if (pagerCount < totalPage && totalPage <= pagerCount + 2) {
+  // 页数大于显示数但小于等于显示数+2
+  else if (pagerCount < totalPage && totalPage <= pagerCount + 2) {
     // 当前页小于等于显示页数的一半
     if (currentPage <= Math.ceil(pagerCount / 2)) {
-      pages = [
+      return [
         [1],
         [],
         [...generateRangeArray(2, pagerCount - 1, 1)],
@@ -86,7 +91,7 @@ export const generatePagesArray = (
       ];
     } else {
       // 当前页大于显示页数的一半
-      pages = [
+      return [
         [1],
         [0],
         [...generateRangeArray(totalPage - pagerCount + 1, totalPage - 1, 1)],
@@ -96,10 +101,10 @@ export const generatePagesArray = (
     }
   }
   // 页数大于显示数+2
-  if (totalPage > pagerCount + 2) {
+  else {
     // 当前页小于等于显示页数的一半
     if (currentPage <= Math.ceil(pagerCount / 2)) {
-      pages = [
+      return [
         [1],
         [],
         [...generateRangeArray(2, pagerCount - 1, 1)],
@@ -108,7 +113,7 @@ export const generatePagesArray = (
       ];
     } else if (totalPage - pagerCount + 1 < currentPage) {
       // 当前页离末页的页数大于显示页数的一半
-      pages = [
+      return [
         [1],
         [0],
         [...generateRangeArray(totalPage - pagerCount + 1, totalPage - 1, 1)],
@@ -117,13 +122,13 @@ export const generatePagesArray = (
       ];
     } else {
       // 当前页处于中间
-      pages = [
+      return [
         [1],
         [0],
         [
           ...generateRangeArray(
-            currentPage - Math.floor(pagerCount / 2),
-            currentPage + Math.floor(pagerCount / 2),
+            currentPage - Math.floor(pagerCount / 2) + 1,
+            currentPage + Math.floor(pagerCount / 2) - 1,
             1
           ),
         ],
@@ -132,6 +137,4 @@ export const generatePagesArray = (
       ];
     }
   }
-  console.log("pages", pages);
-  return pages;
 };

@@ -1,11 +1,12 @@
 import { http } from "./http";
 import { users } from "./../../mock/user";
+import { ResCode } from "../enums/http";
 // 开发环境
 function mockFetch(data: any) {
   return new Promise<ResType>((resolve) => {
     setTimeout(() => {
       resolve({
-        code: 10000,
+        code: ResCode.SUCCESS,
         msg: "成功",
         data,
       });
@@ -26,6 +27,9 @@ export const api = {
             )
           : users,
     });
+  },
+  deleteUser(id: string) {
+    return mockFetch(null);
   },
 };
 

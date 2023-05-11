@@ -7,6 +7,7 @@ import LayoutTransverse from "./LayoutTransverse";
 import LayoutVertical from "./LayoutVertical";
 import useGlobalStore from "../hooks/useGlobalStore";
 import "./style.scss";
+import GlobalAlert from "../components/GlobalAlert";
 
 const LAYOUT_BASE: Record<LayoutType, ReactElement> = {
   CLASSIC: <LayoutClassic></LayoutClassic>,
@@ -25,6 +26,7 @@ export const Layout = () => {
       <div className={`w-full h-full ${darkTheme ? "bp4-dark" : ""}`}>
         {LAYOUT_BASE[layoutType]}
         <ThemeDrawer />
+        <GlobalAlert isOpen={false} />
       </div>
     </HotkeysProvider>
   );

@@ -1,5 +1,6 @@
 import axios from "axios";
-import { AppToaster } from "../components/Toaster";
+import { AppToaster } from "../utils/Toaster";
+import { ResCode } from "../enums/http";
 
 axios.defaults.timeout = 15000;
 axios.defaults.headers.get["Content-Type"] = "application/json; charset=UTF-8";
@@ -41,9 +42,9 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   async (res: any) => {
-    if (res.data.status === 50000) {
+    if (res.data.code === ResCode.NOT_LOGIN) {
       localStorage.clear();
-      AppToaster.show({ message: "成功" });
+      AppToaster.show({ message: "未登录" });
       return Promise.reject(res);
     }
     AppToaster.show({ message: res.data.msg });

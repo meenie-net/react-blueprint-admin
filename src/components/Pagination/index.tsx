@@ -60,7 +60,7 @@ const Pagination = (props: {
       </ControlGroup>
       {/* pager container */}
       <ControlGroup className="ml-4">
-        {/* 前一页 */}
+        {/* 前一页按钮 */}
         <Button
           icon="caret-left"
           onClick={() => handlePage(currentPage - 1)}
@@ -77,7 +77,12 @@ const Pagination = (props: {
             </Button>
           ))}
         {/* 第一个省略号 */}
-        {pages[1] && pages[1].length > 0 && <Button>···</Button>}
+        {pages[1] && pages[1].length > 0 && (
+          <Button
+            className="before:absolute before:bottom-0.5 text-2xl before:content-['···'] hover:before:content-['«']"
+            onClick={() => handlePage(currentPage - pagerCount)}
+          ></Button>
+        )}
         {/* 页码中间部分 */}
         {pages[2] &&
           pages[2].map((v, i) => (
@@ -90,7 +95,12 @@ const Pagination = (props: {
             </Button>
           ))}
         {/* 第二个省略号 */}
-        {pages[3] && pages[3].length > 0 && <Button>···</Button>}
+        {pages[3] && pages[3].length > 0 && (
+          <Button
+            className="before:absolute before:bottom-0.5 text-2xl before:content-['···'] hover:before:content-['»']"
+            onClick={() => handlePage(currentPage + pagerCount)}
+          ></Button>
+        )}
         {/* 页码结束部分 */}
         {pages[4] &&
           pages[4].map((v, i) => (
@@ -102,6 +112,7 @@ const Pagination = (props: {
               {v}
             </Button>
           ))}
+        {/* 后一页按钮 */}
         <Button
           icon="caret-right"
           onClick={() => handlePage(currentPage + 1)}
