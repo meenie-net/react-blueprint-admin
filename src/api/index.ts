@@ -29,6 +29,7 @@ export const api = {
     });
   },
   deleteUser(id: string) {
+    console.log("id", id);
     return mockFetch(null);
   },
 };
