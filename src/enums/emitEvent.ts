@@ -4,5 +4,6 @@ const enum EmitEventEnum {
   OpenGlobalAlert = "OpenGlobalAlert",
   GlobalAlertConfirm = "GlobalAlertConfirm",
   CloseGlobalAlert = "CloseGlobalAlert",
+  GlobalAlertCancel = "GlobalAlertCancel",
 }
 export default EmitEventEnum;

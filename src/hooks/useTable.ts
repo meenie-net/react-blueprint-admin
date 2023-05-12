@@ -1,11 +1,5 @@
 import { Region, Table2, TableLoadingOption } from "@blueprintjs/table";
-import {
-  MutableRefObject,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { generateArray, generateRangeArray } from "../utils";
 
 /**
@@ -33,7 +27,7 @@ function useTable<T, K extends keyof T>(
   tableData: T[];
   tableRef: RefObject<Table2>;
   updateTable: (args0?: PaginationRequest) => void;
-  loading: MutableRefObject<TableLoadingOption[]>;
+  loading: TableLoadingOption[];
   pager: PagerState;
   onSelection: (regions: Region[], key: K) => void;
   multiSelectedArr: T[K][];
@@ -53,7 +47,7 @@ function useTable<T, K extends keyof T>(
   // 多选数组
   const [multiSelectedArr, setMultiSelectedArr] = useState<T[K][]>([]);
   // 表格loading状态
-  const loading = useRef<TableLoadingOption[]>([
+  const [loading, setLoading] = useState<TableLoadingOption[]>([
     TableLoadingOption.CELLS,
     TableLoadingOption.COLUMN_HEADERS,
     TableLoadingOption.ROW_HEADERS,
@@ -62,11 +56,11 @@ function useTable<T, K extends keyof T>(
   const tableRef = useRef<Table2>(null);
   // 表格更新函数
   const updateTable = async (customReq?: PaginationRequest) => {
-    loading.current = [
+    setLoading([
       TableLoadingOption.CELLS,
       TableLoadingOption.COLUMN_HEADERS,
       TableLoadingOption.ROW_HEADERS,
-    ];
+    ]);
     const param = customReq ||
       config?.param || {
         pageSize: pager.pageSize,
@@ -80,7 +74,7 @@ function useTable<T, K extends keyof T>(
         currentPage: data.pageNum || param.pageNum,
         total: data.total || data.data.length,
       });
-      loading.current = [];
+      setLoading([]);
     }
   };
   useEffect(() => {
@@ -94,6 +88,7 @@ function useTable<T, K extends keyof T>(
           return generateRangeArray(region.rows[0], region.rows[1], 1);
       })
       .flat()
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       .map((i) => tableData[i!][key]);
     setMultiSelectedArr(prev);
   };

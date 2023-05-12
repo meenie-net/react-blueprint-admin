@@ -8,7 +8,11 @@ import {
 import emitter from "../../utils/EventEmitter";
 import { useState } from "react";
 import EmitEventEnum from "../../enums/emitEvent";
+import useGlobalStore from "../../hooks/useGlobalStore";
 const GlobalAlert = (props: AlertProps) => {
+  const {
+    setting: { darkTheme },
+  } = useGlobalStore();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [icon, setIcon] = useState<IconName | MaybeElement>("lightbulb");
@@ -20,11 +24,11 @@ const GlobalAlert = (props: AlertProps) => {
     intent: Intent | undefined;
   }) => {
     setMessage(payload.message);
-    setIcon(payload.icon);
+    payload.icon && setIcon(payload.icon);
     setIntent(payload.intent);
     setOpen(true);
   };
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     setLoading(true);
     emitter.emit(EmitEventEnum.GlobalAlertConfirm);
   };
@@ -38,6 +42,7 @@ const GlobalAlert = (props: AlertProps) => {
   const handleCancel = () => {
     emitter.off(EmitEventEnum.OpenGlobalAlert, init);
     emitter.off(EmitEventEnum.CloseGlobalAlert, close);
+    emitter.emit(EmitEventEnum.GlobalAlertCancel);
     close();
   };
   emitter.on(EmitEventEnum.OpenGlobalAlert, init);
@@ -45,6 +50,7 @@ const GlobalAlert = (props: AlertProps) => {
   return (
     <Alert
       {...props}
+      className={`${darkTheme ? "bp4-dark" : ""}`}
       cancelButtonText="取消"
       confirmButtonText="确认"
       icon={icon}

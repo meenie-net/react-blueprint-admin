@@ -195,7 +195,7 @@ const UserList = () => {
               className="overflow-x-hidden"
               numRows={userData.length}
               rowHeights={generateArray(() => 40, userData.length)}
-              loadingOptions={loading.current}
+              loadingOptions={loading}
               rowHeaderCellRenderer={userRowHeaderRenderer}
               onSelection={(_) => onSelection(_, "id")} // 多选数组值对应的key
               selectionModes={SelectionModes.ROWS_ONLY}
