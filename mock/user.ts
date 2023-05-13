@@ -1,4 +1,6 @@
-export const users: User[] = [
+import { IUser } from "../src/views/User/user";
+
+export const users: IUser[] = [
   {
     id: "1",
     nick: "Jack",

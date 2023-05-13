@@ -11,10 +11,10 @@ import useTable from "../../hooks/useTable";
 import { api } from "../../api";
 import { generateArray } from "../../utils";
 import UserDrawer from "./UserDrawer";
-import emitter from "../../utils/EventEmitter";
-import EmitEventEnum from "../../enums/emitEvent";
+import emitter, { EmitEventEnum } from "../../utils/EventEmitter";
 import Pagination from "./../../components/Pagination/index";
 import { useHandleConfirm } from "../../hooks/useHandleConfirm";
+import { IUser } from "./user";
 
 const UserList = () => {
   // 使用useTable Hooks获取table数据及相关方法
@@ -26,7 +26,7 @@ const UserList = () => {
     pager, // 表格数据分页器数据
     onSelection, // 多选回调函数
     multiSelectedArr, //多选结果数组
-  } = useTable<User, "id">( // 泛型参数：第一个代表泛型T，第二个参数代表多选数组的值对应的key
+  } = useTable<IUser, "id">( // 泛型参数：第一个代表泛型T，第二个参数代表多选数组的值对应的key
     api.getUserList, // 表格数据接口
     {} // 表格配置
   );
@@ -37,21 +37,21 @@ const UserList = () => {
     });
   };
   // 点击“查看”按钮操作
-  const handleView = (user: User) => {
+  const handleView = (user: IUser) => {
     emitter.emit(EmitEventEnum.OpenUserDrawer, {
       user,
       state: "edit",
     });
   };
   // 点击“编辑”按钮操作
-  const handleEdit = (user: User) => {
+  const handleEdit = (user: IUser) => {
     emitter.emit(EmitEventEnum.OpenUserDrawer, {
       user,
       state: "edit",
     });
   };
   // 点击“重置密码”按钮操作
-  const handleResetPassword = async (user: User) => {
+  const handleResetPassword = async (user: IUser) => {
     await useHandleConfirm({
       handler: api.deleteUser,
       param: { id: user.id },
@@ -60,7 +60,7 @@ const UserList = () => {
     });
   };
   // 点击“删除”按钮操作
-  const handleDelete = async (user: User) => {
+  const handleDelete = async (user: IUser) => {
     await useHandleConfirm({
       handler: api.deleteUser,
       param: { id: user.id },

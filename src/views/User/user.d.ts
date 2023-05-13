@@ -1,6 +1,6 @@
-type User = {
-    id: string,
-    nick: string,
-    tel: number,
-    permission: string[],
+export declare interface IUser {
+  id: string;
+  nick: string;
+  tel: number;
+  permission: string[];
 }

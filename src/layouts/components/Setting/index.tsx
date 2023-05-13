@@ -1,8 +1,8 @@
-import { ButtonGroup, Button, Icon, H1 } from "@blueprintjs/core";
-import EmitEventEnum from "../../../enums/emitEvent";
-import emitter from "../../../utils/EventEmitter";
+import { ButtonGroup, Button, Icon, H1, Menu } from "@blueprintjs/core";
+import emitter, { EmitEventEnum } from "../../../utils/EventEmitter";
 import useGlobalStore from "../../../hooks/useGlobalStore";
-import { Classes, Popover2 } from "@blueprintjs/popover2";
+import { Classes, MenuItem2, Popover2 } from "@blueprintjs/popover2";
+import i18n, { lngs, type TLngsKey } from "../../../i18n";
 
 const Setting = () => {
   const {
@@ -11,6 +11,21 @@ const Setting = () => {
   const handleThemeClick = () => {
     emitter.emit(EmitEventEnum.OpenThemeDrawer);
   };
+  const handleLanguageClick = (lng: TLngsKey) => {
+    i18n.changeLanguage(lng);
+  };
+  const LanguageMenu = (
+    <Menu className="min-w-[60px]">
+      {Object.keys(lngs).map((lng) => (
+        <MenuItem2
+          className={`${i18n.resolvedLanguage === lng ? "bold" : "normal"}`}
+          key={lng}
+          text={lngs[lng as TLngsKey].nativeName}
+          onClick={() => handleLanguageClick(lng as TLngsKey)}
+        />
+      ))}
+    </Menu>
+  );
   return (
     <>
       <ButtonGroup minimal={true} large={assemblyLarge}>
@@ -24,13 +39,15 @@ const Setting = () => {
         <Button>
           <Icon icon="search" color="#f6f7f9" size={assemblyLarge ? 24 : 18} />
         </Button>
-        <Button>
-          <Icon
-            icon="translate"
-            color="#f6f7f9"
-            size={assemblyLarge ? 24 : 18}
-          />
-        </Button>
+        <Popover2 content={LanguageMenu} fill={true} placement="bottom">
+          <Button>
+            <Icon
+              icon="translate"
+              color="#f6f7f9"
+              size={assemblyLarge ? 24 : 18}
+            />
+          </Button>
+        </Popover2>
         <Button>
           <Icon
             icon="zoom-to-fit"

@@ -6,6 +6,12 @@ import {
 } from "@blueprintjs/core";
 import { generatePagesArray } from "../../utils";
 
+export interface IPager {
+  pageSize: number;
+  currentPage: number;
+  total: number;
+}
+
 const Pagination = (props: {
   total: number;
   pageSize?: number;

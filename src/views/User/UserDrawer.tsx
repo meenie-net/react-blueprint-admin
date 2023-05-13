@@ -1,10 +1,10 @@
 import { Drawer } from "@blueprintjs/core";
-import emitter from "../../utils/EventEmitter";
-import EmitEventEnum from "../../enums/emitEvent";
+import emitter, { EmitEventEnum } from "../../utils/EventEmitter";
 import { useEffect, useState } from "react";
+import { IUser } from "./user";
 
 const UserDrawer = () => {
-  const [user, setUser] = useState<User>({
+  const [user, setUser] = useState<IUser>({
     id: "",
     nick: "",
     tel: 0,
@@ -12,7 +12,7 @@ const UserDrawer = () => {
   });
   const [state, setState] = useState("add");
   const [open, setOpen] = useState(false);
-  const init = (payload: { state: "add" | "edit"; user?: User }) => {
+  const init = (payload: { state: "add" | "edit"; user?: IUser }) => {
     console.log("payload", payload);
     if (payload.state === "edit" && payload.user) setUser(payload.user);
     setState(payload.state);

@@ -1,10 +1,18 @@
 import { createHashRouter } from "react-router-dom";
-import menu from "../config/menu";
+import menu, { IMenu } from "../config/menu";
 import { Layout } from "../layouts";
+import { ReactElement } from "react";
 
-const generateRoutes = (menu: MenuType[]): RouteType[] => {
+export interface IRoute {
+  path: string;
+  element?: ReactElement;
+  children?: IRoute[];
+  handle: object;
+}
+
+const generateRoutes = (menu: IMenu[]): IRoute[] => {
   return menu.map((route) => {
-    let children: RouteType[] = [];
+    let children: IRoute[] = [];
     if (route.children) {
       children = generateRoutes(route.children);
       return {

@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { IMenu } from "../config/menu";
+
 /**
  *
  * @param menu 用户配置的menu数据
  * @returns 打平的menu
  */
-export const flapMenu = (menu: MenuType[]): MenuType[] => {
-  const serializedMenu: MenuType[] = JSON.parse(JSON.stringify(menu));
+export const flapMenu = (menu: IMenu[]): IMenu[] => {
+  const serializedMenu: IMenu[] = JSON.parse(JSON.stringify(menu));
   return serializedMenu.flatMap((item) => [
     item,
     ...(item.children ? flapMenu(item.children) : []),

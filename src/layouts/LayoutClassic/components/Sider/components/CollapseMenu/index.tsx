@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useGlobalStore from "../../../../../../hooks/useGlobalStore";
 import "./style.scss";
+import { IMenu } from "../../../../../../config/menu";
 
-const CollapseMenu = (props: { key: string; item: MenuType }) => {
+const CollapseMenu = (props: { key: string; item: IMenu }) => {
   const { item } = props;
   const {
     setting: { menuOpen },

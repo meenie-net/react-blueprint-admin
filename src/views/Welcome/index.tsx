@@ -1,7 +1,9 @@
+import { t } from "i18next";
+
 const Welcome = () => {
   return (
     <div className="h-full text-center">
-      <h1 className="text-2xl font-bold">Welcome</h1>
+      <h1 className="text-2xl font-bold">{t("welcome")}</h1>
       <div className="my-4">
         <span className="px-4 font-serif text-6xl font-bold text-white bg-black">
           Mee Admin

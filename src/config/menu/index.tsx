@@ -2,8 +2,21 @@ import UserList from "../../views/User/UserList";
 import Welcome from "../../views/Welcome";
 import GoodsList from "../../views/Goods/GoodsList";
 import { createRef } from "react";
+import { IconName, MaybeElement } from "@blueprintjs/core";
 
-const menu: MenuType[] = [
+export interface IMenu {
+  path: string;
+  name: string;
+  element?: JSX.Element;
+  nodeRef?: React.RefObject<unknown>;
+  meta: {
+    title: string;
+    icon: IconName | MaybeElement;
+  };
+  children?: IMenu[];
+}
+
+const menu: IMenu[] = [
   {
     path: "/",
     name: "home",

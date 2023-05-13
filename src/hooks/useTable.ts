@@ -1,6 +1,8 @@
 import { Region, Table2, TableLoadingOption } from "@blueprintjs/table";
 import { RefObject, useEffect, useRef, useState } from "react";
 import { generateArray, generateRangeArray } from "../utils";
+import { IPaginationRequest, IResponse } from "../api";
+import { IPager } from "../components/Pagination";
 
 /**
  *
@@ -18,22 +20,22 @@ import { generateArray, generateRangeArray } from "../utils";
  * @returns [tableData,wrapperRef,tableRef,update]
  */
 function useTable<T, K extends keyof T>(
-  cb: { (req: PaginationRequest): Promise<ResType> },
+  cb: { (req: IPaginationRequest): Promise<IResponse> },
   config?: {
     widthArr?: Array<number>;
-    param?: PaginationRequest;
+    param?: IPaginationRequest;
   }
 ): {
   tableData: T[];
   tableRef: RefObject<Table2>;
-  updateTable: (args0?: PaginationRequest) => void;
+  updateTable: (args0?: IPaginationRequest) => void;
   loading: TableLoadingOption[];
-  pager: PagerState;
+  pager: IPager;
   onSelection: (regions: Region[], key: K) => void;
   multiSelectedArr: T[K][];
 } {
   // 分页器页码数组
-  const [pager, setPager] = useState<PagerState>({
+  const [pager, setPager] = useState<IPager>({
     pageSize: 5,
     currentPage: 1,
     total: 0,
@@ -55,7 +57,7 @@ function useTable<T, K extends keyof T>(
   // 表格Ref
   const tableRef = useRef<Table2>(null);
   // 表格更新函数
-  const updateTable = async (customReq?: PaginationRequest) => {
+  const updateTable = async (customReq?: IPaginationRequest) => {
     setLoading([
       TableLoadingOption.CELLS,
       TableLoadingOption.COLUMN_HEADERS,

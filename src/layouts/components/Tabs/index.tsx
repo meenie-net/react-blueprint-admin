@@ -2,7 +2,7 @@ import { Button, Card, Tabs, Tab, Icon } from "@blueprintjs/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { removeTab, setTab } from "../../../stores/global";
+import { ITab, removeTab, setTab } from "../../../stores/global";
 import useGlobalStore from "../../../hooks/useGlobalStore";
 import { RootState } from "../../../stores";
 
@@ -46,7 +46,7 @@ const TabsSection = () => {
             selectedTabId={location.pathname}
           >
             {tabList.length &&
-              tabList.map((tab: TabType, i: number) => (
+              tabList.map((tab: ITab, i: number) => (
                 <Tab
                   key={tab.path}
                   id={tab.path}

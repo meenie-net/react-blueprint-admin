@@ -1,8 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-import menu from "../../config/menu";
+import menu, { IMenu } from "../../config/menu";
 import { flapMenu } from "../../utils";
+import { TLayout } from "../../layouts";
+import { IconName, MaybeElement } from "@blueprintjs/core";
+export interface ITab {
+  path: string;
+  name: string;
+  meta: {
+    title: string;
+    icon: IconName | MaybeElement;
+  };
+}
+export interface IGlobalStore {
+  layoutType: TLayout;
+  tabList: ITab[];
+  flapedMenu: IMenu[];
+  setting: {
+    darkTheme: boolean;
+    menuOpen: boolean;
+    assemblyLarge: boolean;
+    showBreadcrumbs: boolean;
+    showBreadcrumbsIcon: boolean;
+    showTab: boolean;
+    showTabIcon: boolean;
+    showFooter: boolean;
+  };
+}
 
-const initialState: globalStoreState = {
+const initialState: IGlobalStore = {
   layoutType: "CLASSIC",
   tabList: [
     {

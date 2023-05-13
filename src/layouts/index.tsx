@@ -9,7 +9,9 @@ import useGlobalStore from "../hooks/useGlobalStore";
 import "./style.scss";
 import GlobalAlert from "../components/GlobalAlert";
 
-const LAYOUT_BASE: Record<LayoutType, ReactElement> = {
+export type TLayout = "CLASSIC" | "COLUMN" | "VERTICAL" | "TRANSVERSE";
+
+const LAYOUT_BASE: Record<TLayout, ReactElement> = {
   CLASSIC: <LayoutClassic></LayoutClassic>,
   COLUMN: <LayoutColumn></LayoutColumn>,
   VERTICAL: <LayoutVertical></LayoutVertical>,

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import EmitEventEnum from "../../../../enums/emitEvent";
-import emitter from "../../../../utils/EventEmitter";
+import emitter, { EmitEventEnum } from "../../../../utils/EventEmitter";
 import { Drawer, Switch } from "@blueprintjs/core";
 import Divider from "../../../../components/Divider";
 import useGlobalStore from "../../../../hooks/useGlobalStore";
@@ -17,6 +16,7 @@ import {
 } from "../../../../stores/global";
 import { changeMenuOpen } from "../../../../stores/global";
 import { ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
+import { TLayout } from "../../..";
 
 const ThemeDrawer = () => {
   const [open, setOpen] = useState(false);
@@ -37,7 +37,7 @@ const ThemeDrawer = () => {
   emitter.on(EmitEventEnum.OpenThemeDrawer, () => {
     setOpen(true);
   });
-  const handleLayout = (layout: LayoutType) => {
+  const handleLayout = (layout: TLayout) => {
     dispatch(setLayoutType(layout));
   };
   type SettingMethod =

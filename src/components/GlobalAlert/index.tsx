@@ -5,9 +5,8 @@ import {
   Intent,
   MaybeElement,
 } from "@blueprintjs/core";
-import emitter from "../../utils/EventEmitter";
+import emitter, { EmitEventEnum } from "../../utils/EventEmitter";
 import { useState } from "react";
-import EmitEventEnum from "../../enums/emitEvent";
 import useGlobalStore from "../../hooks/useGlobalStore";
 const GlobalAlert = (props: AlertProps) => {
   const {

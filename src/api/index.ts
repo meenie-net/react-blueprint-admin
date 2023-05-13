@@ -1,12 +1,36 @@
 import { http } from "./http";
 import { users } from "./../../mock/user";
-import { ResCode } from "../enums/http";
+export interface IResponse {
+  code: ResCodeEnum;
+  msg: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any;
+}
+export interface IPaginationRequest {
+  pageSize?: number;
+  pageNum?: number;
+  param?: object;
+}
+
+/**
+ *** 10000--success
+ *** 10001
+ *** 20000
+ *** 20001
+ *** 30000
+ *** 40000
+ */
+export enum ResCodeEnum {
+  SUCCESS = 10000,
+  NOT_LOGIN = 50000,
+}
+
 // 开发环境
 function mockFetch(data: any) {
-  return new Promise<ResType>((resolve) => {
+  return new Promise<IResponse>((resolve) => {
     setTimeout(() => {
       resolve({
-        code: ResCode.SUCCESS,
+        code: ResCodeEnum.SUCCESS,
         msg: "成功",
         data,
       });
@@ -14,7 +38,7 @@ function mockFetch(data: any) {
   });
 }
 export const api = {
-  getUserList(req: PaginationRequest) {
+  getUserList(req: IPaginationRequest) {
     return mockFetch({
       total: users.length,
       pageSize: req.pageSize,

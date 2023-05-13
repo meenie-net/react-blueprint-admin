@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AppToaster } from "../utils/Toaster";
-import { ResCode } from "../enums/http";
+import { ResCodeEnum } from ".";
 
 axios.defaults.timeout = 15000;
 axios.defaults.headers.get["Content-Type"] = "application/json; charset=UTF-8";
@@ -42,7 +42,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   async (res: any) => {
-    if (res.data.code === ResCode.NOT_LOGIN) {
+    if (res.data.code === ResCodeEnum.NOT_LOGIN) {
       localStorage.clear();
       AppToaster.show({ message: "未登录" });
       return Promise.reject(res);

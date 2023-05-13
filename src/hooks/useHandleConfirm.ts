@@ -1,12 +1,11 @@
 import { IconName, Intent, MaybeElement } from "@blueprintjs/core";
-import EmitEventEnum from "../enums/emitEvent";
-import emitter from "../utils/EventEmitter";
+import emitter, { EmitEventEnum } from "../utils/EventEmitter";
 import { AppToaster } from "../utils/Toaster";
-import { ResCode } from "../enums/http";
+import { IResponse, ResCodeEnum } from "../api";
 
 export const useHandleConfirm = (config: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  handler: (args?: any) => Promise<ResType>;
+  handler: (args?: any) => Promise<IResponse>;
   param?: object;
   message: string;
   icon?: IconName | MaybeElement;
@@ -22,7 +21,7 @@ export const useHandleConfirm = (config: {
   return new Promise((resolve, reject) => {
     const cb = async () => {
       const { code } = await handler(param);
-      if (code === ResCode.SUCCESS) {
+      if (code === ResCodeEnum.SUCCESS) {
         AppToaster.show({
           message: "成功",
           icon: "tick",
