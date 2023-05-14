@@ -1,0 +1,14 @@
+{
+  "menu":{
+    "home":"Home",
+    "bigScreen":"BigScreen",
+    "user":"User",
+    "userList":"UserList",
+    "userManage":"UserManage",
+    "goods":"Goods",
+    "goodsList":"GoodsList",
+    "goodsManage":"GoodsManage"
+  },
+  "welcome": "Welcome to my website",
+  "about": "Mee Admin is a <1>relaxed</1> and <1>soft </1>admin template with{' '}<1>blueprint</1>{' '}UI framework."
+}

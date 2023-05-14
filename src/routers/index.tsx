@@ -20,6 +20,7 @@ const generateRoutes = (menu: IMenu[]): IRoute[] => {
         element: route.element,
         children,
         handle: {
+          name: route.meta.name,
           icon: route.meta.icon,
           title: route.meta.title,
         },
@@ -29,6 +30,7 @@ const generateRoutes = (menu: IMenu[]): IRoute[] => {
         path: route.path,
         element: route.element,
         handle: {
+          name: route.meta.name,
           icon: route.meta.icon,
           title: route.meta.title,
         },
@@ -44,6 +46,7 @@ const routes = [
     element: <Layout />,
     children: [...sub],
     handle: {
+      name: "home",
       icon: "home",
       title: "首页",
     },

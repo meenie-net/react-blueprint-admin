@@ -5,8 +5,8 @@ import { TLayout } from "../../layouts";
 import { IconName, MaybeElement } from "@blueprintjs/core";
 export interface ITab {
   path: string;
-  name: string;
   meta: {
+    name: string;
     title: string;
     icon: IconName | MaybeElement;
   };
@@ -32,8 +32,8 @@ const initialState: IGlobalStore = {
   tabList: [
     {
       path: "/",
-      name: "home",
       meta: {
+        name: "home",
         title: "首页",
         icon: "home",
       },
@@ -69,8 +69,8 @@ const globalStore = createSlice({
           if (item.path === payload) {
             state.tabList.push({
               path: payload,
-              name: item.name,
               meta: {
+                name: item.meta.name,
                 title: item.meta.title,
                 icon: item.meta.icon,
               },

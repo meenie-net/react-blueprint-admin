@@ -5,9 +5,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useGlobalStore from "../../../../../../hooks/useGlobalStore";
 import "./style.scss";
 import { IMenu } from "../../../../../../config/menu";
+import { useTranslation } from "react-i18next";
 
 const CollapseMenu = (props: { key: string; item: IMenu }) => {
   const { item } = props;
+  const { t } = useTranslation();
   const {
     setting: { menuOpen },
   } = useGlobalStore();
@@ -33,11 +35,11 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
       <MenuDivider />
       {menuOpen ? (
         <MenuItem2
-          text={menuOpen ? item.meta.title : ""}
+          text={menuOpen ? t(`menu.${item.meta.name}`) : ""}
           className="justify-center"
           icon={item.meta.icon}
           active={collapseActive}
-          title={menuOpen ? "" : item.meta.title}
+          title={menuOpen ? "" : "" + t(`menu.${item.meta.name}`)}
           labelElement={
             menuOpen && <Icon icon={open ? "caret-up" : "caret-down"} />
           }
@@ -61,9 +63,9 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
                 key={sub.path}
                 icon={sub.meta.icon}
                 active={pathname === sub.path}
-                title={sub.meta.title}
+                title={"" + t(`menu.${sub.meta.name}`)}
                 onClick={() => handleClick(sub.path)}
-                text={sub.meta.title}
+                text={t(`menu.${sub.meta.name}`)}
               ></MenuItem2>
             ))}
         </MenuItem2>
@@ -77,9 +79,9 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
                   key={sub.path}
                   icon={sub.meta.icon}
                   active={pathname === sub.path}
-                  title={menuOpen ? "" : sub.meta.title}
+                  title={menuOpen ? "" : "" + t(`menu.${sub.meta.name}`)}
                   onClick={() => handleClick(sub.path)}
-                  text={menuOpen ? sub.meta.title : ""}
+                  text={menuOpen ? t(`menu.${sub.meta.name}`) : ""}
                 ></MenuItem2>
               ))}
           </Menu>

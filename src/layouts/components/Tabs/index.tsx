@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ITab, removeTab, setTab } from "../../../stores/global";
 import useGlobalStore from "../../../hooks/useGlobalStore";
 import { RootState } from "../../../stores";
+import { useTranslation } from "react-i18next";
 
 const TabsSection = () => {
   const {
@@ -14,6 +15,7 @@ const TabsSection = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { tabList } = useSelector((state: RootState) => state.global);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(setTab(location.pathname));
@@ -50,7 +52,7 @@ const TabsSection = () => {
                 <Tab
                   key={tab.path}
                   id={tab.path}
-                  title={tab.meta.title}
+                  title={t(`menu.${tab.meta.name}`)}
                   icon={showTabIcon && tab.meta.icon}
                   className="group"
                 >

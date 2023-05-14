@@ -6,10 +6,10 @@ import { IconName, MaybeElement } from "@blueprintjs/core";
 
 export interface IMenu {
   path: string;
-  name: string;
   element?: JSX.Element;
   nodeRef?: React.RefObject<unknown>;
   meta: {
+    name: string;
     title: string;
     icon: IconName | MaybeElement;
   };
@@ -19,48 +19,48 @@ export interface IMenu {
 const menu: IMenu[] = [
   {
     path: "/",
-    name: "home",
     element: <Welcome />,
     nodeRef: createRef(),
     meta: {
+      name: "home",
       title: "首页",
       icon: "home",
     },
   },
   {
     path: "/bigScreen",
-    name: "bigScreen",
     element: <Welcome />,
     nodeRef: createRef(),
     meta: {
+      name: "bigScreen",
       title: "大屏",
       icon: "home",
     },
   },
   {
     path: "/user",
-    name: "user",
     meta: {
+      name: "user",
       title: "用户管理",
       icon: "user",
     },
     children: [
       {
         path: "/user/list",
-        name: "userList",
         element: <UserList />,
         nodeRef: createRef(),
         meta: {
+          name: "userList",
           title: "用户列表",
           icon: "th",
         },
       },
       {
         path: "/user/manage",
-        name: "userManage",
         element: <Welcome />,
         nodeRef: createRef(),
         meta: {
+          name: "userManage",
           title: "用户权限",
           icon: "edit",
         },
@@ -69,28 +69,28 @@ const menu: IMenu[] = [
   },
   {
     path: "/goods",
-    name: "goods",
     meta: {
+      name: "goods",
       title: "商品管理",
       icon: "shop",
     },
     children: [
       {
         path: "/goods/list",
-        name: "goodsList",
         element: <GoodsList />,
         nodeRef: createRef(),
         meta: {
+          name: "goodsList",
           title: "商品列表",
           icon: "th",
         },
       },
       {
         path: "/goods/manage",
-        name: "goodsManage",
         element: <Welcome />,
         nodeRef: createRef(),
         meta: {
+          name: "goodsManage",
           title: "商品管理",
           icon: "edit",
         },

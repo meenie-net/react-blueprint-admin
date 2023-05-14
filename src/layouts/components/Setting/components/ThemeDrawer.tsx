@@ -40,7 +40,7 @@ const ThemeDrawer = () => {
   const handleLayout = (layout: TLayout) => {
     dispatch(setLayoutType(layout));
   };
-  type SettingMethod =
+  type TSettingMethod =
     | "menu"
     | "theme"
     | "assemblyLarge"
@@ -49,7 +49,7 @@ const ThemeDrawer = () => {
     | "tab"
     | "tab-icon"
     | "footer";
-  const settingMethods: Record<SettingMethod, ActionCreatorWithoutPayload> = {
+  const settingMethods: Record<TSettingMethod, ActionCreatorWithoutPayload> = {
     menu: changeMenuOpen,
     theme: changeDarkTheme,
     assemblyLarge: changeAssemblySize,
@@ -59,7 +59,7 @@ const ThemeDrawer = () => {
     "tab-icon": changeShowTabIcon,
     footer: changeShowFooter,
   };
-  const handleClick = (target: SettingMethod) => {
+  const handleClick = (target: TSettingMethod) => {
     dispatch(settingMethods[target]());
   };
   return (

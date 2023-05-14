@@ -1,6 +1,7 @@
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const Welcome = () => {
+  const { t } = useTranslation();
   return (
     <div className="h-full text-center">
       <h1 className="text-2xl font-bold">{t("welcome")}</h1>

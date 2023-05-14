@@ -1,7 +1,7 @@
 import LayoutClassic from "./LayoutClassic";
-import { ReactElement } from "react";
+import { ReactElement, Suspense } from "react";
 import ThemeDrawer from "./components/Setting/components/ThemeDrawer";
-import { HotkeysProvider } from "@blueprintjs/core";
+import { HotkeysProvider, Spinner, SpinnerSize } from "@blueprintjs/core";
 import LayoutColumn from "./LayoutColumn";
 import LayoutTransverse from "./LayoutTransverse";
 import LayoutVertical from "./LayoutVertical";
@@ -24,12 +24,14 @@ export const Layout = () => {
     setting: { darkTheme },
   } = useGlobalStore();
   return (
-    <HotkeysProvider>
-      <div className={`w-full h-full ${darkTheme ? "bp4-dark" : ""}`}>
-        {LAYOUT_BASE[layoutType]}
-        <ThemeDrawer />
-        <GlobalAlert isOpen={false} />
-      </div>
-    </HotkeysProvider>
+    <Suspense fallback={<Spinner size={SpinnerSize.LARGE} />}>
+      <HotkeysProvider>
+        <div className={`w-full h-full ${darkTheme ? "bp4-dark" : ""}`}>
+          {LAYOUT_BASE[layoutType]}
+          <ThemeDrawer />
+          <GlobalAlert isOpen={false} />
+        </div>
+      </HotkeysProvider>
+    </Suspense>
   );
 };

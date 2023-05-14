@@ -1,6 +1,7 @@
 import { BreadcrumbProps, IconName, MaybeElement } from "@blueprintjs/core";
 import { useNavigate, useMatches } from "react-router-dom";
 import useGlobalStore from "./useGlobalStore";
+import { useTranslation } from "react-i18next";
 
 const useBreadcrumbs = () => {
   const {
@@ -8,12 +9,14 @@ const useBreadcrumbs = () => {
   } = useGlobalStore();
   const navigate = useNavigate();
   const matches = useMatches();
+  const { t } = useTranslation();
   if (matches[1]?.pathname === "/") matches.shift();
   const crumbs: BreadcrumbProps[] = matches
     .map((match) => {
       return {
         ...match,
         handle: match.handle as {
+          name: string;
           icon: IconName | MaybeElement;
           title: string;
         },
@@ -29,7 +32,7 @@ const useBreadcrumbs = () => {
             //navigate(result);
           },
           icon: showBreadcrumbsIcon && v.handle.icon,
-          text: v.handle.title,
+          text: t(`menu.${v.handle.name}`),
           className: `${
             assemblyLarge
               ? "text-dark-text hover:text-hover"
@@ -40,7 +43,7 @@ const useBreadcrumbs = () => {
       if (k === matches.length - 1) {
         return {
           icon: showBreadcrumbsIcon && v.handle.icon,
-          text: v.handle.title,
+          text: t(`menu.${v.handle.name}`),
           className: `${assemblyLarge ? "font-normal" : "font-normal text-xs"}`,
         };
       }
@@ -49,7 +52,7 @@ const useBreadcrumbs = () => {
           navigate(v.pathname);
         },
         icon: showBreadcrumbsIcon && v.handle.icon,
-        text: v.handle.title,
+        text: t(`menu.${v.handle.name}`),
         className: `${
           assemblyLarge
             ? "text-dark-text hover:text-hover"

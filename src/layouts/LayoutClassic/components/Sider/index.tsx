@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CollapseMenu from "./components/CollapseMenu";
 import { MenuItem2 } from "@blueprintjs/popover2";
 import useGlobalStore from "../../../../hooks/useGlobalStore";
+import { useTranslation } from "react-i18next";
 
 const ClassicSider = () => {
   const {
@@ -11,6 +12,7 @@ const ClassicSider = () => {
   } = useGlobalStore();
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
   const handleClick = (path: string) => {
     navigate(path);
   };
@@ -28,8 +30,8 @@ const ClassicSider = () => {
               <MenuItem2
                 key={item.path}
                 icon={item.meta.icon}
-                title={menuOpen ? "" : item.meta.title}
-                text={menuOpen ? item.meta.title : ""}
+                title={menuOpen ? "" : "" + t(`menu.${item.meta.name}`)}
+                text={menuOpen ? t(`menu.${item.meta.name}`) : ""}
                 onClick={() => handleClick(item.path)}
                 active={location.pathname === item.path}
                 className="self-center"
