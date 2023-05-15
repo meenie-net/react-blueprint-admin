@@ -1,67 +1,62 @@
 {
-  "menu":{
-    "home":"首页",
-    "bigScreen":"大屏",
-    "user":"用户",
-    "userList":"用户列表",
-    "userManage":"用户管理",
-    "goods":"商品",
-    "goodsList":"商品列表",
-    "goodsManage":"商品管理"
+  "menu": {
+    "home": "首页",
+    "bigScreen": "大屏",
+    "user": "用户",
+    "userList": "用户列表",
+    "userManage": "用户管理",
+    "goods": "商品",
+    "goodsList": "商品列表",
+    "goodsManage": "商品管理"
   },
-  "setting":{
-    "self":"设置",
-    "interface":{
-      "self":"外观"
+  "appearanceSetting": {
+    "self": "外观设置",
+    "layoutSetting": "布局设置",
+    "layout": {
+      "classic": "经典",
+      "column": "分栏",
+      "vertical": "纵向",
+      "transverse": "横向"
     },
-    "layout":{
-      "self":"布局",
-      "classic":"",
-      "column":"",
-      "vertical":"",
-      "transverse":""
-    },
-    "dark":"暗黑",
-    "theme":"主题",
-    "menu":"菜单",
-    "collase":"折叠",
-    "global":"全局",
-    "size":"大小",
-    "tab":"标签栏",
-    "footer":"页脚"
+    "themeSetting": "主题设置",
+    "darkTheme": "暗黑主题",
+    "interfaceSetting": "界面设置",
+    "menuCollapse": "菜单折叠",
+    "globalSize": "全局大小",
+    "breadcrumb": "面包屑",
+    "breadcrumbIcon": "面包屑图标",
+    "tab": "标签栏",
+    "tabIcon": "标签栏图标",
+    "footer": "页脚"
   },
-  "breadcrume":{
-    "self":"面包屑"
-
+  "button": {
+    "self": "按钮",
+    "view": "查看",
+    "edit": "编辑",
+    "reset": "重置",
+    "delete": "删除"
   },
-  "button":{
-    "self":"",
-    "view":"查看",
-    "edit":"编辑",
-    "reset":"重置",
-    "delete":"删除"
+  "pagination": {
+    "self": "分页",
+    "total": ""
   },
-  "pagination":{
-    "self":"分页",
-    "total":""
-  },
-  "common":{
-    "self":"公共",
-    "name":"姓名",
-    "tel":"电话",
-    "number":"数字",
-    "please":"请",
-    "input":"输入",
-    "page":"页",
-    "goto":"前往",
-    "reset":"重置",
-    "confirm":"确认",
-    "search":"搜索",
-    "icon":"图标",
-    "password":"密码"
+  "common": {
+    "self": "公共",
+    "name": "姓名",
+    "tel": "电话",
+    "number": "数字",
+    "please": "请",
+    "input": "输入",
+    "page": "页",
+    "goto": "前往",
+    "reset": "重置",
+    "confirm": "确认",
+    "search": "搜索",
+    "icon": "图标",
+    "password": "密码"
   },
   "welcome": "欢迎来到我的网站",
   "about": {
-    "":"Mee Admin是一个<1>清爽</1>并且<1>舒服的</1>后台模板，它使用了<1>blueprint</1>这个UI框架."
+    "": "Mee Admin是一个<1>清爽</1>并且<1>舒服的</1>后台模板，它使用了<1>blueprint</1>这个UI框架."
   }
 }

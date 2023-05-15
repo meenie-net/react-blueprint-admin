@@ -17,6 +17,7 @@ import {
 import { changeMenuOpen } from "../../../../stores/global";
 import { ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
 import { TLayout } from "../../..";
+import { useTranslation } from "react-i18next";
 
 const ThemeDrawer = () => {
   const [open, setOpen] = useState(false);
@@ -34,6 +35,7 @@ const ThemeDrawer = () => {
     },
   } = useGlobalStore();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   emitter.on(EmitEventEnum.OpenThemeDrawer, () => {
     setOpen(true);
   });
@@ -67,13 +69,13 @@ const ThemeDrawer = () => {
       isOpen={open}
       size={"240px"}
       icon="contrast"
-      title="外观设置"
+      title={t("appearanceSetting.self")}
       canOutsideClickClose
       onClose={() => setOpen(false)}
     >
       <div className="px-4">
         <div>
-          <Divider content="布局设置" />
+          <Divider content={t("appearanceSetting.layoutSetting")} />
           <div className="text-center">
             <div className="grid grid-cols-2 gap-2 w-[170px] mx-auto place-content-center place-items-center">
               <div
@@ -121,12 +123,12 @@ const ThemeDrawer = () => {
           </div>
         </div>
         <div>
-          <Divider content="主题设置" />
+          <Divider content={t("appearanceSetting.themeSetting")} />
           <div>
             <div>
               <Switch
                 alignIndicator="right"
-                labelElement={<span>暗黑主题</span>}
+                labelElement={<span>{t("appearanceSetting.darkTheme")}</span>}
                 defaultChecked={darkTheme}
                 innerLabelChecked="☽"
                 innerLabel="☀"
@@ -136,12 +138,14 @@ const ThemeDrawer = () => {
           </div>
         </div>
         <div>
-          <Divider content="界面设置" />
+          <Divider content={t("appearanceSetting.interfaceSetting")} />
           <div>
             <div>
               <Switch
                 alignIndicator="right"
-                labelElement={<span>折叠菜单</span>}
+                labelElement={
+                  <span>{t("appearanceSetting.menuCollapse")}</span>
+                }
                 defaultChecked={menuOpen}
                 innerLabelChecked="on"
                 innerLabel="off"
@@ -149,7 +153,7 @@ const ThemeDrawer = () => {
               />
               <Switch
                 alignIndicator="right"
-                labelElement={<span>全局大小</span>}
+                labelElement={<span>{t("appearanceSetting.globalSize")}</span>}
                 defaultChecked={assemblyLarge}
                 innerLabelChecked="large"
                 innerLabel="normal"
@@ -157,7 +161,7 @@ const ThemeDrawer = () => {
               />
               <Switch
                 alignIndicator="right"
-                labelElement={<span>面包屑</span>}
+                labelElement={<span>{t("appearanceSetting.breadcrumb")}</span>}
                 defaultChecked={showBreadcrumbs}
                 innerLabelChecked="on"
                 innerLabel="off"
@@ -165,7 +169,9 @@ const ThemeDrawer = () => {
               />
               <Switch
                 alignIndicator="right"
-                labelElement={<span>面包屑图标</span>}
+                labelElement={
+                  <span>{t("appearanceSetting.breadcrumbIcon")}</span>
+                }
                 defaultChecked={showBreadcrumbsIcon}
                 innerLabelChecked="on"
                 innerLabel="off"
@@ -173,7 +179,7 @@ const ThemeDrawer = () => {
               />
               <Switch
                 alignIndicator="right"
-                labelElement={<span>标签栏</span>}
+                labelElement={<span>{t("appearanceSetting.tab")}</span>}
                 defaultChecked={showTab}
                 innerLabelChecked="on"
                 innerLabel="off"
@@ -181,7 +187,7 @@ const ThemeDrawer = () => {
               />
               <Switch
                 alignIndicator="right"
-                labelElement={<span>标签栏图标</span>}
+                labelElement={<span>{t("appearanceSetting.tabIcon")}</span>}
                 defaultChecked={showTabIcon}
                 innerLabelChecked="on"
                 innerLabel="off"
@@ -189,7 +195,7 @@ const ThemeDrawer = () => {
               />
               <Switch
                 alignIndicator="right"
-                labelElement={<span>页脚</span>}
+                labelElement={<span>{t("appearanceSetting.footer")}</span>}
                 defaultChecked={showFooter}
                 innerLabelChecked="on"
                 innerLabel="off"

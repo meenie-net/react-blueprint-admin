@@ -1,13 +1,33 @@
 {
-  "menu":{
-    "home":"Home",
-    "bigScreen":"BigScreen",
-    "user":"User",
-    "userList":"UserList",
-    "userManage":"UserManage",
-    "goods":"Goods",
-    "goodsList":"GoodsList",
-    "goodsManage":"GoodsManage"
+  "menu": {
+    "home": "Home",
+    "bigScreen": "BigScreen",
+    "user": "User",
+    "userList": "UserList",
+    "userManage": "UserManage",
+    "goods": "Goods",
+    "goodsList": "GoodsList",
+    "goodsManage": "GoodsManage"
+  },
+  "appearanceSetting": {
+    "self": "Appearance",
+    "layoutSetting": "Layout",
+    "layout": {
+      "classic": "Classic",
+      "column": "Column",
+      "vertical": "Vertical",
+      "transverse": "Transverse"
+    },
+    "themeSetting": "Theme",
+    "darkTheme": "Dark",
+    "interfaceSetting": "Interface",
+    "menuCollapse": "MenuCollapse",
+    "globalSize": "GlobalSize",
+    "breadcrumb": "Breadcrumb",
+    "breadcrumbIcon": "BreadcrumbIcon",
+    "tab": "Tab",
+    "tabIcon": "TabIcon",
+    "footer": "Footer"
   },
   "welcome": "Welcome to my website",
   "about": "Mee Admin is a <1>relaxed</1> and <1>soft </1>admin template with{' '}<1>blueprint</1>{' '}UI framework."
