@@ -43,6 +43,7 @@ const sub = generateRoutes(menu);
 const routes = [
   {
     path: "/",
+    name: "home",
     element: <Layout />,
     children: [...sub],
     handle: {
@@ -52,6 +53,7 @@ const routes = [
     },
   },
 ];
+console.log("routes", routes);
 
 const router = createHashRouter(routes);
 

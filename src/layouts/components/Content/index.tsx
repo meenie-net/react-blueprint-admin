@@ -1,15 +1,31 @@
-import KeepAlive from "react-activation";
+import { KeepAlive } from "react-activation";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import "./style.scss";
-import RouteBeforeEach from "../../../components/RouteBeforeEach";
+import { useLocation, useOutlet } from "react-router-dom";
+import NProgress from "nprogress"; // 引入nprogress插件
+import "nprogress/nprogress.css";
+import { useEffect } from "react";
 
 const Content = () => {
+  const currentOutlet = useOutlet();
+  const location = useLocation();
+  // todo
+  // auth逻辑
+  useEffect(() => {
+    // 使用 NProgress
+    NProgress.configure({ easing: "ease", speed: 1000 });
+    NProgress.start();
+    const timer = setTimeout(() => NProgress.done(), 300);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [location]);
   return (
     <SwitchTransition mode="out-in">
       <CSSTransition key={location.pathname} timeout={300} classNames="page">
         {() => (
-          <KeepAlive saveScrollPosition>
-            <RouteBeforeEach />
+          <KeepAlive cacheKey={location.pathname} saveScrollPosition>
+            {currentOutlet}
           </KeepAlive>
         )}
       </CSSTransition>

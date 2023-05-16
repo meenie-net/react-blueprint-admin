@@ -30,6 +30,7 @@ const Welcome = () => {
           这个UI框架.
         </span>
       </div>
+      <input type="text" />
     </div>
   );
 };

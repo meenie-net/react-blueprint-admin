@@ -24,7 +24,13 @@ export const Layout = () => {
     setting: { darkTheme },
   } = useGlobalStore();
   return (
-    <Suspense fallback={<Spinner size={SpinnerSize.LARGE} />}>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center h-full">
+          <Spinner size={SpinnerSize.LARGE} />
+        </div>
+      }
+    >
       <HotkeysProvider>
         <div className={`w-full h-full ${darkTheme ? "bp4-dark" : ""}`}>
           {LAYOUT_BASE[layoutType]}
