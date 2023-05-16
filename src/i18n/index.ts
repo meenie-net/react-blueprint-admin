@@ -18,7 +18,14 @@ i18n
     interpolation: {
       escapeValue: false,
     },
+    backend: {
+      loadPath: () => {
+        return `${import.meta.env.VITE_I18N_PATH}/locales/{{lng}}/{{ns}}.json`;
+      },
+    },
   });
+
+console.log("import.meta", import.meta);
 
 export default i18n;
 
