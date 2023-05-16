@@ -43,7 +43,7 @@ const initialState: IGlobalStore = {
   setting: {
     darkTheme: false,
     menuOpen: true,
-    assemblyLarge: true,
+    assemblyLarge: false,
     showBreadcrumbs: true,
     showBreadcrumbsIcon: true,
     showTab: true,

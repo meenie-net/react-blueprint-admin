@@ -53,7 +53,7 @@ const LayoutClassic = () => {
           {menuOpen && <span>Mee Admin</span>}
         </div>
         {/* HeaderRight */}
-        <div className="flex items-center justify-between flex-auto pl-4">
+        <div className="flex items-center justify-between flex-auto pl-4 pr-6">
           {/* OpenIcon & Breadcrumb */}
           <div className="flex items-center">
             {/* OpenIcon */}

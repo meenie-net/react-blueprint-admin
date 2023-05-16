@@ -25,8 +25,6 @@ i18n
     },
   });
 
-console.log("import.meta", import.meta);
-
 export default i18n;
 
 export const lngs = {

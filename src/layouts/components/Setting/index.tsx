@@ -2,6 +2,7 @@ import { ButtonGroup, Button, Icon, H1, Menu } from "@blueprintjs/core";
 import emitter, { EmitEventEnum } from "../../../utils/EventEmitter";
 import useGlobalStore from "../../../hooks/useGlobalStore";
 import { Classes, MenuItem2, Popover2 } from "@blueprintjs/popover2";
+import Notification from "./components/Notification";
 import i18n, { lngs, type TLngsKey } from "../../../i18n";
 
 const Setting = () => {
@@ -65,11 +66,7 @@ const Setting = () => {
           />
         </Button>
 
-        <Popover2
-          content={<H1>Popover!</H1>}
-          placement="bottom"
-          popoverClassName={Classes.POPOVER2_CONTENT_SIZING}
-        >
+        <Popover2 content={<Notification />} placement="bottom">
           <Button className="relative" title="消息">
             <Icon
               icon="notifications"
@@ -83,15 +80,17 @@ const Setting = () => {
           </Button>
         </Popover2>
         <span className="flex items-center ml-3 font-semibold">Meenie</span>
-        <Button>
-          <img
-            src="../../src/assets/avatar.png"
-            className={`${
-              assemblyLarge ? "w-8 h-8 rounded-full" : "w-6 h-6 rounded-full"
-            }`}
-            alt=""
-          />
-        </Button>
+        <Popover2 content={LanguageMenu} fill={true} placement="bottom">
+          <Button>
+            <img
+              src="../../src/assets/avatar.png"
+              className={`${
+                assemblyLarge ? "w-8 h-8 rounded-full" : "w-6 h-6 rounded-full"
+              }`}
+              alt=""
+            />
+          </Button>
+        </Popover2>
       </ButtonGroup>
     </>
   );
