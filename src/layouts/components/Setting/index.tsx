@@ -1,9 +1,10 @@
-import { ButtonGroup, Button, Icon, H1, Menu } from "@blueprintjs/core";
+import { ButtonGroup, Button, Icon, Menu } from "@blueprintjs/core";
 import emitter, { EmitEventEnum } from "../../../utils/EventEmitter";
 import useGlobalStore from "../../../hooks/useGlobalStore";
-import { Classes, MenuItem2, Popover2 } from "@blueprintjs/popover2";
+import { MenuItem2, Popover2 } from "@blueprintjs/popover2";
 import Notification from "./components/Notification";
 import i18n, { lngs, type TLngsKey } from "../../../i18n";
+import { assetsUrl } from "../../../utils";
 
 const Setting = () => {
   const {
@@ -80,10 +81,10 @@ const Setting = () => {
           </Button>
         </Popover2>
         <span className="flex items-center ml-3 font-semibold">Meenie</span>
-        <Popover2 content={LanguageMenu} fill={true} placement="bottom">
+        <Popover2 content={LanguageMenu} placement="bottom">
           <Button>
             <img
-              src="../../src/assets/avatar.png"
+              src={assetsUrl("../../src/assets/avatar.png")}
               className={`${
                 assemblyLarge ? "w-8 h-8 rounded-full" : "w-6 h-6 rounded-full"
               }`}

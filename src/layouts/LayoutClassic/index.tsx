@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { changeMenuOpen } from "../../stores/global";
 import useGlobalStore from "../../hooks/useGlobalStore";
 import Footer from "../components/Footer";
+import { assetsUrl } from "../../utils";
 
 const LayoutClassic = () => {
   const {
@@ -44,7 +45,7 @@ const LayoutClassic = () => {
           }`}
         >
           <img
-            src="../../../../src/assets/avatar.png"
+            src={assetsUrl("../../../../src/assets/avatar.png")}
             alt=""
             className={`${
               assemblyLarge ? "w-8 h-8 rounded-full" : "w-7 h-7 rounded-full"
@@ -94,17 +95,17 @@ const LayoutClassic = () => {
           <ClassicSider />
         </div>
         {/* ContentContainer */}
-        <div className="flex flex-col flex-auto min-w-0 content-between">
+        <div className="flex flex-col content-between flex-auto min-w-0">
           {/* Tabs */}
           <Tabs />
           {/* Content */}
           <div
             id="content"
-            className="dark flex flex-col flex-auto min-h-0 p-3 bg-slate-200"
+            className="flex flex-col flex-auto min-h-0 p-3 dark bg-slate-200"
           >
             <Content />
           </div>
-          <Footer className="dark text-center py-1" />
+          <Footer className="py-1 text-center dark" />
         </div>
       </div>
     </div>

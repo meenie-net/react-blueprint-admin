@@ -26,6 +26,7 @@ export enum ResCodeEnum {
 }
 
 // 开发环境
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mockFetch(data: any) {
   return new Promise<IResponse>((resolve) => {
     setTimeout(() => {
