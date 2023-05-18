@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { changeMenuOpen } from "../../stores/global";
 import useGlobalStore from "../../hooks/useGlobalStore";
 import Footer from "../components/Footer";
-import { assetsUrl } from "../../utils";
 
 const LayoutClassic = () => {
   const {
