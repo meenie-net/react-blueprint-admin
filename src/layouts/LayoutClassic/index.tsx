@@ -44,7 +44,7 @@ const LayoutClassic = () => {
           }`}
         >
           <img
-            src="../../../../public/avatar.png"
+            src="/assets/avatar.png"
             alt=""
             className={`${
               assemblyLarge ? "w-8 h-8 rounded-full" : "w-7 h-7 rounded-full"

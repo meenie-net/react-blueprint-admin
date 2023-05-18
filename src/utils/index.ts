@@ -140,7 +140,3 @@ export const generatePagesArray = (
     }
   }
 };
-
-export const assetsUrl = (url: string) => {
-  return import.meta.env.MODE === "development" ? url : url.split("/src")[1];
-};

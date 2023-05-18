@@ -83,7 +83,7 @@ const Setting = () => {
         <Popover2 content={LanguageMenu} placement="bottom">
           <Button>
             <img
-              src="../../../public/avatar.png"
+              src="/assets/avatar.png"
               className={`${
                 assemblyLarge ? "w-8 h-8 rounded-full" : "w-6 h-6 rounded-full"
               }`}
