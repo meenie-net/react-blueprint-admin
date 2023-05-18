@@ -144,5 +144,5 @@ export const generatePagesArray = (
 export const assetsUrl = (url: string) => {
   return import.meta.env.MODE === "development"
     ? url
-    : `${import.meta.env.VITE_BASE_PATH}url`;
+    : `${import.meta.env.VITE_BASE_PATH}${url}`;
 };
