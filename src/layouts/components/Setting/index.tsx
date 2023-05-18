@@ -4,6 +4,7 @@ import useGlobalStore from "../../../hooks/useGlobalStore";
 import { MenuItem2, Popover2 } from "@blueprintjs/popover2";
 import Notification from "./components/Notification";
 import i18n, { lngs, type TLngsKey } from "../../../i18n";
+import { assetsUrl } from "../../../utils";
 
 const Setting = () => {
   const {
@@ -83,7 +84,7 @@ const Setting = () => {
         <Popover2 content={LanguageMenu} placement="bottom">
           <Button>
             <img
-              src="/assets/avatar.png"
+              src={assetsUrl("/assets/avatar.png")}
               className={`${
                 assemblyLarge ? "w-8 h-8 rounded-full" : "w-6 h-6 rounded-full"
               }`}

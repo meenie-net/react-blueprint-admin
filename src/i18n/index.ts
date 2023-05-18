@@ -21,7 +21,7 @@ i18n
     },
     backend: {
       loadPath: () => {
-        return `${import.meta.env.VITE_I18N_PATH}/locales/{{lng}}/{{ns}}.json`;
+        return `${import.meta.env.VITE_BASE_PATH}/locales/{{lng}}/{{ns}}.json`;
       },
     },
   });

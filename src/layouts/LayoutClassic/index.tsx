@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { changeMenuOpen } from "../../stores/global";
 import useGlobalStore from "../../hooks/useGlobalStore";
 import Footer from "../components/Footer";
+import { assetsUrl } from "../../utils";
 
 const LayoutClassic = () => {
   const {
@@ -44,7 +45,7 @@ const LayoutClassic = () => {
           }`}
         >
           <img
-            src="/assets/avatar.png"
+            src={assetsUrl("/assets/avatar.png")}
             alt=""
             className={`${
               assemblyLarge ? "w-8 h-8 rounded-full" : "w-7 h-7 rounded-full"
