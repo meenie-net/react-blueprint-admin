@@ -1,5 +1,5 @@
 import { Button, Icon } from "@blueprintjs/core";
-import ClassicSider from "./components/Sider";
+import ClassicSider from "./ClassicSider";
 import Tabs from "../components/Tabs";
 import Setting from "../components/Setting";
 import Breadcrumb from "../components/Breadcrumb";
@@ -23,7 +23,7 @@ const LayoutClassic = () => {
 
   return (
     // ClassicLayoutContainer
-    <div className="flex flex-col w-full h-full">
+    <div className="flex h-full w-full flex-col">
       {/* Header */}
       <div
         className={`border-box flex w-full flex-shrink-0 items-center divide-x-2 bg-dark-bg text-dark-text ${
@@ -52,7 +52,7 @@ const LayoutClassic = () => {
           {menuOpen && <span className="whitespace-nowrap">Mee Admin</span>}
         </div>
         {/* HeaderRight */}
-        <div className="flex items-center justify-between flex-auto pl-4 pr-6">
+        <div className="flex flex-auto items-center justify-between pl-4 pr-6">
           {/* OpenIcon & Breadcrumb */}
           <div className="flex items-center">
             {/* OpenIcon */}
@@ -76,7 +76,7 @@ const LayoutClassic = () => {
         </div>
       </div>
       {/* Body */}
-      <div className="flex flex-auto min-h-0">
+      <div className="flex min-h-0 flex-auto">
         {/* SiderMenu */}
         <div
           id="sider-menu-container"
@@ -93,17 +93,17 @@ const LayoutClassic = () => {
           <ClassicSider />
         </div>
         {/* ContentContainer */}
-        <div className="flex flex-col content-between flex-auto min-w-0">
+        <div className="flex min-w-0 flex-auto flex-col content-between">
           {/* Tabs */}
           <Tabs />
           {/* Content */}
           <div
             id="content"
-            className="flex flex-col flex-auto min-h-0 p-3 dark bg-slate-200"
+            className="dark flex min-h-0 flex-auto flex-col bg-slate-200 p-3"
           >
             <Content />
           </div>
-          <Footer className="py-1 text-center dark" />
+          <Footer className="dark py-1 text-center" />
         </div>
       </div>
     </div>

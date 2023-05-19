@@ -1,9 +1,9 @@
 import { Icon } from "@blueprintjs/core";
-import menu, { IMenu } from "../../../../config/menu";
-import { useLocation, useNavigate } from "react-router-dom";
-import useGlobalStore from "../../../../hooks/useGlobalStore";
+import menu, { IMenu } from "../../config/menu";
+import { useLocation, useMatches, useNavigate } from "react-router-dom";
+import useGlobalStore from "../../hooks/useGlobalStore";
 import { useTranslation } from "react-i18next";
-import { assetsUrl } from "../../../../utils";
+import { assetsUrl } from "../../utils";
 import { useState } from "react";
 
 const ColumnSider = () => {
@@ -13,6 +13,7 @@ const ColumnSider = () => {
   } = useGlobalStore();
   const navigate = useNavigate();
   const location = useLocation();
+  const matches = useMatches();
   const { t } = useTranslation();
   const handleClick = (item: IMenu) => {
     if (!item.children) {
@@ -38,7 +39,7 @@ const ColumnSider = () => {
             key={item.path}
             onClick={() => handleClick(item)}
             className={`flex h-[64px] flex-col items-center justify-center transition-all hover:cursor-pointer hover:bg-slate-600 ${
-              location.pathname === item.path ? "bg-slate-800" : ""
+              matches[1].pathname === item.path ? "bg-slate-800" : ""
             }`}
           >
             <Icon icon={item.meta.icon} size={assemblyLarge ? 24 : 20} />
@@ -65,11 +66,12 @@ const ColumnSider = () => {
             {menuOpen ? "Mee Admin" : "M"}
           </span>
         </div>
-        {subMenu.map((item) => (
-          <div
-            key={item.path}
-            onClick={() => navigate(item.path)}
-            className={`flex 
+        {subMenu.length !== 0 &&
+          subMenu.map((item) => (
+            <div
+              key={item.path}
+              onClick={() => navigate(item.path)}
+              className={`flex 
                 h-10 
                 items-center 
                 justify-center
@@ -81,15 +83,15 @@ const ColumnSider = () => {
                      ? "bg-orange-800 text-white"
                      : ""
                  }`}
-          >
-            <Icon icon={item.meta.icon} size={assemblyLarge ? 20 : 13} />
-            {menuOpen && (
-              <span className="ml-2 whitespace-nowrap">
-                {t(`menu.${item.meta.name}`)}
-              </span>
-            )}
-          </div>
-        ))}
+            >
+              <Icon icon={item.meta.icon} size={assemblyLarge ? 20 : 13} />
+              {menuOpen && (
+                <span className="ml-2 whitespace-nowrap">
+                  {t(`menu.${item.meta.name}`)}
+                </span>
+              )}
+            </div>
+          ))}
       </div>
     </div>
   );

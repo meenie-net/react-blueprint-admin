@@ -1,9 +1,9 @@
 import { Menu, Icon } from "@blueprintjs/core";
-import menu from "../../../../config/menu";
+import menu from "../../config/menu";
 import { useLocation, useNavigate } from "react-router-dom";
 import CollapseMenu from "./components/CollapseMenu";
 import { MenuItem2 } from "@blueprintjs/popover2";
-import useGlobalStore from "../../../../hooks/useGlobalStore";
+import useGlobalStore from "../../hooks/useGlobalStore";
 import { useTranslation } from "react-i18next";
 
 const ClassicSider = () => {
@@ -20,7 +20,7 @@ const ClassicSider = () => {
     <>
       <Menu
         large={assemblyLarge}
-        className="min-w-[50px] flex flex-col content-center"
+        className="flex min-w-[50px] flex-col content-center"
       >
         {menu.map((item) => {
           if (item.children && item.children.length > 0) {

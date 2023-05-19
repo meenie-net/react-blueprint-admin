@@ -2,9 +2,9 @@ import { MenuDivider, Icon, Collapse, Menu } from "@blueprintjs/core";
 import { MenuItem2 } from "@blueprintjs/popover2";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useGlobalStore from "../../../../../../hooks/useGlobalStore";
+import useGlobalStore from "../../../../hooks/useGlobalStore";
 import "./style.scss";
-import { IMenu } from "../../../../../../config/menu";
+import { IMenu } from "../../../../config/menu";
 import { useTranslation } from "react-i18next";
 
 const CollapseMenu = (props: { key: string; item: IMenu }) => {

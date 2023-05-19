@@ -2,7 +2,7 @@ import { Button, Icon } from "@blueprintjs/core";
 import { useDispatch } from "react-redux";
 import useGlobalStore from "../../hooks/useGlobalStore";
 import { changeMenuOpen } from "../../stores/global";
-import ClassicSider from "../LayoutClassic/components/Sider";
+import ClassicSider from "../LayoutClassic/ClassicSider";
 import Content from "../components/Content";
 import Setting from "../components/Setting";
 import Breadcrumb from "../components/Breadcrumb";
@@ -21,13 +21,13 @@ const LayoutTransverse = () => {
   return (
     // todo
     // ClassicLayoutContainer
-    <div className="flex flex-col w-full h-full">
+    <div className="flex h-full w-full flex-col">
       {/* Header */}
       <div
         className={`${
           assemblyLarge
-            ? "flex items-center w-full divide-x-2 border-box h-[55px] text-dark-text bg-dark-bg"
-            : "flex items-center w-full divide-x-2 border-box h-[45px] text-dark-text bg-dark-bg"
+            ? "border-box flex h-[55px] w-full items-center divide-x-2 bg-dark-bg text-dark-text"
+            : "border-box flex h-[45px] w-full items-center divide-x-2 bg-dark-bg text-dark-text"
         }`}
       >
         {/* HeaderLeft */}
@@ -46,13 +46,13 @@ const LayoutTransverse = () => {
             src="../../../../src/assets/avatar.png"
             alt=""
             className={`${
-              assemblyLarge ? "w-8 h-8 rounded-full" : "w-7 h-7 rounded-full"
+              assemblyLarge ? "h-8 w-8 rounded-full" : "h-7 w-7 rounded-full"
             }`}
           />
           {menuOpen && <span>Mee Admin</span>}
         </div>
         {/* HeaderRight */}
-        <div className="flex items-center justify-between flex-auto pl-4">
+        <div className="flex flex-auto items-center justify-between pl-4">
           {/* OpenIcon & Breadcrumb */}
           <div className="flex items-center">
             {/* OpenIcon */}
@@ -76,7 +76,7 @@ const LayoutTransverse = () => {
         </div>
       </div>
       {/* Body */}
-      <div className="flex flex-auto w-full">
+      <div className="flex w-full flex-auto">
         {/* SiderMenu */}
         <div
           id="sider-menu-container"
@@ -93,13 +93,13 @@ const LayoutTransverse = () => {
           <ClassicSider />
         </div>
         {/* ContentContainer */}
-        <div className="flex flex-col flex-auto h-full">
+        <div className="flex h-full flex-auto flex-col">
           {/* Tabs */}
           <Tabs />
           {/* Content */}
           <div
             id="content"
-            className="flex-auto p-3 bg-slate-200 h-classic-container"
+            className="h-classic-container flex-auto bg-slate-200 p-3"
           >
             <Content />
           </div>
