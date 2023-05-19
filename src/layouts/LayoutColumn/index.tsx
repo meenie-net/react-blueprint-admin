@@ -23,18 +23,7 @@ const LayoutColumn = () => {
     // ClassicLayoutContainer
     <div className="flex flex-row w-full h-full">
       {/* SiderMenu */}
-      <div
-        id="sider-menu-container"
-        className={`${
-          assemblyLarge
-            ? menuOpen
-              ? "dark w-classic-large-open-left min-w-classic-large-open-left"
-              : "dark w-classic-large-close-left min-w-classic-large-close-left"
-            : menuOpen
-            ? "dark w-classic-open-left min-w-classic-open-left"
-            : "dark w-classic-close-left min-w-classic-close-left"
-        }`}
-      >
+      <div id="sider-menu-container">
         <ColumnSider />
       </div>
       {/* PageRight */}
@@ -43,8 +32,8 @@ const LayoutColumn = () => {
         <div
           className={`${
             assemblyLarge
-              ? "flex items-center flex-shrink-0 w-full divide-x-2 border-box h-classic-large-header text-dark-text bg-dark-bg"
-              : "flex items-center flex-shrink-0 w-full divide-x-2 border-box h-classic-header text-dark-text bg-dark-bg"
+              ? "flex items-center flex-shrink-0 w-full divide-x-2 border-box h-[55px] text-dark-text bg-dark-bg"
+              : "flex items-center flex-shrink-0 w-full divide-x-2 border-box h-[45px] text-dark-text bg-dark-bg"
           }`}
         >
           {/* HeaderRight */}

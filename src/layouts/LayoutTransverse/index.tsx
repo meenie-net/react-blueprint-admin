@@ -26,8 +26,8 @@ const LayoutTransverse = () => {
       <div
         className={`${
           assemblyLarge
-            ? "flex items-center w-full divide-x-2 border-box h-classic-large-header text-dark-text bg-dark-bg"
-            : "flex items-center w-full divide-x-2 border-box h-classic-header text-dark-text bg-dark-bg"
+            ? "flex items-center w-full divide-x-2 border-box h-[55px] text-dark-text bg-dark-bg"
+            : "flex items-center w-full divide-x-2 border-box h-[45px] text-dark-text bg-dark-bg"
         }`}
       >
         {/* HeaderLeft */}
@@ -83,11 +83,11 @@ const LayoutTransverse = () => {
           className={`${
             assemblyLarge
               ? menuOpen
-                ? "w-classic-large-open-left min-w-classic-large-open-left"
-                : "w-classic-large-close-left min-w-classic-large-close-left"
+                ? "w-[160px] min-w-[160px]"
+                : "w-[60px] min-w-[60px]"
               : menuOpen
-              ? "w-classic-open-left min-w-classic-open-left"
-              : "w-classic-close-left min-w-classic-close-left"
+              ? "w-[160px] min-w-[160px]"
+              : "w-[50px] min-w-[50px]"
           }`}
         >
           <ClassicSider />

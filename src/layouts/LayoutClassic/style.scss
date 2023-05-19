@@ -1,22 +1,5 @@
 @import "@blueprintjs/core/lib/scss/variables";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-@layer components {
-  .header-left-open {
-    @apply flex font-mono justify-evenly text-xl font-black text-center w-classic-open-left min-w-classic-open-left;
-  }
-  .header-left-large-open {
-    @apply flex font-mono justify-evenly text-xl font-black text-center w-classic-large-open-left min-w-classic-large-open-left;
-  }
-  .header-left-close {
-    @apply flex font-mono justify-evenly text-xl font-black text-center w-classic-close-left min-w-classic-close-left;
-  }
-  .header-left-large-close {
-    @apply flex font-mono justify-evenly text-xl font-black text-center w-classic-large-close-left min-w-classic-large-close-left;
-  }
-}
 .ka-wrapper,
 .ka-content {
   width: 100%;

@@ -26,32 +26,30 @@ const LayoutClassic = () => {
     <div className="flex flex-col w-full h-full">
       {/* Header */}
       <div
-        className={`${
-          assemblyLarge
-            ? "flex items-center flex-shrink-0 w-full divide-x-2 border-box h-classic-large-header text-dark-text bg-dark-bg"
-            : "flex items-center flex-shrink-0 w-full divide-x-2 border-box h-classic-header text-dark-text bg-dark-bg"
+        className={`border-box flex w-full flex-shrink-0 items-center divide-x-2 bg-dark-bg text-dark-text ${
+          assemblyLarge ? "h-[55px]" : "h-[45px]"
         }`}
       >
         {/* HeaderLeft */}
         <div
-          className={`${
+          className={`flex justify-evenly overflow-hidden text-center font-mono text-xl font-black transition-all ${
             assemblyLarge
               ? menuOpen
-                ? "header-left-large-open"
-                : "header-left-large-close"
+                ? "w-[160px] min-w-[160px]"
+                : "w-[60px] min-w-[60px]"
               : menuOpen
-              ? "header-left-open"
-              : "header-left-close"
+              ? "w-[160px] min-w-[160px]"
+              : "w-[50px] min-w-[50px]"
           }`}
         >
           <img
             src={assetsUrl("/assets/avatar.png")}
             alt=""
             className={`${
-              assemblyLarge ? "w-8 h-8 rounded-full" : "w-7 h-7 rounded-full"
+              assemblyLarge ? "h-8 w-8 rounded-full" : "h-7 w-7 rounded-full"
             }`}
           />
-          {menuOpen && <span>Mee Admin</span>}
+          {menuOpen && <span className="whitespace-nowrap">Mee Admin</span>}
         </div>
         {/* HeaderRight */}
         <div className="flex items-center justify-between flex-auto pl-4 pr-6">
@@ -82,14 +80,14 @@ const LayoutClassic = () => {
         {/* SiderMenu */}
         <div
           id="sider-menu-container"
-          className={`${
+          className={`dark transition-all ${
             assemblyLarge
               ? menuOpen
-                ? "dark w-classic-large-open-left min-w-classic-large-open-left"
-                : "dark w-classic-large-close-left min-w-classic-large-close-left"
+                ? "w-[160px] min-w-[160px]"
+                : "w-[60px] min-w-[60px]"
               : menuOpen
-              ? "dark w-classic-open-left min-w-classic-open-left"
-              : "dark w-classic-close-left min-w-classic-close-left"
+              ? "w-[160px] min-w-[160px]"
+              : "w-[50px] min-w-[50px]"
           }`}
         >
           <ClassicSider />
