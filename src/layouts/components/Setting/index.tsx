@@ -34,48 +34,31 @@ const Setting = () => {
     <>
       <ButtonGroup minimal={true} large={assemblyLarge}>
         <Button title="调整大小">
-          <Icon
-            icon="settings"
-            color="#f6f7f9"
-            size={assemblyLarge ? 24 : 18}
-          />
+          <Icon icon="settings" size={assemblyLarge ? 24 : 18} />
         </Button>
         <Button>
-          <Icon icon="search" color="#f6f7f9" size={assemblyLarge ? 24 : 18} />
+          <Icon icon="search" size={assemblyLarge ? 24 : 18} />
         </Button>
         <Popover2 content={LanguageMenu} fill={true} placement="bottom">
           <Button>
-            <Icon
-              icon="translate"
-              color="#f6f7f9"
-              size={assemblyLarge ? 24 : 18}
-            />
+            <Icon icon="translate" size={assemblyLarge ? 24 : 18} />
           </Button>
         </Popover2>
         <Button>
-          <Icon
-            icon="zoom-to-fit"
-            color="#f6f7f9"
-            size={assemblyLarge ? 24 : 18}
-          />
+          <Icon icon="zoom-to-fit" size={assemblyLarge ? 24 : 18} />
         </Button>
         <Button onClick={handleThemeClick}>
-          <Icon
-            icon="contrast"
-            color="#f6f7f9"
-            size={assemblyLarge ? 24 : 18}
-          />
+          <Icon icon="contrast" size={assemblyLarge ? 24 : 18} />
         </Button>
 
         <Popover2 content={<Notification />} placement="bottom">
           <Button className="relative" title="消息">
             <Icon
               icon="notifications"
-              color="#f6f7f9"
               size={assemblyLarge ? 24 : 18}
               className="mx-[-7px]"
             />
-            <span className="text-xs font-bold absolute top-0 right-2px bg-[#B83211] text-dark-text rounded-full px-1 border-1 border-solid border-white">
+            <span className="right-2px border-1 absolute top-0 rounded-full border-solid border-white bg-[#B83211] px-1 text-xs font-bold text-dark-text">
               2222
             </span>
           </Button>
@@ -86,7 +69,7 @@ const Setting = () => {
             <img
               src={assetsUrl("/assets/avatar.png")}
               className={`${
-                assemblyLarge ? "w-8 h-8 rounded-full" : "w-6 h-6 rounded-full"
+                assemblyLarge ? "h-8 w-8 rounded-full" : "h-6 w-6 rounded-full"
               }`}
               alt=""
             />

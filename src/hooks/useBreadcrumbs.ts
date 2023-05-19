@@ -34,9 +34,7 @@ const useBreadcrumbs = () => {
           icon: showBreadcrumbsIcon && v.handle.icon,
           text: t(`menu.${v.handle.name}`),
           className: `${
-            assemblyLarge
-              ? "text-dark-text hover:text-hover"
-              : "text-dark-text hover:text-hover text-xs"
+            assemblyLarge ? "hover:text-hover" : "hover:text-hover text-xs"
           }`,
         };
       }
@@ -54,9 +52,7 @@ const useBreadcrumbs = () => {
         icon: showBreadcrumbsIcon && v.handle.icon,
         text: t(`menu.${v.handle.name}`),
         className: `${
-          assemblyLarge
-            ? "text-dark-text hover:text-hover"
-            : "text-dark-text hover:text-hover text-xs"
+          assemblyLarge ? "hover:text-hover" : "hover:text-hover text-xs"
         }`,
       };
     });
