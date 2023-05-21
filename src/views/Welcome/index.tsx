@@ -6,7 +6,7 @@ const Welcome = () => {
     <div className="h-full text-center">
       <h1 className="text-2xl font-bold">{t("welcome")}</h1>
       <div className="my-4">
-        <span className="px-4 font-serif text-6xl font-bold text-white bg-black">
+        <span className="bg-black px-4 font-serif text-6xl font-bold text-white">
           Mee Admin
         </span>
       </div>
@@ -30,7 +30,6 @@ const Welcome = () => {
           这个UI框架.
         </span>
       </div>
-      <input type="text" />
     </div>
   );
 };

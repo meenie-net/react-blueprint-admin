@@ -40,6 +40,7 @@ const VerticalMenu = () => {
       >
         {subMenu.length !== 0 &&
           subMenu.map((item) => (
+            // todo use Menu to support mutil level menu
             <div
               key={item.path}
               onClick={() => navigate(item.path)}
@@ -64,6 +65,7 @@ const VerticalMenu = () => {
   return (
     <div className="flex">
       {/* 一级菜单 */}
+      {/* todo optimize UI */}
       <div className="flex h-full text-white">
         {menu.map((item) =>
           item.children ? (

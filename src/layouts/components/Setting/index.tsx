@@ -9,7 +9,7 @@ import { assetsUrl } from "../../../utils";
 const Setting = (props: { mode: "dark" | "light" }) => {
   const { mode } = props;
   const {
-    setting: { assemblyLarge, darkTheme },
+    setting: { assemblyLarge },
   } = useGlobalStore();
   const handleThemeClick = () => {
     emitter.emit(EmitEventEnum.OpenThemeDrawer);

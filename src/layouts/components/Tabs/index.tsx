@@ -1,5 +1,5 @@
 import { Button, Card, Tabs, Tab, Icon } from "@blueprintjs/core";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ITab, removeTab, setTab } from "../../../stores/global";
@@ -16,6 +16,25 @@ const TabsSection = () => {
   const dispatch = useDispatch();
   const { tabList } = useSelector((state: RootState) => state.global);
   const { t } = useTranslation();
+
+  const tabContainerRef = useRef<HTMLDivElement>(null);
+
+  const [overflow, setOverflow] = useState(false);
+
+  useEffect(() => {
+    // todo tabs overflow
+    if (!tabContainerRef.current) return;
+    const tab = tabContainerRef.current.querySelector(
+      ".bp4-tab-list"
+    ) as HTMLElement;
+    if (!tab) return;
+    if (tab.offsetWidth < tab.scrollWidth) {
+      setOverflow(false);
+    } else {
+      setOverflow(true);
+    }
+    console.log("overflow", overflow);
+  }, [location, tabList]);
 
   useEffect(() => {
     dispatch(setTab(location.pathname));
@@ -37,8 +56,8 @@ const TabsSection = () => {
   };
   return showTab ? (
     <>
-      <Card className="flex justify-between p-1 border-s-2 border-gray-50">
-        <div className="ml-1 overflow-x-hidden">
+      <Card className="flex justify-between border-s-2 border-gray-50 p-1">
+        <div ref={tabContainerRef} className="ml-1 overflow-x-hidden">
           <Tabs
             id="tabs"
             animate
@@ -68,7 +87,7 @@ const TabsSection = () => {
               ))}
           </Tabs>
         </div>
-        <div className="flex items-center mr-1">
+        <div className="mr-1 flex items-center">
           <Button
             icon="more"
             minimal={true}

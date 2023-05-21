@@ -1,7 +1,6 @@
 import UserList from "../../views/User/UserList";
 import Welcome from "../../views/Welcome";
 import GoodsList from "../../views/Goods/GoodsList";
-import { createRef } from "react";
 import { IconName, MaybeElement } from "@blueprintjs/core";
 
 export interface IMenu {
@@ -20,7 +19,6 @@ const menu: IMenu[] = [
   {
     path: "/",
     element: <Welcome />,
-    nodeRef: createRef(),
     meta: {
       name: "home",
       title: "首页",
@@ -30,7 +28,6 @@ const menu: IMenu[] = [
   {
     path: "/bigScreen",
     element: <Welcome />,
-    nodeRef: createRef(),
     meta: {
       name: "bigScreen",
       title: "大屏",
@@ -48,7 +45,6 @@ const menu: IMenu[] = [
       {
         path: "/user/list",
         element: <UserList />,
-        nodeRef: createRef(),
         meta: {
           name: "userList",
           title: "用户列表",
@@ -58,7 +54,6 @@ const menu: IMenu[] = [
       {
         path: "/user/manage",
         element: <Welcome />,
-        nodeRef: createRef(),
         meta: {
           name: "userManage",
           title: "用户权限",
@@ -78,7 +73,6 @@ const menu: IMenu[] = [
       {
         path: "/goods/list",
         element: <GoodsList />,
-        nodeRef: createRef(),
         meta: {
           name: "goodsList",
           title: "商品列表",
@@ -88,11 +82,234 @@ const menu: IMenu[] = [
       {
         path: "/goods/manage",
         element: <Welcome />,
-        nodeRef: createRef(),
         meta: {
           name: "goodsManage",
           title: "商品管理",
           icon: "edit",
+        },
+      },
+    ],
+  },
+  {
+    path: "/permission",
+    meta: {
+      name: "permission",
+      title: "权限管理",
+      icon: "shop",
+    },
+    children: [
+      {
+        path: "/permission/menu",
+        element: <GoodsList />,
+        meta: {
+          name: "menuPermission",
+          title: "菜单权限",
+          icon: "th",
+        },
+      },
+      {
+        path: "/permission/button",
+        element: <Welcome />,
+        meta: {
+          name: "buttonPermission",
+          title: "按钮权限",
+          icon: "edit",
+        },
+      },
+    ],
+  },
+  {
+    path: "/form",
+    meta: {
+      name: "form",
+      title: "常用表单",
+      icon: "shop",
+    },
+    children: [
+      {
+        path: "/form/basic",
+        element: <GoodsList />,
+        meta: {
+          name: "formBasic",
+          title: "基础表单",
+          icon: "th",
+        },
+      },
+      {
+        path: "/form/validate",
+        element: <Welcome />,
+        meta: {
+          name: "formValidate",
+          title: "表单验证",
+          icon: "edit",
+        },
+      },
+    ],
+  },
+  {
+    path: "/eCharts",
+    meta: {
+      name: "eCharts",
+      title: "ECharts",
+      icon: "shop",
+    },
+    children: [
+      {
+        path: "/eCharts/water",
+        element: <GoodsList />,
+        meta: {
+          name: "eChartsWater",
+          title: "水型图",
+          icon: "th",
+        },
+      },
+      {
+        path: "/eCharts/column",
+        element: <Welcome />,
+        meta: {
+          name: "eChartsColumn",
+          title: "柱状图",
+          icon: "edit",
+        },
+      },
+      {
+        path: "/eCharts/line",
+        element: <Welcome />,
+        meta: {
+          name: "eChartsLine",
+          title: "折线图",
+          icon: "edit",
+        },
+      },
+      {
+        path: "/eCharts/pie",
+        element: <Welcome />,
+        meta: {
+          name: "eChartsPie",
+          title: "饼图",
+          icon: "edit",
+        },
+      },
+      {
+        path: "/eCharts/radar",
+        element: <Welcome />,
+        meta: {
+          name: "eChartsRadar",
+          title: "雷达图",
+          icon: "edit",
+        },
+      },
+      {
+        path: "/eCharts/nested",
+        element: <Welcome />,
+        meta: {
+          name: "eChartsNested",
+          title: "环形图",
+          icon: "edit",
+        },
+      },
+    ],
+  },
+  {
+    path: "/menu",
+    meta: {
+      name: "menu",
+      title: "菜单嵌套",
+      icon: "shop",
+    },
+    children: [
+      {
+        path: "/menu/menu1",
+        element: <GoodsList />,
+        meta: {
+          name: "menuMenu1",
+          title: "菜单1",
+          icon: "th",
+        },
+        children: [
+          {
+            path: "/menu/menu1/menu11",
+            element: <GoodsList />,
+            meta: {
+              name: "menuMenu1Menu11",
+              title: "菜单1-1",
+              icon: "th",
+            },
+          },
+          {
+            path: "/menu/menu1/menu12",
+            element: <Welcome />,
+            meta: {
+              name: "menuMenu1Menu12",
+              title: "菜单1-2",
+              icon: "edit",
+            },
+          },
+        ],
+      },
+      {
+        path: "/menu/menu2",
+        element: <Welcome />,
+        meta: {
+          name: "menuMenu2",
+          title: "菜单2",
+          icon: "edit",
+        },
+      },
+    ],
+  },
+  {
+    path: "/system",
+    meta: {
+      name: "system",
+      title: "系统管理",
+      icon: "shop",
+    },
+    children: [
+      {
+        path: "/system/account",
+        element: <GoodsList />,
+        meta: {
+          name: "systemAccount",
+          title: "账号管理",
+          icon: "th",
+        },
+      },
+      {
+        path: "/system/role",
+        element: <Welcome />,
+        meta: {
+          name: "systemRole",
+          title: "角色管理",
+          icon: "edit",
+        },
+      },
+      {
+        path: "/system/menu",
+        element: <Welcome />,
+        meta: {
+          name: "systemMenu",
+          title: "菜单管理",
+          icon: "edit",
+        },
+      },
+    ],
+  },
+  {
+    path: "/link",
+    meta: {
+      name: "link",
+      title: "外部链接",
+      icon: "shop",
+    },
+    children: [
+      {
+        path: "/link/github",
+        element: <GoodsList />,
+        meta: {
+          name: "linkGithub",
+          title: "GitHub",
+          icon: "th",
         },
       },
     ],

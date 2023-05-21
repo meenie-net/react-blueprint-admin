@@ -13,7 +13,7 @@ const LayoutVertical = () => {
 
   return (
     // ClassicLayoutContainer
-    <div className="flex flex-col w-full h-full">
+    <div className="flex h-full w-full flex-col">
       {/* Header */}
       <div
         className={`border-box flex w-full flex-shrink-0 items-center justify-between bg-dark-bg text-dark-text ${
@@ -43,24 +43,24 @@ const LayoutVertical = () => {
         <div className="flex items-center justify-between pl-4 pr-6">
           {/* Setting */}
           <div>
-            <Setting />
+            <Setting mode="light" />
           </div>
         </div>
       </div>
       {/* Body */}
-      <div className="flex flex-auto min-h-0">
+      <div className="flex min-h-0 flex-auto">
         {/* ContentContainer */}
-        <div className="flex flex-col content-between flex-auto min-w-0">
+        <div className="flex min-w-0 flex-auto flex-col content-between">
           {/* Tabs */}
           <Tabs />
           {/* Content */}
           <div
             id="content"
-            className="flex flex-col flex-auto min-h-0 p-3 dark bg-slate-200"
+            className="dark flex min-h-0 flex-auto flex-col bg-slate-200 p-3"
           >
             <Content />
           </div>
-          <Footer className="py-1 text-center dark" />
+          <Footer className="dark py-1 text-center" />
         </div>
       </div>
     </div>

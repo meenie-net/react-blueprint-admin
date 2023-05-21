@@ -13,7 +13,6 @@ const UserDrawer = () => {
   const [state, setState] = useState("add");
   const [open, setOpen] = useState(false);
   const init = (payload: { state: "add" | "edit"; user?: IUser }) => {
-    console.log("payload", payload);
     if (payload.state === "edit" && payload.user) setUser(payload.user);
     setState(payload.state);
     setOpen(true);
