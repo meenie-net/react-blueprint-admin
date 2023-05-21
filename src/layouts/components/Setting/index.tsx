@@ -6,9 +6,10 @@ import Notification from "./components/Notification";
 import i18n, { lngs, type TLngsKey } from "../../../i18n";
 import { assetsUrl } from "../../../utils";
 
-const Setting = () => {
+const Setting = (props: { mode: "dark" | "light" }) => {
+  const { mode } = props;
   const {
-    setting: { assemblyLarge },
+    setting: { assemblyLarge, darkTheme },
   } = useGlobalStore();
   const handleThemeClick = () => {
     emitter.emit(EmitEventEnum.OpenThemeDrawer);
@@ -34,27 +35,48 @@ const Setting = () => {
     <>
       <ButtonGroup minimal={true} large={assemblyLarge}>
         <Button title="调整大小">
-          <Icon icon="settings" size={assemblyLarge ? 24 : 18} />
+          <Icon
+            icon="settings"
+            color={mode === "dark" ? undefined : "#ffffff"}
+            size={assemblyLarge ? 24 : 18}
+          />
         </Button>
         <Button>
-          <Icon icon="search" size={assemblyLarge ? 24 : 18} />
+          <Icon
+            icon="search"
+            color={mode === "dark" ? undefined : "#ffffff"}
+            size={assemblyLarge ? 24 : 18}
+          />
         </Button>
         <Popover2 content={LanguageMenu} fill={true} placement="bottom">
           <Button>
-            <Icon icon="translate" size={assemblyLarge ? 24 : 18} />
+            <Icon
+              icon="translate"
+              color={mode === "dark" ? undefined : "#ffffff"}
+              size={assemblyLarge ? 24 : 18}
+            />
           </Button>
         </Popover2>
         <Button>
-          <Icon icon="zoom-to-fit" size={assemblyLarge ? 24 : 18} />
+          <Icon
+            icon="zoom-to-fit"
+            color={mode === "dark" ? undefined : "#ffffff"}
+            size={assemblyLarge ? 24 : 18}
+          />
         </Button>
         <Button onClick={handleThemeClick}>
-          <Icon icon="contrast" size={assemblyLarge ? 24 : 18} />
+          <Icon
+            icon="contrast"
+            color={mode === "dark" ? undefined : "#ffffff"}
+            size={assemblyLarge ? 24 : 18}
+          />
         </Button>
 
         <Popover2 content={<Notification />} placement="bottom">
           <Button className="relative" title="消息">
             <Icon
               icon="notifications"
+              color={mode === "dark" ? undefined : "#ffffff"}
               size={assemblyLarge ? 24 : 18}
               className="mx-[-7px]"
             />
@@ -63,12 +85,12 @@ const Setting = () => {
             </span>
           </Button>
         </Popover2>
-        <span className="flex items-center ml-3 font-semibold">Meenie</span>
+        <span className="ml-3 flex items-center font-semibold">Meenie</span>
         <Popover2 content={LanguageMenu} placement="bottom">
           <Button>
             <img
               src={assetsUrl("/assets/avatar.png")}
-              className={`${
+              className={`border border-gray-500 ${
                 assemblyLarge ? "h-8 w-8 rounded-full" : "h-6 w-6 rounded-full"
               }`}
               alt=""

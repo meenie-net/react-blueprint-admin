@@ -22,9 +22,9 @@ const LayoutTransverse = () => {
 
   return (
     // ClassicLayoutContainer
-    <div className="flex flex-row w-full h-full dark">
+    <div className="dark flex h-full w-full flex-row">
       {/* SiderMenu */}
-      <div id="sider-menu-container">
+      <div id="sider-menu-container" className="custom-border-r">
         {/* Logo */}
         <div
           className={`flex items-center justify-evenly overflow-hidden text-center font-mono text-xl font-black transition-all ${
@@ -50,7 +50,7 @@ const LayoutTransverse = () => {
         <ClassicSider />
       </div>
       {/* PageRight */}
-      <div className="flex flex-col content-between flex-auto min-w-0">
+      <div className="flex min-w-0 flex-auto flex-col content-between">
         {/* Header */}
         <div
           className={`border-box flex w-full flex-shrink-0 items-center divide-x-2 ${
@@ -58,7 +58,7 @@ const LayoutTransverse = () => {
           }`}
         >
           {/* HeaderRight */}
-          <div className="flex items-center justify-between flex-auto pl-4 pr-6">
+          <div className="flex flex-auto items-center justify-between pl-4 pr-6">
             {/* OpenIcon & Breadcrumb */}
             <div className="flex items-center">
               {/* OpenIcon */}
@@ -71,29 +71,29 @@ const LayoutTransverse = () => {
               </Button>
               {/* Breadcrumb */}
               <div className="ml-4">
-                <Breadcrumb />
+                <Breadcrumb mode="dark" />
               </div>
             </div>
             {/* Setting */}
             <div>
-              <Setting />
+              <Setting mode="dark" />
             </div>
           </div>
         </div>
         {/* Body */}
-        <div className="flex flex-auto min-h-0">
+        <div className="flex min-h-0 flex-auto">
           {/* ContentContainer */}
-          <div className="flex flex-col content-between flex-auto min-w-0">
+          <div className="flex min-w-0 flex-auto flex-col content-between">
             {/* Tabs */}
             <Tabs />
             {/* Content */}
             <div
               id="content"
-              className="flex flex-col flex-auto min-h-0 p-3 dark bg-slate-200"
+              className="dark flex min-h-0 flex-auto flex-col bg-slate-200 p-3"
             >
               <Content />
             </div>
-            <Footer className="py-1 text-center dark" />
+            <Footer className="dark py-1 text-center" />
           </div>
         </div>
       </div>

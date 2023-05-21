@@ -27,10 +27,10 @@ const LayoutColumn = () => {
         <ColumnSider />
       </div>
       {/* PageRight */}
-      <div className="flex min-w-0 flex-auto flex-col content-between">
+      <div className="dark flex min-w-0 flex-auto flex-col content-between">
         {/* Header */}
         <div
-          className={`border-box flex w-full flex-shrink-0 items-center divide-x-2 bg-dark-bg text-dark-text ${
+          className={`border-box flex w-full flex-shrink-0 items-center divide-x-2 ${
             assemblyLarge ? "h-[55px]" : "h-[45px]"
           }`}
         >
@@ -43,18 +43,17 @@ const LayoutColumn = () => {
                 <Icon
                   icon={menuOpen ? "menu-closed" : "menu-open"}
                   className="animate-appear_right"
-                  color="#f6f7f9"
                   size={assemblyLarge ? 28 : 24}
                 ></Icon>
               </Button>
               {/* Breadcrumb */}
               <div className="ml-4">
-                <Breadcrumb />
+                <Breadcrumb mode="dark" />
               </div>
             </div>
             {/* Setting */}
             <div>
-              <Setting />
+              <Setting mode="dark" />
             </div>
           </div>
         </div>

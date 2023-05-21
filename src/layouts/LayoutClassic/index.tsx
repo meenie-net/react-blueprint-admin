@@ -26,7 +26,7 @@ const LayoutClassic = () => {
     <div className="flex h-full w-full flex-col">
       {/* Header */}
       <div
-        className={`border-box flex w-full flex-shrink-0 items-center divide-x-2 bg-dark-bg text-dark-text ${
+        className={`border-box dark-when-light flex w-full flex-shrink-0 items-center divide-x-2 ${
           assemblyLarge ? "h-[55px]" : "h-[45px]"
         }`}
       >
@@ -66,12 +66,12 @@ const LayoutClassic = () => {
             </Button>
             {/* Breadcrumb */}
             <div className="ml-4">
-              <Breadcrumb />
+              <Breadcrumb mode="light" />
             </div>
           </div>
           {/* Setting */}
           <div>
-            <Setting />
+            <Setting mode="light" />
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@ const LayoutClassic = () => {
         {/* SiderMenu */}
         <div
           id="sider-menu-container"
-          className={`dark transition-all ${
+          className={`custom-border-r dark transition-all ${
             assemblyLarge
               ? menuOpen
                 ? "w-[160px] min-w-[160px]"

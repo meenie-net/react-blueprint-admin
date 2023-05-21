@@ -61,7 +61,7 @@ const ColumnSider = () => {
             : "w-[40px]"
         }`}
       >
-        <div className="flex items-center justify-center h-10 border-b border-gray-400">
+        <div className="flex h-10 items-center justify-center border-b border-gray-400">
           <span className="whitespace-nowrap">
             {menuOpen ? "Mee Admin" : "M"}
           </span>

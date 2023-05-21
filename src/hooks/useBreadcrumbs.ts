@@ -1,9 +1,10 @@
-import { BreadcrumbProps, IconName, MaybeElement } from "@blueprintjs/core";
 import { useNavigate, useMatches } from "react-router-dom";
 import useGlobalStore from "./useGlobalStore";
 import { useTranslation } from "react-i18next";
+import { BreadcrumbProps } from "@blueprintjs/popover2";
+import { IconName, MaybeElement } from "@blueprintjs/core";
 
-const useBreadcrumbs = () => {
+const useBreadcrumbs = ({ mode }: { mode: "dark" | "light" }) => {
   const {
     setting: { assemblyLarge, showBreadcrumbsIcon },
   } = useGlobalStore();
@@ -33,7 +34,7 @@ const useBreadcrumbs = () => {
           },
           icon: showBreadcrumbsIcon && v.handle.icon,
           text: t(`menu.${v.handle.name}`),
-          className: `${
+          className: `${mode === "dark" ? "" : "text-white"} ${
             assemblyLarge ? "hover:text-hover" : "hover:text-hover text-xs"
           }`,
         };
@@ -42,7 +43,9 @@ const useBreadcrumbs = () => {
         return {
           icon: showBreadcrumbsIcon && v.handle.icon,
           text: t(`menu.${v.handle.name}`),
-          className: `${assemblyLarge ? "font-normal" : "font-normal text-xs"}`,
+          className: `${mode === "dark" ? "" : "text-white"} ${
+            assemblyLarge ? "font-normal" : "font-normal text-xs"
+          }`,
         };
       }
       return {
@@ -51,7 +54,7 @@ const useBreadcrumbs = () => {
         },
         icon: showBreadcrumbsIcon && v.handle.icon,
         text: t(`menu.${v.handle.name}`),
-        className: `${
+        className: `${mode === "dark" ? "" : "text-white"} ${
           assemblyLarge ? "hover:text-hover" : "hover:text-hover text-xs"
         }`,
       };
