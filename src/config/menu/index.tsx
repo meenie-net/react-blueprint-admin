@@ -220,7 +220,6 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/menu/menu1",
-        element: <GoodsList />,
         meta: {
           name: "menuMenu1",
           title: "菜单1",
@@ -238,12 +237,31 @@ const menu: IMenu[] = [
           },
           {
             path: "/menu/menu1/menu12",
-            element: <Welcome />,
             meta: {
               name: "menuMenu1Menu12",
               title: "菜单1-2",
               icon: "edit",
             },
+            children: [
+              {
+                path: "/menu/menu1/menu12/menu121",
+                element: <GoodsList />,
+                meta: {
+                  name: "menuMenu1Menu12Menu121",
+                  title: "菜单1-2-1",
+                  icon: "th",
+                },
+              },
+              {
+                path: "/menu/menu1/menu12/menu122",
+                element: <Welcome />,
+                meta: {
+                  name: "menuMenu1Menu12Menu122",
+                  title: "菜单1-2-2",
+                  icon: "edit",
+                },
+              },
+            ],
           },
         ],
       },
