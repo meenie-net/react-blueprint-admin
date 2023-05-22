@@ -27,7 +27,6 @@ const ClassicSider = () => {
             return <CollapseMenu key={item.path} item={item} />;
           } else {
             return (
-              // todo use Menu to support mutil level menu
               <MenuItem2
                 key={item.path}
                 icon={item.meta.icon}

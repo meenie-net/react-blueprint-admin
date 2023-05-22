@@ -24,7 +24,7 @@ const LayoutTransverse = () => {
     // ClassicLayoutContainer
     <div className="dark flex h-full w-full flex-row">
       {/* SiderMenu */}
-      <div id="sider-menu-container" className="custom-border-r">
+      <div id="sider-menu-container" className="custom-border-r flex flex-col">
         {/* Logo */}
         <div
           className={`flex items-center justify-evenly overflow-hidden text-center font-mono text-xl font-black transition-all ${
@@ -47,7 +47,9 @@ const LayoutTransverse = () => {
           {menuOpen && <span className="whitespace-nowrap">Mee Admin</span>}
         </div>
         {/* Menu */}
-        <ClassicSider />
+        <div className="h-full flex-auto overflow-y-auto">
+          <ClassicSider />
+        </div>
       </div>
       {/* PageRight */}
       <div className="flex min-w-0 flex-auto flex-col content-between">

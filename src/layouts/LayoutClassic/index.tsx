@@ -76,11 +76,11 @@ const LayoutClassic = () => {
         </div>
       </div>
       {/* Body */}
-      <div className="flex min-h-0 flex-auto">
+      <div className="flex h-full min-h-0 flex-auto">
         {/* SiderMenu */}
         <div
           id="sider-menu-container"
-          className={`custom-border-r dark transition-all ${
+          className={`custom-border-r dark h-full overflow-y-auto transition-all ${
             assemblyLarge
               ? menuOpen
                 ? "w-[160px] min-w-[160px]"

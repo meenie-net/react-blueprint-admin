@@ -1,10 +1,11 @@
 import { Icon } from "@blueprintjs/core";
 import menu, { IMenu } from "../../config/menu";
-import { useLocation, useMatches, useNavigate } from "react-router-dom";
+import { useMatches, useNavigate } from "react-router-dom";
 import useGlobalStore from "../../hooks/useGlobalStore";
 import { useTranslation } from "react-i18next";
 import { assetsUrl } from "../../utils";
 import { useState } from "react";
+import MenuOpenItem from "./components/MenuOpenItem";
 
 const ColumnSider = () => {
   const [subMenu, setSubMenu] = useState<IMenu[]>([]);
@@ -12,7 +13,6 @@ const ColumnSider = () => {
     setting: { assemblyLarge, menuOpen },
   } = useGlobalStore();
   const navigate = useNavigate();
-  const location = useLocation();
   const matches = useMatches();
   const { t } = useTranslation();
   const handleClick = (item: IMenu) => {
@@ -23,11 +23,12 @@ const ColumnSider = () => {
       setSubMenu(item.children);
     }
   };
+
   return (
     <div className="flex h-full">
       {/* 一级菜单 */}
-      <div className="min-h-full w-[64px] bg-slate-700 text-white">
-        <div className="flex h-[64px] items-center justify-center border-b border-b-slate-400">
+      <div className="min-h-full w-[84px] overflow-y-auto bg-slate-700 text-white">
+        <div className="flex h-[84px] items-center justify-center border-b border-b-slate-400">
           <img
             src={assetsUrl("/assets/avatar.png")}
             alt=""
@@ -42,7 +43,7 @@ const ColumnSider = () => {
               matches[1].pathname === item.path ? "bg-slate-800" : ""
             }`}
           >
-            <Icon icon={item.meta.icon} size={assemblyLarge ? 24 : 20} />
+            <Icon icon={item.meta.icon} size={assemblyLarge ? 24 : 24} />
             {t(`menu.${item.meta.name}`)}
           </div>
         ))}
@@ -68,31 +69,7 @@ const ColumnSider = () => {
         </div>
         {/* todo use Menu to support mutil level menu */}
         {subMenu.length !== 0 &&
-          subMenu.map((item) => (
-            <div
-              key={item.path}
-              onClick={() => navigate(item.path)}
-              className={`flex 
-                h-10 
-                items-center 
-                justify-center
-                hover:cursor-pointer 
-                hover:bg-orange-600
-                hover:text-white
-                 ${
-                   location.pathname === item.path
-                     ? "bg-orange-800 text-white"
-                     : ""
-                 }`}
-            >
-              <Icon icon={item.meta.icon} size={assemblyLarge ? 20 : 13} />
-              {menuOpen && (
-                <span className="ml-2 whitespace-nowrap">
-                  {t(`menu.${item.meta.name}`)}
-                </span>
-              )}
-            </div>
-          ))}
+          subMenu.map((item) => <MenuOpenItem item={item} />)}
       </div>
     </div>
   );
