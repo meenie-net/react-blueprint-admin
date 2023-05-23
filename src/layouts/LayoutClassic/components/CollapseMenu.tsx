@@ -2,9 +2,8 @@ import { MenuDivider, Icon, Collapse, Menu } from "@blueprintjs/core";
 import { MenuItem2 } from "@blueprintjs/popover2";
 import { useState } from "react";
 import { useMatches, useNavigate } from "react-router-dom";
-import useGlobalStore from "../../../../hooks/useGlobalStore";
-import "./style.scss";
-import { IMenu } from "../../../../config/menu";
+import useGlobalStore from "../../../hooks/useGlobalStore";
+import { IMenu } from "../../../config/menu";
 import { useTranslation } from "react-i18next";
 
 const CollapseMenu = (props: { key: string; item: IMenu }) => {
@@ -28,7 +27,7 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
     navigate(path);
   };
 
-  const MenuCloseItem = (props: { _item: IMenu }) => {
+  const ClassicClosedMenu = (props: { _item: IMenu }) => {
     const { _item } = props;
     return (
       <MenuItem2
@@ -41,7 +40,7 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
       >
         {_item.children &&
           _item.children.map((sub) => (
-            <MenuCloseItem key={sub.path} _item={sub} />
+            <ClassicClosedMenu key={sub.path} _item={sub} />
           ))}
       </MenuItem2>
     );
@@ -87,7 +86,7 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
         >
           {item.children &&
             item.children.map((sub) => (
-              <MenuCloseItem key={sub.path} _item={sub} />
+              <ClassicClosedMenu key={sub.path} _item={sub} />
             ))}
         </MenuItem2>
       )}

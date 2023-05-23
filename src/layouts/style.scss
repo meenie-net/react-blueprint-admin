@@ -18,3 +18,13 @@
 .custom-border-r {
   border-right: 1px solid #e4e7ed;
 }
+.fix-menuicon-mr {
+  span {
+    margin-right: 0;
+  }
+}
+.fix-popmenu-min-w {
+  ul {
+    min-width: auto;
+  }
+}

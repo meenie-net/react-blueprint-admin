@@ -7,7 +7,7 @@ import Setting from "../components/Setting";
 import Breadcrumb from "../components/Breadcrumb";
 import Tabs from "../components/Tabs";
 import Footer from "../components/Footer";
-import ClassicSider from "../LayoutClassic/ClassicSider";
+import ClassicSider from "../LayoutClassic/components/ClassicSider";
 import { assetsUrl } from "../../utils";
 
 const LayoutTransverse = () => {

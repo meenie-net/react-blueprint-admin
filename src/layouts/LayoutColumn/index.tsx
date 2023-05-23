@@ -7,7 +7,7 @@ import Setting from "../components/Setting";
 import Tabs from "../components/Tabs";
 import Breadcrumb from "../components/Breadcrumb";
 import Footer from "../components/Footer";
-import ColumnSider from "./ColumnSider";
+import ColumnSider from "./components/ColumnSider";
 
 const LayoutColumn = () => {
   const {

@@ -1,5 +1,5 @@
 import { Button, Icon } from "@blueprintjs/core";
-import ClassicSider from "./ClassicSider";
+import ClassicSider from "./components/ClassicSider";
 import Tabs from "../components/Tabs";
 import Setting from "../components/Setting";
 import Breadcrumb from "../components/Breadcrumb";

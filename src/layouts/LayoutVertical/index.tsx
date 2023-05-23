@@ -2,7 +2,7 @@ import useGlobalStore from "../../hooks/useGlobalStore";
 import Content from "../components/Content";
 import Setting from "../components/Setting";
 import Tabs from "../components/Tabs";
-import VerticalMenu from "./VerticalMenu";
+import VerticalMenu from "./components/VerticalMenu";
 import Footer from "../components/Footer";
 import { assetsUrl } from "../../utils";
 

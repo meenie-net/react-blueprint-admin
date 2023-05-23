@@ -1,11 +1,12 @@
 import { Icon } from "@blueprintjs/core";
-import menu, { IMenu } from "../../config/menu";
+import menu, { IMenu } from "../../../config/menu";
 import { useMatches, useNavigate } from "react-router-dom";
-import useGlobalStore from "../../hooks/useGlobalStore";
+import useGlobalStore from "../../../hooks/useGlobalStore";
 import { useTranslation } from "react-i18next";
-import { assetsUrl } from "../../utils";
+import { assetsUrl } from "../../../utils";
 import { useState } from "react";
-import MenuOpenItem from "./components/MenuOpenItem";
+import ColumnOpenMenu from "./ColumnOpenMenu";
+import ColumnClosedMenu from "./ColumnClosedMenu";
 
 const ColumnSider = () => {
   const [subMenu, setSubMenu] = useState<IMenu[]>([]);
@@ -55,11 +56,11 @@ const ColumnSider = () => {
             ? "w-0"
             : assemblyLarge
             ? menuOpen
-              ? "w-[120px]"
-              : "w-[50px]"
+              ? "w-[160px]"
+              : "w-[60px]"
             : menuOpen
-            ? "w-[100px]"
-            : "w-[40px]"
+            ? "w-[140px]"
+            : "w-[50px]"
         }`}
       >
         <div className="flex h-10 items-center justify-center border-b border-gray-400">
@@ -67,9 +68,11 @@ const ColumnSider = () => {
             {menuOpen ? "Mee Admin" : "M"}
           </span>
         </div>
-        {/* todo use Menu to support mutil level menu */}
-        {subMenu.length !== 0 &&
-          subMenu.map((item) => <MenuOpenItem item={item} />)}
+        {subMenu.length !== 0 && menuOpen ? (
+          <ColumnOpenMenu subMenu={subMenu} />
+        ) : (
+          <ColumnClosedMenu subMenu={subMenu} />
+        )}
       </div>
     </div>
   );

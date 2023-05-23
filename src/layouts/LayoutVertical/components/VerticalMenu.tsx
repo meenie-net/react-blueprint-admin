@@ -1,8 +1,8 @@
 import { Icon } from "@blueprintjs/core";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation, useMatches } from "react-router-dom";
-import menu, { IMenu } from "../../config/menu";
-import useGlobalStore from "../../hooks/useGlobalStore";
+import menu, { IMenu } from "../../../config/menu";
+import useGlobalStore from "../../../hooks/useGlobalStore";
 import { Popover2 } from "@blueprintjs/popover2";
 
 const VerticalMenu = () => {
