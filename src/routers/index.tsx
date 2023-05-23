@@ -2,6 +2,7 @@ import { createHashRouter } from "react-router-dom";
 import menu, { IMenu } from "../config/menu";
 import { Layout } from "../layouts";
 import { ReactElement } from "react";
+import NotFound from "../views/Common/NotFound";
 
 export interface IRoute {
   path: string;
@@ -50,6 +51,16 @@ const routes = [
       name: "home",
       icon: "home",
       title: "首页",
+    },
+  },
+  {
+    path: "/*",
+    name: "404",
+    element: <NotFound />,
+    handle: {
+      name: "404",
+      icon: "home",
+      title: "未知页面",
     },
   },
 ];

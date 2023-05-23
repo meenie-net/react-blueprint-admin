@@ -2,6 +2,16 @@ import UserList from "../../views/User/UserList";
 import Welcome from "../../views/Welcome";
 import GoodsList from "../../views/Goods/GoodsList";
 import { IconName, MaybeElement } from "@blueprintjs/core";
+import MenuPermission from "../../views/Permission/MenuPermission";
+import ButtonPermission from "../../views/Permission/ButtonPermission";
+import BasicForm from "../../views/Form/BasicForm";
+import ValidatedForm from "../../views/Form/ValidatedForm";
+import EChartsWater from "../../views/ECharts/EChartsWater";
+import EChartsColumn from "../../views/ECharts/EChartsColumn";
+import EChartsLine from "../../views/ECharts/EChartsLine";
+import EChartsPie from "../../views/ECharts/EChartsPie";
+import EChartsRadar from "../../views/ECharts/EChartsRadar";
+import EChartsNested from "../../views/ECharts/EChartsNested";
 
 export interface IMenu {
   path: string;
@@ -63,34 +73,6 @@ const menu: IMenu[] = [
     ],
   },
   {
-    path: "/goods",
-    meta: {
-      name: "goods",
-      title: "商品管理",
-      icon: "shop",
-    },
-    children: [
-      {
-        path: "/goods/list",
-        element: <GoodsList />,
-        meta: {
-          name: "goodsList",
-          title: "商品列表",
-          icon: "th",
-        },
-      },
-      {
-        path: "/goods/manage",
-        element: <Welcome />,
-        meta: {
-          name: "goodsManage",
-          title: "商品管理",
-          icon: "edit",
-        },
-      },
-    ],
-  },
-  {
     path: "/permission",
     meta: {
       name: "permission",
@@ -100,7 +82,7 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/permission/menu",
-        element: <GoodsList />,
+        element: <MenuPermission />,
         meta: {
           name: "menuPermission",
           title: "菜单权限",
@@ -109,7 +91,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/permission/button",
-        element: <Welcome />,
+        element: <ButtonPermission />,
         meta: {
           name: "buttonPermission",
           title: "按钮权限",
@@ -128,7 +110,7 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/form/basic",
-        element: <GoodsList />,
+        element: <BasicForm />,
         meta: {
           name: "formBasic",
           title: "基础表单",
@@ -137,7 +119,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/form/validate",
-        element: <Welcome />,
+        element: <ValidatedForm />,
         meta: {
           name: "formValidate",
           title: "表单验证",
@@ -156,7 +138,7 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/eCharts/water",
-        element: <GoodsList />,
+        element: <EChartsWater />,
         meta: {
           name: "eChartsWater",
           title: "水型图",
@@ -165,7 +147,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/column",
-        element: <Welcome />,
+        element: <EChartsColumn />,
         meta: {
           name: "eChartsColumn",
           title: "柱状图",
@@ -174,7 +156,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/line",
-        element: <Welcome />,
+        element: <EChartsLine />,
         meta: {
           name: "eChartsLine",
           title: "折线图",
@@ -183,7 +165,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/pie",
-        element: <Welcome />,
+        element: <EChartsPie />,
         meta: {
           name: "eChartsPie",
           title: "饼图",
@@ -192,7 +174,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/radar",
-        element: <Welcome />,
+        element: <EChartsRadar />,
         meta: {
           name: "eChartsRadar",
           title: "雷达图",
@@ -201,7 +183,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/nested",
-        element: <Welcome />,
+        element: <EChartsNested />,
         meta: {
           name: "eChartsNested",
           title: "环形图",

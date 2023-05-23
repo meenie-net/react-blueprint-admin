@@ -40,7 +40,6 @@ const VerticalMenu = () => {
       >
         {subMenu.length !== 0 &&
           subMenu.map((item) => (
-            // todo use Menu to support mutil level menu
             <div
               key={item.path}
               onClick={() => navigate(item.path)}
