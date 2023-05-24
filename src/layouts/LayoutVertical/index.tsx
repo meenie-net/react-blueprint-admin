@@ -17,7 +17,7 @@ const LayoutVertical = () => {
       {/* Header */}
       <div
         className={`border-box flex w-full flex-shrink-0 items-center justify-between bg-dark-bg text-dark-text ${
-          assemblyLarge ? "h-[55px]" : "h-[45px]"
+          assemblyLarge ? "h-[65px]" : "h-[55px]"
         }`}
       >
         {/* HeaderLeft */}
