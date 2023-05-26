@@ -15,7 +15,11 @@ const ColumnClosedMenu = (props: { subMenu: IMenu[] }) => {
   const location = useLocation();
 
   const handleClick = (item: IMenu) => {
-    navigate(item.path);
+    if (item.meta.url) {
+      window.open(item.meta.url, item.meta.target || "_self");
+    } else {
+      navigate(item.path);
+    }
   };
   const MenuItem = (props: { _item: IMenu[] }) => {
     const { _item } = props;

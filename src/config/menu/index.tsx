@@ -12,6 +12,8 @@ import EChartsLine from "../../views/ECharts/EChartsLine";
 import EChartsPie from "../../views/ECharts/EChartsPie";
 import EChartsRadar from "../../views/ECharts/EChartsRadar";
 import EChartsNested from "../../views/ECharts/EChartsNested";
+import NestedMenu from "../../views/Common/NestedMenu";
+import OutsideLink from "../../views/Common/OutsideLink";
 
 export interface IMenu {
   path: string;
@@ -21,6 +23,8 @@ export interface IMenu {
     name: string;
     title: string;
     icon: IconName | MaybeElement;
+    target?: "_blank" | "_self" | "_parent";
+    url?: string;
   };
   children?: IMenu[];
 }
@@ -210,7 +214,7 @@ const menu: IMenu[] = [
         children: [
           {
             path: "/menu/menu1/menu11",
-            element: <GoodsList />,
+            element: <NestedMenu />,
             meta: {
               name: "menuMenu1Menu11",
               title: "菜单1-1",
@@ -227,7 +231,7 @@ const menu: IMenu[] = [
             children: [
               {
                 path: "/menu/menu1/menu12/menu121",
-                element: <GoodsList />,
+                element: <NestedMenu />,
                 meta: {
                   name: "menuMenu1Menu12Menu121",
                   title: "菜单1-2-1",
@@ -236,7 +240,7 @@ const menu: IMenu[] = [
               },
               {
                 path: "/menu/menu1/menu12/menu122",
-                element: <Welcome />,
+                element: <NestedMenu />,
                 meta: {
                   name: "menuMenu1Menu12Menu122",
                   title: "菜单1-2-2",
@@ -249,7 +253,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/menu/menu2",
-        element: <Welcome />,
+        element: <NestedMenu />,
         meta: {
           name: "menuMenu2",
           title: "菜单2",
@@ -305,11 +309,13 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/link/github",
-        element: <GoodsList />,
+        element: <OutsideLink />,
         meta: {
           name: "linkGithub",
           title: "GitHub",
           icon: "th",
+          target: "_self",
+          url: "https://github.com",
         },
       },
     ],

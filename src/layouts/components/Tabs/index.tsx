@@ -1,4 +1,4 @@
-import { Button, Card, Tabs, Tab, Icon } from "@blueprintjs/core";
+import { Button, Tabs, Tab, Icon } from "@blueprintjs/core";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -56,7 +56,7 @@ const TabsSection = () => {
   };
   return showTab ? (
     <>
-      <Card className="flex justify-between border-s-2 border-gray-50 p-1">
+      <div className="custom-border-b dark flex justify-between p-1">
         <div ref={tabContainerRef} className="ml-1 overflow-x-hidden">
           <Tabs
             id="tabs"
@@ -73,7 +73,7 @@ const TabsSection = () => {
                   id={tab.path}
                   title={t(`menu.${tab.meta.name}`)}
                   icon={showTabIcon && tab.meta.icon}
-                  className="group"
+                  className="group select-none"
                 >
                   <Icon
                     icon="small-cross"
@@ -95,7 +95,7 @@ const TabsSection = () => {
             small={!assemblyLarge}
           />
         </div>
-      </Card>
+      </div>
     </>
   ) : null;
 };

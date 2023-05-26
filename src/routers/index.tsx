@@ -3,6 +3,7 @@ import menu, { IMenu } from "../config/menu";
 import { Layout } from "../layouts";
 import { ReactElement } from "react";
 import NotFound from "../views/Common/NotFound";
+import KeepAlive from "react-activation";
 
 export interface IRoute {
   path: string;
@@ -18,22 +19,44 @@ const generateRoutes = (menu: IMenu[]): IRoute[] => {
       children = generateRoutes(route.children);
       return {
         path: route.path,
-        element: route.element,
+        element: (
+          <KeepAlive
+            cacheKey={route.path}
+            name={route.path}
+            id={route.path}
+            saveScrollPosition
+          >
+            {route.element}
+          </KeepAlive>
+        ),
         children,
         handle: {
           name: route.meta.name,
           icon: route.meta.icon,
           title: route.meta.title,
+          url: route.meta.url,
+          target: route.meta.target,
         },
       };
     } else {
       return {
         path: route.path,
-        element: route.element,
+        element: (
+          <KeepAlive
+            cacheKey={route.path}
+            name={route.path}
+            id={route.path}
+            saveScrollPosition
+          >
+            {route.element}
+          </KeepAlive>
+        ),
         handle: {
           name: route.meta.name,
           icon: route.meta.icon,
           title: route.meta.title,
+          url: route.meta.url,
+          target: route.meta.target,
         },
       };
     }
@@ -41,6 +64,7 @@ const generateRoutes = (menu: IMenu[]): IRoute[] => {
 };
 
 const sub = generateRoutes(menu);
+console.log("sub", sub);
 const routes = [
   {
     path: "/",

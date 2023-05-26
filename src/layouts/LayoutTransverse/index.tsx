@@ -55,7 +55,7 @@ const LayoutTransverse = () => {
       <div className="flex min-w-0 flex-auto flex-col content-between">
         {/* Header */}
         <div
-          className={`border-box flex w-full flex-shrink-0 items-center divide-x-2 ${
+          className={`custom-border-b border-box flex w-full flex-shrink-0 items-center divide-x-2 ${
             assemblyLarge ? "h-[55px]" : "h-[45px]"
           }`}
         >

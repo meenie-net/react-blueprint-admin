@@ -17,6 +17,14 @@ const VerticalMenu = () => {
 
   const [activeMenu, setActiveMenu] = useState("");
 
+  const handleClick = (item: IMenu) => {
+    if (item.meta.url) {
+      window.open(item.meta.url, item.meta.target || "_self");
+    } else {
+      navigate(item.path);
+    }
+  };
+
   const generateMenu = (menu: IMenu) => {
     return (
       <div
@@ -61,7 +69,7 @@ const VerticalMenu = () => {
             ) : (
               <MenuItem2
                 key={i.path}
-                onClick={() => navigate(i.path)}
+                onClick={() => handleClick(i)}
                 className={`flex h-10 items-center justify-center hover:cursor-pointer hover:bg-orange-600 hover:text-white
                  ${
                    location.pathname === i.path

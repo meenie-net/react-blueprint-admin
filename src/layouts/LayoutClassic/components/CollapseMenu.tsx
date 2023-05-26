@@ -23,8 +23,12 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
   const handleCollapse = () => {
     setOpen(!open);
   };
-  const handleClick = (path: string) => {
-    navigate(path);
+  const handleClick = (item: IMenu) => {
+    if (item.meta.url) {
+      window.open(item.meta.url, item.meta.target || "_self");
+    } else {
+      navigate(item.path);
+    }
   };
 
   const ClassicClosedMenu = (props: { _item: IMenu }) => {
@@ -35,7 +39,7 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
         icon={_item.meta.icon}
         active={matches.map((route) => route.pathname).includes(_item.path)}
         title={"" + t(`menu.${_item.meta.name}`)}
-        onClick={() => handleClick(_item.path)}
+        onClick={() => handleClick(_item)}
         text={t(`menu.${_item.meta.name}`)}
       >
         {_item.children &&
@@ -69,7 +73,7 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
             icon={item.meta.icon}
             active={collapseActive}
             title={menuOpen ? "" : "" + t(`menu.${item.meta.name}`)}
-            onClick={() => handleClick(item.path)}
+            onClick={() => handleClick(item)}
           ></MenuItem2>
         )
       ) : (

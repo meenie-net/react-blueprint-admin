@@ -17,7 +17,11 @@ const ColumnOpenMenu = (props: { subMenu: IMenu[] }) => {
 
   const handleClick = (item: IMenu) => {
     if (!item.children) {
-      navigate(item.path);
+      if (item.meta.url) {
+        window.open(item.meta.url, item.meta.target || "_self");
+      } else {
+        navigate(item.path);
+      }
     } else {
       setOpen(!open);
     }
@@ -25,9 +29,8 @@ const ColumnOpenMenu = (props: { subMenu: IMenu[] }) => {
   return (
     <>
       {subMenu.map((item) => (
-        <>
+        <div key={item.path}>
           <div
-            key={item.path}
             onClick={() => handleClick(item)}
             className={`flex h-10 items-center justify-between pr-2 hover:cursor-pointer hover:bg-orange-600 hover:text-white ${
               location.pathname === item.path ? "bg-orange-800 text-white" : ""
@@ -65,7 +68,7 @@ const ColumnOpenMenu = (props: { subMenu: IMenu[] }) => {
           >
             {item.children && <ColumnOpenMenu subMenu={item.children} />}
           </div>
-        </>
+        </div>
       ))}
     </>
   );

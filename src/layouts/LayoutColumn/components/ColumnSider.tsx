@@ -16,10 +16,15 @@ const ColumnSider = () => {
   const navigate = useNavigate();
   const matches = useMatches();
   const { t } = useTranslation();
+
   const handleClick = (item: IMenu) => {
     if (!item.children) {
       setSubMenu([]);
-      navigate(item.path);
+      if (item.meta.url) {
+        window.open(item.meta.url, item.meta.target || "_self");
+      } else {
+        navigate(item.path);
+      }
     } else {
       setSubMenu(item.children);
     }
@@ -29,7 +34,7 @@ const ColumnSider = () => {
     <div className="flex h-full">
       {/* 一级菜单 */}
       <div className="min-h-full w-[84px] overflow-y-auto bg-slate-700 text-white">
-        <div className="flex h-[84px] items-center justify-center border-b border-b-slate-400">
+        <div className="custom-border-b flex h-[84px] items-center justify-center">
           <img
             src={assetsUrl("/assets/avatar.png")}
             alt=""
@@ -51,7 +56,7 @@ const ColumnSider = () => {
       </div>
       {/* 二级菜单 */}
       <div
-        className={`dark overflow-hidden transition-all ${
+        className={`custom-border-r dark overflow-hidden transition-all ${
           subMenu.length === 0
             ? "w-0"
             : assemblyLarge
@@ -63,7 +68,7 @@ const ColumnSider = () => {
             : "w-[50px]"
         }`}
       >
-        <div className="flex h-10 items-center justify-center border-b border-gray-400">
+        <div className="custom-border-b flex h-[45px] items-center justify-center">
           <span className="whitespace-nowrap">
             {menuOpen ? "Mee Admin" : "M"}
           </span>

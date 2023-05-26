@@ -16,7 +16,7 @@ const LayoutVertical = () => {
     <div className="flex h-full w-full flex-col">
       {/* Header */}
       <div
-        className={`border-box flex w-full flex-shrink-0 items-center justify-between bg-dark-bg text-dark-text ${
+        className={`border-box custom-border-b flex w-full flex-shrink-0 items-center justify-between bg-dark-bg text-dark-text ${
           assemblyLarge ? "h-[65px]" : "h-[55px]"
         }`}
       >

@@ -26,13 +26,13 @@ export const Layout = () => {
   return (
     <Suspense
       fallback={
-        <div className="flex items-center justify-center h-full">
+        <div className="flex h-full items-center justify-center">
           <Spinner size={SpinnerSize.LARGE} />
         </div>
       }
     >
       <HotkeysProvider>
-        <div className={`w-full h-full ${darkTheme ? "bp4-dark" : ""}`}>
+        <div className={`h-full w-full ${darkTheme ? "bp4-dark" : ""}`}>
           {LAYOUT_BASE[layoutType]}
           <ThemeDrawer />
           <GlobalAlert isOpen={false} />

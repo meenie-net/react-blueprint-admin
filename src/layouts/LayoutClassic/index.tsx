@@ -26,7 +26,7 @@ const LayoutClassic = () => {
     <div className="flex h-full w-full flex-col">
       {/* Header */}
       <div
-        className={`border-box dark-when-light flex w-full flex-shrink-0 items-center divide-x-2 ${
+        className={`border-box dark-when-light custom-border-b flex w-full flex-shrink-0 items-center divide-x-2 ${
           assemblyLarge ? "h-[55px]" : "h-[45px]"
         }`}
       >

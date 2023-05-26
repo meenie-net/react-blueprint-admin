@@ -34,13 +34,6 @@ const Setting = (props: { mode: "dark" | "light" }) => {
   return (
     <>
       <ButtonGroup minimal={true} large={assemblyLarge}>
-        <Button title="调整大小">
-          <Icon
-            icon="settings"
-            color={mode === "dark" ? undefined : "#ffffff"}
-            size={assemblyLarge ? 24 : 18}
-          />
-        </Button>
         <Button>
           <Icon
             icon="search"

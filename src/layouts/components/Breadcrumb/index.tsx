@@ -8,7 +8,9 @@ const Breadcrumb = (props: { mode: "dark" | "light" }) => {
     setting: { showBreadcrumbs },
   } = useGlobalStore();
   const crumbs = useBreadcrumbs({ mode });
-  return showBreadcrumbs ? <Breadcrumbs2 items={crumbs} /> : null;
+  return showBreadcrumbs ? (
+    <Breadcrumbs2 className="select-none" items={crumbs} />
+  ) : null;
 };
 
 export default Breadcrumb;
