@@ -1,9 +1,10 @@
 import { createHashRouter } from "react-router-dom";
-import menu, { IMenu } from "../config/menu";
+import menus, { IMenu } from "../config/menu";
 import { Layout } from "../layouts";
-import { ReactElement } from "react";
+import { ReactElement, lazy, Suspense } from "react";
 import NotFound from "../views/Common/NotFound";
-import KeepAlive from "react-activation";
+import { KeepAlive } from "react-activation";
+import { Spinner, SpinnerSize } from "@blueprintjs/core";
 
 export interface IRoute {
   path: string;
@@ -12,58 +13,57 @@ export interface IRoute {
   handle: object;
 }
 
-const generateRoutes = (menu: IMenu[]): IRoute[] => {
-  return menu.map((route) => {
+const generateRoutes = (menus: IMenu[]): IRoute[] => {
+  return menus.map((menu) => {
     let children: IRoute[] = [];
-    if (route.children) {
-      children = generateRoutes(route.children);
+    if (menu.children) {
+      children = generateRoutes(menu.children);
       return {
-        path: route.path,
-        element: (
-          <KeepAlive
-            cacheKey={route.path}
-            name={route.path}
-            id={route.path}
-            saveScrollPosition
-          >
-            {route.element}
-          </KeepAlive>
-        ),
+        path: menu.path,
         children,
         handle: {
-          name: route.meta.name,
-          icon: route.meta.icon,
-          title: route.meta.title,
-          url: route.meta.url,
-          target: route.meta.target,
+          name: menu.meta.name,
+          icon: menu.meta.icon,
+          title: menu.meta.title,
+          url: menu.meta.url,
+          target: menu.meta.target,
         },
       };
     } else {
+      const Component = lazy(() => import(menu.element!));
       return {
-        path: route.path,
+        path: menu.path,
         element: (
           <KeepAlive
-            cacheKey={route.path}
-            name={route.path}
-            id={route.path}
+            // key={menu.meta.name}
+            name={menu.meta.name}
+            id={menu.meta.name}
             saveScrollPosition
           >
-            {route.element}
+            <Suspense
+              fallback={
+                <div className="flex h-full items-center justify-center">
+                  <Spinner size={SpinnerSize.LARGE} />
+                </div>
+              }
+            >
+              <Component key={menu.meta.name} />
+            </Suspense>
           </KeepAlive>
         ),
         handle: {
-          name: route.meta.name,
-          icon: route.meta.icon,
-          title: route.meta.title,
-          url: route.meta.url,
-          target: route.meta.target,
+          name: menu.meta.name,
+          icon: menu.meta.icon,
+          title: menu.meta.title,
+          url: menu.meta.url,
+          target: menu.meta.target,
         },
       };
     }
   });
 };
 
-const sub = generateRoutes(menu);
+const sub = generateRoutes(menus);
 console.log("sub", sub);
 const routes = [
   {

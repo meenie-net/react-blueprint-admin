@@ -1,23 +1,8 @@
-import UserList from "../../views/User/UserList";
-import Welcome from "../../views/Welcome";
-import GoodsList from "../../views/Goods/GoodsList";
 import { IconName, MaybeElement } from "@blueprintjs/core";
-import MenuPermission from "../../views/Permission/MenuPermission";
-import ButtonPermission from "../../views/Permission/ButtonPermission";
-import BasicForm from "../../views/Form/BasicForm";
-import ValidatedForm from "../../views/Form/ValidatedForm";
-import EChartsWater from "../../views/ECharts/EChartsWater";
-import EChartsColumn from "../../views/ECharts/EChartsColumn";
-import EChartsLine from "../../views/ECharts/EChartsLine";
-import EChartsPie from "../../views/ECharts/EChartsPie";
-import EChartsRadar from "../../views/ECharts/EChartsRadar";
-import EChartsNested from "../../views/ECharts/EChartsNested";
-import NestedMenu from "../../views/Common/NestedMenu";
-import OutsideLink from "../../views/Common/OutsideLink";
 
 export interface IMenu {
   path: string;
-  element?: JSX.Element;
+  element?: string;
   nodeRef?: React.RefObject<unknown>;
   meta: {
     name: string;
@@ -29,10 +14,10 @@ export interface IMenu {
   children?: IMenu[];
 }
 
-const menu: IMenu[] = [
+const menus: IMenu[] = [
   {
     path: "/",
-    element: <Welcome />,
+    element: "../views/Welcome",
     meta: {
       name: "home",
       title: "首页",
@@ -41,7 +26,7 @@ const menu: IMenu[] = [
   },
   {
     path: "/bigScreen",
-    element: <Welcome />,
+    element: "../views/Welcome",
     meta: {
       name: "bigScreen",
       title: "大屏",
@@ -58,7 +43,7 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/user/list",
-        element: <UserList />,
+        element: "../views/User/UserList",
         meta: {
           name: "userList",
           title: "用户列表",
@@ -67,7 +52,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/user/manage",
-        element: <Welcome />,
+        element: "../views/Welcome",
         meta: {
           name: "userManage",
           title: "用户权限",
@@ -86,7 +71,7 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/permission/menu",
-        element: <MenuPermission />,
+        element: "../views/Permission/MenuPermission",
         meta: {
           name: "menuPermission",
           title: "菜单权限",
@@ -95,7 +80,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/permission/button",
-        element: <ButtonPermission />,
+        element: "../views/Permission/ButtonPermission",
         meta: {
           name: "buttonPermission",
           title: "按钮权限",
@@ -114,7 +99,7 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/form/basic",
-        element: <BasicForm />,
+        element: "../views/Form/BasicForm",
         meta: {
           name: "formBasic",
           title: "基础表单",
@@ -123,7 +108,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/form/validate",
-        element: <ValidatedForm />,
+        element: "../views/Form/ValidatedForm",
         meta: {
           name: "formValidate",
           title: "表单验证",
@@ -142,7 +127,7 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/eCharts/water",
-        element: <EChartsWater />,
+        element: "../views/ECharts/EChartsWater",
         meta: {
           name: "eChartsWater",
           title: "水型图",
@@ -151,7 +136,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/column",
-        element: <EChartsColumn />,
+        element: "../views/ECharts/EChartsColumn",
         meta: {
           name: "eChartsColumn",
           title: "柱状图",
@@ -160,7 +145,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/line",
-        element: <EChartsLine />,
+        element: "../views/ECharts/EChartsLine",
         meta: {
           name: "eChartsLine",
           title: "折线图",
@@ -169,7 +154,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/pie",
-        element: <EChartsPie />,
+        element: "../views/ECharts/EChartsPie",
         meta: {
           name: "eChartsPie",
           title: "饼图",
@@ -178,7 +163,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/radar",
-        element: <EChartsRadar />,
+        element: "../views/ECharts/EChartsRadar",
         meta: {
           name: "eChartsRadar",
           title: "雷达图",
@@ -187,7 +172,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/eCharts/nested",
-        element: <EChartsNested />,
+        element: "../views/ECharts/EChartsNested",
         meta: {
           name: "eChartsNested",
           title: "环形图",
@@ -214,7 +199,7 @@ const menu: IMenu[] = [
         children: [
           {
             path: "/menu/menu1/menu11",
-            element: <NestedMenu />,
+            element: "../views/Common/NestedMenu",
             meta: {
               name: "menuMenu1Menu11",
               title: "菜单1-1",
@@ -231,7 +216,7 @@ const menu: IMenu[] = [
             children: [
               {
                 path: "/menu/menu1/menu12/menu121",
-                element: <NestedMenu />,
+                element: "../views/Common/NestedMenu",
                 meta: {
                   name: "menuMenu1Menu12Menu121",
                   title: "菜单1-2-1",
@@ -240,7 +225,7 @@ const menu: IMenu[] = [
               },
               {
                 path: "/menu/menu1/menu12/menu122",
-                element: <NestedMenu />,
+                element: "../views/Common/NestedMenu",
                 meta: {
                   name: "menuMenu1Menu12Menu122",
                   title: "菜单1-2-2",
@@ -253,7 +238,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/menu/menu2",
-        element: <NestedMenu />,
+        element: "../views/Common/NestedMenu",
         meta: {
           name: "menuMenu2",
           title: "菜单2",
@@ -272,7 +257,7 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/system/account",
-        element: <GoodsList />,
+        element: "../views/Welcome",
         meta: {
           name: "systemAccount",
           title: "账号管理",
@@ -281,7 +266,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/system/role",
-        element: <Welcome />,
+        element: "../views/Welcome",
         meta: {
           name: "systemRole",
           title: "角色管理",
@@ -290,7 +275,7 @@ const menu: IMenu[] = [
       },
       {
         path: "/system/menu",
-        element: <Welcome />,
+        element: "../views/Welcome",
         meta: {
           name: "systemMenu",
           title: "菜单管理",
@@ -309,7 +294,7 @@ const menu: IMenu[] = [
     children: [
       {
         path: "/link/github",
-        element: <OutsideLink />,
+        element: "../views/Common/OutsideLink",
         meta: {
           name: "linkGithub",
           title: "GitHub",
@@ -321,4 +306,4 @@ const menu: IMenu[] = [
     ],
   },
 ];
-export default menu;
+export default menus;

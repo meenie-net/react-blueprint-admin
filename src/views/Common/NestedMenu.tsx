@@ -10,7 +10,7 @@ const NestedMenu = () => {
   return (
     <div>
       这是嵌套菜单{routeHandle.name}
-      <input type="text" />
+      <input placeholder="input" type="text" />
     </div>
   );
 };

@@ -8,7 +8,6 @@ import { useEffect } from "react";
 const Content = () => {
   const currentOutlet = useOutlet();
   const location = useLocation();
-  console.log("currentOutlet", currentOutlet);
   // todo
   // auth逻辑
   useEffect(() => {
@@ -23,7 +22,7 @@ const Content = () => {
   return (
     <SwitchTransition mode="out-in">
       <CSSTransition key={location.pathname} timeout={300} classNames="page">
-        {currentOutlet}
+        <div>{currentOutlet}</div>
       </CSSTransition>
     </SwitchTransition>
   );
