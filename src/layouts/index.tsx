@@ -1,5 +1,5 @@
 import LayoutClassic from "./LayoutClassic";
-import { ReactElement, Suspense, useEffect } from "react";
+import { ReactElement, Suspense } from "react";
 import ThemeDrawer from "./components/Setting/components/ThemeDrawer";
 import { HotkeysProvider, Spinner, SpinnerSize } from "@blueprintjs/core";
 import LayoutColumn from "./LayoutColumn";
@@ -8,7 +8,7 @@ import LayoutVertical from "./LayoutVertical";
 import useGlobalStore from "../hooks/useGlobalStore";
 import "./style.scss";
 import GlobalAlert from "../components/GlobalAlert";
-import { AliveScope, useAliveController } from "react-activation";
+import { AliveScope } from "react-activation";
 
 export type TLayout = "CLASSIC" | "COLUMN" | "VERTICAL" | "TRANSVERSE";
 
@@ -24,11 +24,6 @@ export const Layout = () => {
     layoutType,
     setting: { darkTheme },
   } = useGlobalStore();
-  const { getCachingNodes } = useAliveController();
-
-  useEffect(() => {
-    console.log("getCachingNodes()", getCachingNodes());
-  });
   return (
     <AliveScope>
       <Suspense

@@ -1,14 +1,8 @@
-import { useEffect } from "react";
-import { useLocation, useMatches } from "react-router-dom";
+import { useMatches } from "react-router-dom";
 
 export const useRouteHandle = () => {
   const matches = useMatches();
-  const location = useLocation();
-  let handle = matches[matches.length - 1].handle;
-  useEffect(() => {
-    console.log("1", 1);
-    handle = matches[matches.length - 1].handle;
-  }, [location]);
+  const { handle } = matches[matches.length - 1];
   return handle as unknown as {
     icon: string;
     url: string;

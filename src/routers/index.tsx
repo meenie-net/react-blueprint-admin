@@ -35,10 +35,11 @@ const generateRoutes = (menus: IMenu[]): IRoute[] => {
         path: menu.path,
         element: (
           <KeepAlive
-            // key={menu.meta.name}
+            key={menu.path}
             name={menu.meta.name}
             id={menu.meta.name}
             saveScrollPosition
+            autoFreeze={false} // react-activation与freeze冲突，导致嵌套菜单缓存会出现顺序等错误，设置为false避免
           >
             <Suspense
               fallback={
@@ -64,7 +65,6 @@ const generateRoutes = (menus: IMenu[]): IRoute[] => {
 };
 
 const sub = generateRoutes(menus);
-console.log("sub", sub);
 const routes = [
   {
     path: "/",
