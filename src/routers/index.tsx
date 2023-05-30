@@ -1,7 +1,7 @@
 import { createHashRouter } from "react-router-dom";
 import menus, { IMenu } from "../config/menu";
 import { Layout } from "../layouts";
-import { ReactElement, lazy, Suspense } from "react";
+import { ReactElement, lazy, Suspense, ComponentType } from "react";
 import NotFound from "../views/Common/NotFound";
 import { KeepAlive } from "react-activation";
 import { Spinner, SpinnerSize } from "@blueprintjs/core";
@@ -30,7 +30,13 @@ const generateRoutes = (menus: IMenu[]): IRoute[] => {
         },
       };
     } else {
-      const Component = lazy(() => import(menu.element!));
+      const views = import.meta.glob([
+        "../views/**/*.tsx",
+        "../views/*.tsx",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ]) as Record<string, () => Promise<{ default: ComponentType<any> }>>;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const Component = lazy(views[menu.element!]);
       return {
         path: menu.path,
         element: (
@@ -48,7 +54,7 @@ const generateRoutes = (menus: IMenu[]): IRoute[] => {
                 </div>
               }
             >
-              <Component key={menu.meta.name} />
+              <Component />
             </Suspense>
           </KeepAlive>
         ),

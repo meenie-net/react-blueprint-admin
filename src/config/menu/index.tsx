@@ -17,7 +17,7 @@ export interface IMenu {
 const menus: IMenu[] = [
   {
     path: "/",
-    element: "../views/Welcome",
+    element: "../views/Common/Welcome.tsx",
     meta: {
       name: "home",
       title: "首页",
@@ -26,7 +26,7 @@ const menus: IMenu[] = [
   },
   {
     path: "/bigScreen",
-    element: "../views/Welcome",
+    element: "../views/Common/Welcome.tsx",
     meta: {
       name: "bigScreen",
       title: "大屏",
@@ -43,7 +43,7 @@ const menus: IMenu[] = [
     children: [
       {
         path: "/user/list",
-        element: "../views/User/UserList",
+        element: "../views/User/UserList.tsx",
         meta: {
           name: "userList",
           title: "用户列表",
@@ -52,7 +52,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/user/manage",
-        element: "../views/Welcome",
+        element: "../views/Common/Welcome.tsx",
         meta: {
           name: "userManage",
           title: "用户权限",
@@ -71,7 +71,7 @@ const menus: IMenu[] = [
     children: [
       {
         path: "/permission/menu",
-        element: "../views/Permission/MenuPermission",
+        element: "../views/Permission/MenuPermission.tsx",
         meta: {
           name: "menuPermission",
           title: "菜单权限",
@@ -80,7 +80,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/permission/button",
-        element: "../views/Permission/ButtonPermission",
+        element: "../views/Permission/ButtonPermission.tsx",
         meta: {
           name: "buttonPermission",
           title: "按钮权限",
@@ -99,7 +99,7 @@ const menus: IMenu[] = [
     children: [
       {
         path: "/form/basic",
-        element: "../views/Form/BasicForm",
+        element: "../views/Form/BasicForm.tsx",
         meta: {
           name: "formBasic",
           title: "基础表单",
@@ -108,7 +108,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/form/validate",
-        element: "../views/Form/ValidatedForm",
+        element: "../views/Form/ValidatedForm.tsx",
         meta: {
           name: "formValidate",
           title: "表单验证",
@@ -127,7 +127,7 @@ const menus: IMenu[] = [
     children: [
       {
         path: "/eCharts/water",
-        element: "../views/ECharts/EChartsWater",
+        element: "../views/ECharts/EChartsWater.tsx",
         meta: {
           name: "eChartsWater",
           title: "水型图",
@@ -136,7 +136,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/eCharts/column",
-        element: "../views/ECharts/EChartsColumn",
+        element: "../views/ECharts/EChartsColumn.tsx",
         meta: {
           name: "eChartsColumn",
           title: "柱状图",
@@ -145,7 +145,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/eCharts/line",
-        element: "../views/ECharts/EChartsLine",
+        element: "../views/ECharts/EChartsLine.tsx",
         meta: {
           name: "eChartsLine",
           title: "折线图",
@@ -154,7 +154,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/eCharts/pie",
-        element: "../views/ECharts/EChartsPie",
+        element: "../views/ECharts/EChartsPie.tsx",
         meta: {
           name: "eChartsPie",
           title: "饼图",
@@ -163,7 +163,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/eCharts/radar",
-        element: "../views/ECharts/EChartsRadar",
+        element: "../views/ECharts/EChartsRadar.tsx",
         meta: {
           name: "eChartsRadar",
           title: "雷达图",
@@ -172,7 +172,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/eCharts/nested",
-        element: "../views/ECharts/EChartsNested",
+        element: "../views/ECharts/EChartsNested.tsx",
         meta: {
           name: "eChartsNested",
           title: "环形图",
@@ -199,7 +199,7 @@ const menus: IMenu[] = [
         children: [
           {
             path: "/menu/menu1/menu11",
-            element: "../views/Common/NestedMenu",
+            element: "../views/Common/NestedMenu.tsx",
             meta: {
               name: "menuMenu1Menu11",
               title: "菜单1-1",
@@ -216,7 +216,7 @@ const menus: IMenu[] = [
             children: [
               {
                 path: "/menu/menu1/menu12/menu121",
-                element: "../views/Common/NestedMenu",
+                element: "../views/Common/NestedMenu.tsx",
                 meta: {
                   name: "menuMenu1Menu12Menu121",
                   title: "菜单1-2-1",
@@ -225,7 +225,7 @@ const menus: IMenu[] = [
               },
               {
                 path: "/menu/menu1/menu12/menu122",
-                element: "../views/Common/NestedMenu",
+                element: "../views/Common/NestedMenu.tsx",
                 meta: {
                   name: "menuMenu1Menu12Menu122",
                   title: "菜单1-2-2",
@@ -238,7 +238,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/menu/menu2",
-        element: "../views/Common/NestedMenu",
+        element: "../views/Common/NestedMenu.tsx",
         meta: {
           name: "menuMenu2",
           title: "菜单2",
@@ -257,7 +257,7 @@ const menus: IMenu[] = [
     children: [
       {
         path: "/system/account",
-        element: "../views/Welcome",
+        element: "../views/Common/Welcome.tsx",
         meta: {
           name: "systemAccount",
           title: "账号管理",
@@ -266,7 +266,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/system/role",
-        element: "../views/Welcome",
+        element: "../views/Common/Welcome.tsx",
         meta: {
           name: "systemRole",
           title: "角色管理",
@@ -275,7 +275,7 @@ const menus: IMenu[] = [
       },
       {
         path: "/system/menu",
-        element: "../views/Welcome",
+        element: "../views/Common/Welcome.tsx",
         meta: {
           name: "systemMenu",
           title: "菜单管理",
@@ -294,7 +294,7 @@ const menus: IMenu[] = [
     children: [
       {
         path: "/link/github",
-        element: "../views/Common/OutsideLink",
+        element: "../views/Common/OutsideLink.tsx",
         meta: {
           name: "linkGithub",
           title: "GitHub",
