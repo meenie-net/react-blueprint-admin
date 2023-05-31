@@ -19,22 +19,36 @@ const TabsSection = () => {
 
   const tabContainerRef = useRef<HTMLDivElement>(null);
 
+  // let overflow1 = false;
   const [overflow, setOverflow] = useState(false);
 
-  useEffect(() => {
-    // todo tabs overflow
+  const computeOverflow = () => {
     if (!tabContainerRef.current) return;
     const tab = tabContainerRef.current.querySelector(
       ".bp4-tab-list"
     ) as HTMLElement;
     if (!tab) return;
-    if (tab.offsetWidth < tab.scrollWidth) {
-      setOverflow(false);
-    } else {
-      setOverflow(true);
-    }
+    setOverflow(
+      tabContainerRef.current.clientWidth - 40 === tab.getClientRects()[0].width
+        ? tab.scrollWidth > tabContainerRef.current.clientWidth - 40
+        : tabContainerRef.current.clientWidth - 40 <
+            tab.getClientRects()[0].width
+    );
     console.log("overflow", overflow);
-  }, [location, tabList]);
+  };
+
+  useEffect(() => computeOverflow(), [location, tabList]);
+
+  useEffect(() => {
+    const overflowObserver = new ResizeObserver(() => {
+      computeOverflow();
+    });
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    overflowObserver.observe(tabContainerRef.current!);
+    return () => {
+      overflowObserver.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     dispatch(setTab(location.pathname));
@@ -56,8 +70,21 @@ const TabsSection = () => {
   };
   return showTab ? (
     <>
-      <div className="custom-border-b dark flex justify-between p-1">
-        <div ref={tabContainerRef} className="ml-1 overflow-x-hidden">
+      <div
+        ref={tabContainerRef}
+        className="custom-border-b dark flex items-center justify-between p-1"
+      >
+        <div className="relative ml-1 overflow-x-hidden">
+          {overflow && (
+            <>
+              <span className="absolute left-0 z-50 flex h-full w-fit items-center bg-white pr-2">
+                <Icon icon="arrow-left" />
+              </span>
+              <span className="absolute right-0 z-50 flex h-full w-fit items-center bg-white px-2">
+                <Icon icon="arrow-right" />
+              </span>
+            </>
+          )}
           <Tabs
             id="tabs"
             animate
@@ -65,6 +92,9 @@ const TabsSection = () => {
             large={assemblyLarge}
             onChange={(nextTabId: string) => handleChange(nextTabId)}
             selectedTabId={location.pathname}
+            className={`transition-all ${
+              overflow ? "translate-x-6" : "translate-x-0"
+            }`}
           >
             {tabList.length &&
               tabList.map((tab: ITab, i: number) => (

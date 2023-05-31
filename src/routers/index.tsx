@@ -30,11 +30,10 @@ const generateRoutes = (menus: IMenu[]): IRoute[] => {
         },
       };
     } else {
-      const views = import.meta.glob([
-        "../views/**/*.tsx",
-        "../views/*.tsx",
+      const views = import.meta.glob(
+        "../views/**/*.tsx"
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ]) as Record<string, () => Promise<{ default: ComponentType<any> }>>;
+      ) as Record<string, () => Promise<{ default: ComponentType<any> }>>;
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const Component = lazy(views[menu.element!]);
       return {

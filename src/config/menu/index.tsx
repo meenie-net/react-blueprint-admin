@@ -2,7 +2,7 @@ import { IconName, MaybeElement } from "@blueprintjs/core";
 
 export interface IMenu {
   path: string;
-  element?: string;
+  element?: string; // 为了支持React.lazy, 此处的字符串必须带上后缀  .tsx
   nodeRef?: React.RefObject<unknown>;
   meta: {
     name: string;
