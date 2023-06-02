@@ -22,7 +22,7 @@ const Content = () => {
   return (
     <SwitchTransition mode="out-in">
       <CSSTransition key={location.pathname} timeout={300} classNames="page">
-        <div>{currentOutlet}</div>
+        {currentOutlet}
       </CSSTransition>
     </SwitchTransition>
   );

@@ -6,6 +6,7 @@ import { ITab, removeTab, setTab } from "../../../stores/global";
 import useGlobalStore from "../../../hooks/useGlobalStore";
 import { RootState } from "../../../stores";
 import { useTranslation } from "react-i18next";
+import "./style.scss";
 
 const TabsSection = () => {
   const {
@@ -18,9 +19,10 @@ const TabsSection = () => {
   const { t } = useTranslation();
 
   const tabContainerRef = useRef<HTMLDivElement>(null);
-
-  // let overflow1 = false;
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = useState(false);
+  const [overflowClass, setOverflowClass] = useState("");
 
   const computeOverflow = () => {
     if (!tabContainerRef.current) return;
@@ -34,6 +36,19 @@ const TabsSection = () => {
         : tabContainerRef.current.clientWidth - 40 <
             tab.getClientRects()[0].width
     );
+    const tabContainer = document.querySelector(".bp4-tabs") as HTMLElement;
+    if (!tabContainer) return;
+    tabContainer.removeAttribute("style");
+    if (
+      tabContainerRef.current.clientWidth - 40 === tab.getClientRects()[0].width
+        ? tab.scrollWidth > tabContainerRef.current.clientWidth - 40
+        : tabContainerRef.current.clientWidth - 40 <
+          tab.getClientRects()[0].width
+    ) {
+      setOverflowClass("translate-x-6");
+    } else {
+      setOverflowClass("translate-x-0");
+    }
     console.log("overflow", overflow);
   };
 
@@ -56,6 +71,38 @@ const TabsSection = () => {
 
   const handleChange = (nextTabId: string) => {
     navigate(nextTabId);
+    // todo
+    // when overflow，click the tab which half hide should animate to show it's whole width
+    const tabContainer = document.querySelector(".bp4-tabs") as HTMLElement;
+    if (!tabContainer) return;
+    const targetTab = tabContainer.querySelector(
+      `[id="bp4-tab-title_tabs_${nextTabId}"]`
+    ) as HTMLElement;
+    if (!targetTab) return;
+    const targetTabLeftBoundary = targetTab.getBoundingClientRect().left;
+    const targetTabRightBoundary =
+      targetTab.getBoundingClientRect().left + targetTab.clientWidth;
+    if (!leftRef.current || !rightRef.current) return;
+    const leftBoundary = leftRef.current.getBoundingClientRect().left + 24;
+    const rightBoundary = rightRef.current.getBoundingClientRect().left;
+    if (
+      targetTabLeftBoundary < leftBoundary &&
+      leftBoundary < targetTabRightBoundary
+    ) {
+      console.log("1", 1);
+      setOverflowClass("translate-x-[30px]");
+    } else if (
+      targetTabLeftBoundary < rightBoundary &&
+      rightBoundary < targetTabRightBoundary
+    ) {
+      const matrix = new WebKitCSSMatrix(
+        window.getComputedStyle(tabContainer).transform
+      );
+      tabContainer.style.transform =
+        "translateX(" +
+        (matrix.m41 - targetTabRightBoundary + rightBoundary) +
+        "px)";
+    }
   };
   const handleRemove = (e: React.MouseEvent, index: number) => {
     e.stopPropagation();
@@ -74,13 +121,19 @@ const TabsSection = () => {
         ref={tabContainerRef}
         className="custom-border-b dark flex items-center justify-between p-1"
       >
-        <div className="relative ml-1 overflow-x-hidden">
+        <div className="relative ml-1 overflow-hidden">
           {overflow && (
             <>
-              <span className="absolute left-0 z-50 flex h-full w-fit items-center bg-white pr-2">
+              <span
+                ref={leftRef}
+                className="absolute left-0 z-50 flex h-full w-fit items-center bg-white pr-2"
+              >
                 <Icon icon="arrow-left" />
               </span>
-              <span className="absolute right-0 z-50 flex h-full w-fit items-center bg-white px-2">
+              <span
+                ref={rightRef}
+                className="absolute right-0 z-50 flex h-full w-fit items-center bg-white px-2"
+              >
                 <Icon icon="arrow-right" />
               </span>
             </>
@@ -92,9 +145,7 @@ const TabsSection = () => {
             large={assemblyLarge}
             onChange={(nextTabId: string) => handleChange(nextTabId)}
             selectedTabId={location.pathname}
-            className={`transition-all ${
-              overflow ? "translate-x-6" : "translate-x-0"
-            }`}
+            className={`transition-all ${overflowClass}`}
           >
             {tabList.length &&
               tabList.map((tab: ITab, i: number) => (
