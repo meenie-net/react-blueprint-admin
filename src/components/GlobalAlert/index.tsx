@@ -7,7 +7,7 @@ import {
 } from "@blueprintjs/core";
 import emitter, { EmitEventEnum } from "../../utils/EventEmitter";
 import { useState } from "react";
-import useGlobalStore from "../../hooks/useGlobalStore";
+import { useGlobalStore } from "../../hooks/useStore";
 const GlobalAlert = (props: AlertProps) => {
   const {
     setting: { darkTheme },

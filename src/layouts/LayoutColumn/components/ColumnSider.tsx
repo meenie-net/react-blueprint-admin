@@ -1,12 +1,12 @@
 import { Icon } from "@blueprintjs/core";
 import menu, { IMenu } from "../../../config/menu";
 import { useMatches, useNavigate } from "react-router-dom";
-import useGlobalStore from "../../../hooks/useGlobalStore";
 import { useTranslation } from "react-i18next";
 import { assetsUrl } from "../../../utils";
 import { useState } from "react";
 import ColumnOpenMenu from "./ColumnOpenMenu";
 import ColumnClosedMenu from "./ColumnClosedMenu";
+import { useGlobalStore } from "../../../hooks/useStore";
 
 const ColumnSider = () => {
   const [subMenu, setSubMenu] = useState<IMenu[]>([]);

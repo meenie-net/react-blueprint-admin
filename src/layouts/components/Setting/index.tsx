@@ -1,10 +1,10 @@
 import { ButtonGroup, Button, Icon, Menu } from "@blueprintjs/core";
 import emitter, { EmitEventEnum } from "../../../utils/EventEmitter";
-import useGlobalStore from "../../../hooks/useGlobalStore";
 import { MenuItem2, Popover2 } from "@blueprintjs/popover2";
 import Notification from "./components/Notification";
 import i18n, { lngs, type TLngsKey } from "../../../i18n";
 import { assetsUrl } from "../../../utils";
+import { useGlobalStore } from "../../../hooks/useStore";
 
 const Setting = (props: { mode: "dark" | "light" }) => {
   const { mode } = props;

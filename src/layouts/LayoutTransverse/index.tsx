@@ -1,6 +1,5 @@
 import { Button, Icon } from "@blueprintjs/core";
 import { useDispatch } from "react-redux";
-import useGlobalStore from "../../hooks/useGlobalStore";
 import { changeMenuOpen } from "../../stores/global";
 import Content from "../components/Content";
 import Setting from "../components/Setting";
@@ -9,6 +8,7 @@ import Tabs from "../components/Tabs";
 import Footer from "../components/Footer";
 import ClassicSider from "../LayoutClassic/components/ClassicSider";
 import { assetsUrl } from "../../utils";
+import { useGlobalStore } from "../../hooks/useStore";
 
 const LayoutTransverse = () => {
   const {

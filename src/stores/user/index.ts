@@ -1,19 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface IUserStore {
+  user: object;
+}
+
+const initialState: IUserStore = {
+  user: {},
+};
 const userStore = createSlice({
   name: "counter",
-  initialState: {
-    value: 0,
-  },
+  initialState,
   reducers: {
-    incremented: (state) => {
-      state.value += 1;
-    },
-    decremented: (state) => {
-      state.value -= 1;
+    setUser: (state, payload) => {
+      state.user = payload;
     },
   },
 });
 
-export const { incremented, decremented } = userStore.actions;
+export const { setUser } = userStore.actions;
 export default userStore;

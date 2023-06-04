@@ -5,6 +5,8 @@ import { ReactElement, lazy, Suspense, ComponentType } from "react";
 import NotFound from "../views/Common/NotFound";
 import { KeepAlive } from "react-activation";
 import { Spinner, SpinnerSize } from "@blueprintjs/core";
+import Login from "../views/Common/Login";
+import RouteBeforeEach from "./RouteBeforeEach";
 
 export interface IRoute {
   path: string;
@@ -39,23 +41,25 @@ const generateRoutes = (menus: IMenu[]): IRoute[] => {
       return {
         path: menu.path,
         element: (
-          <KeepAlive
-            key={menu.path}
-            name={menu.meta.name}
-            id={menu.meta.name}
-            saveScrollPosition
-            autoFreeze={false} // react-activation与freeze冲突，导致嵌套菜单缓存会出现顺序等错误，设置为false避免
-          >
-            <Suspense
-              fallback={
-                <div className="flex h-full items-center justify-center">
-                  <Spinner size={SpinnerSize.LARGE} />
-                </div>
-              }
+          <RouteBeforeEach>
+            <KeepAlive
+              key={menu.path}
+              name={menu.meta.name}
+              id={menu.meta.name}
+              saveScrollPosition
+              autoFreeze={false} // react-activation与freeze冲突，导致嵌套菜单缓存会出现顺序等错误，设置为false避免
             >
-              <Component />
-            </Suspense>
-          </KeepAlive>
+              <Suspense
+                fallback={
+                  <div className="flex h-full items-center justify-center">
+                    <Spinner size={SpinnerSize.LARGE} />
+                  </div>
+                }
+              >
+                <Component />
+              </Suspense>
+            </KeepAlive>
+          </RouteBeforeEach>
         ),
         handle: {
           name: menu.meta.name,
@@ -80,6 +84,16 @@ const routes = [
       name: "home",
       icon: "home",
       title: "首页",
+    },
+  },
+  {
+    path: "/login",
+    name: "login",
+    element: <Login />,
+    handle: {
+      name: "login",
+      icon: "user",
+      title: "登录页面",
     },
   },
   {

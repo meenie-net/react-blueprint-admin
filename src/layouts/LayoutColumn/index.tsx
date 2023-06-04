@@ -1,6 +1,5 @@
 import { Button, Icon } from "@blueprintjs/core";
 import { useDispatch } from "react-redux";
-import useGlobalStore from "../../hooks/useGlobalStore";
 import { changeMenuOpen } from "../../stores/global";
 import Content from "../components/Content";
 import Setting from "../components/Setting";
@@ -8,6 +7,7 @@ import Tabs from "../components/Tabs";
 import Breadcrumb from "../components/Breadcrumb";
 import Footer from "../components/Footer";
 import ColumnSider from "./components/ColumnSider";
+import { useGlobalStore } from "../../hooks/useStore";
 
 const LayoutColumn = () => {
   const {

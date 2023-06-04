@@ -1,8 +1,8 @@
 import { useNavigate, useMatches } from "react-router-dom";
-import useGlobalStore from "./useGlobalStore";
 import { useTranslation } from "react-i18next";
 import { BreadcrumbProps } from "@blueprintjs/popover2";
 import { IconName, MaybeElement } from "@blueprintjs/core";
+import { useGlobalStore } from "./useStore";
 
 const useBreadcrumbs = ({ mode }: { mode: "dark" | "light" }) => {
   const {

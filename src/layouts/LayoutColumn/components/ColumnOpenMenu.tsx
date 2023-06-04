@@ -1,9 +1,9 @@
 import { Icon } from "@blueprintjs/core";
-import useGlobalStore from "../../../hooks/useGlobalStore";
 import { useTranslation } from "react-i18next";
 import { IMenu } from "../../../config/menu";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useGlobalStore } from "../../../hooks/useStore";
 
 const ColumnOpenMenu = (props: { subMenu: IMenu[] }) => {
   const { subMenu } = props;

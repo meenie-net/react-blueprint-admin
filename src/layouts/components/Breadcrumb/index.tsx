@@ -1,6 +1,6 @@
 import { Breadcrumbs2 } from "@blueprintjs/popover2";
 import useBreadcrumbs from "../../../hooks/useBreadcrumbs";
-import useGlobalStore from "../../../hooks/useGlobalStore";
+import { useGlobalStore } from "../../../hooks/useStore";
 
 const Breadcrumb = (props: { mode: "dark" | "light" }) => {
   const { mode } = props;

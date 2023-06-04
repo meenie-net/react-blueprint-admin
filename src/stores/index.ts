@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userStore from "./user";
 import globalStore from "./global";
+import permissionStore from "./permission";
 
 const persistConfig = {
   key: "root",
@@ -13,6 +14,7 @@ const persistConfig = {
 const reducers = combineReducers({
   global: globalStore.reducer,
   user: userStore.reducer,
+  permission: permissionStore.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

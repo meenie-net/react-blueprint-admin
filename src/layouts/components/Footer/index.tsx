@@ -1,4 +1,4 @@
-import useGlobalStore from "../../../hooks/useGlobalStore";
+import { useGlobalStore } from "../../../hooks/useStore";
 
 const Footer = (props: { className?: string }) => {
   const { className } = props;

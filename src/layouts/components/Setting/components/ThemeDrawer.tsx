@@ -2,7 +2,6 @@ import { useState } from "react";
 import emitter, { EmitEventEnum } from "../../../../utils/EventEmitter";
 import { Drawer, Switch } from "@blueprintjs/core";
 import Divider from "../../../../components/Divider";
-import useGlobalStore from "../../../../hooks/useGlobalStore";
 import { useDispatch } from "react-redux";
 import {
   changeAssemblySize,
@@ -19,6 +18,7 @@ import { ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
 import { TLayout } from "../../..";
 import { useTranslation } from "react-i18next";
 import { Tooltip2 } from "@blueprintjs/popover2";
+import { useGlobalStore } from "../../../../hooks/useStore";
 
 const ThemeDrawer = () => {
   const [open, setOpen] = useState(false);
@@ -78,7 +78,7 @@ const ThemeDrawer = () => {
         <div>
           <Divider content={t("appearanceSetting.layoutSetting")} />
           <div className="text-center">
-            <div className="grid grid-cols-2 gap-2 w-[170px] mx-auto place-content-center place-items-center">
+            <div className="mx-auto grid w-[170px] grid-cols-2 place-content-center place-items-center gap-2">
               {/* CLASSIC */}
               <Tooltip2
                 className="block"
@@ -87,18 +87,18 @@ const ThemeDrawer = () => {
                 placement="top"
               >
                 <div
-                  className={`w-20 h-20 cursor-pointer rounded-lg transition-opacity ${
+                  className={`h-20 w-20 cursor-pointer rounded-lg transition-opacity ${
                     layoutType === "CLASSIC" ? "bg-red-200" : "bg-slate-200"
                   }`}
                   onClick={() => handleLayout("CLASSIC")}
                 >
-                  <div className="h-full grid grid-flow-col grid-rows-4 gap-1.5 p-2">
+                  <div className="grid h-full grid-flow-col grid-rows-4 gap-1.5 p-2">
                     {/* menu */}
-                    <div className="col-span-4 row-span-1 bg-blue-800 rounded"></div>
+                    <div className="col-span-4 row-span-1 rounded bg-blue-800"></div>
                     {/* header */}
-                    <div className="col-span-1 row-span-3 bg-blue-600 rounded"></div>
+                    <div className="col-span-1 row-span-3 rounded bg-blue-600"></div>
                     {/* content */}
-                    <div className="col-span-3 row-span-3 bg-blue-200 border border-blue-600 border-dashed rounded border-1"></div>
+                    <div className="border-1 col-span-3 row-span-3 rounded border border-dashed border-blue-600 bg-blue-200"></div>
                   </div>
                 </div>
               </Tooltip2>
@@ -110,18 +110,18 @@ const ThemeDrawer = () => {
                 placement="top"
               >
                 <div
-                  className={`w-20 h-20 cursor-pointer rounded-lg transition-opacity ${
+                  className={`h-20 w-20 cursor-pointer rounded-lg transition-opacity ${
                     layoutType === "COLUMN" ? "bg-red-200" : "bg-slate-200"
                   }`}
                   onClick={() => handleLayout("COLUMN")}
                 >
-                  <div className="h-full grid grid-flow-col grid-rows-4 gap-x-1.5 p-2">
+                  <div className="grid h-full grid-flow-col grid-rows-4 gap-x-1.5 p-2">
                     {/* menu */}
-                    <div className="col-span-1 row-span-4 bg-blue-800 rounded"></div>
+                    <div className="col-span-1 row-span-4 rounded bg-blue-800"></div>
                     {/* submenu */}
-                    <div className="col-span-1 row-span-4 bg-blue-600 rounded"></div>
+                    <div className="col-span-1 row-span-4 rounded bg-blue-600"></div>
                     {/* content */}
-                    <div className="col-span-2 row-span-4 bg-blue-200 border border-blue-600 border-dashed rounded border-1"></div>
+                    <div className="border-1 col-span-2 row-span-4 rounded border border-dashed border-blue-600 bg-blue-200"></div>
                   </div>
                 </div>
               </Tooltip2>
@@ -133,16 +133,16 @@ const ThemeDrawer = () => {
                 placement="top"
               >
                 <div
-                  className={`w-20 h-20 cursor-pointer rounded-lg transition-opacity ${
+                  className={`h-20 w-20 cursor-pointer rounded-lg transition-opacity ${
                     layoutType === "VERTICAL" ? "bg-red-200" : "bg-slate-200"
                   }`}
                   onClick={() => handleLayout("VERTICAL")}
                 >
-                  <div className="h-full grid grid-flow-col grid-rows-4 gap-1.5 p-2">
+                  <div className="grid h-full grid-flow-col grid-rows-4 gap-1.5 p-2">
                     {/* header */}
-                    <div className="col-span-4 row-span-1 bg-blue-800 rounded"></div>
+                    <div className="col-span-4 row-span-1 rounded bg-blue-800"></div>
                     {/* content */}
-                    <div className="col-span-4 row-span-3 bg-blue-200 border border-blue-600 border-dashed rounded border-1"></div>
+                    <div className="border-1 col-span-4 row-span-3 rounded border border-dashed border-blue-600 bg-blue-200"></div>
                   </div>
                 </div>
               </Tooltip2>
@@ -154,18 +154,18 @@ const ThemeDrawer = () => {
                 placement="top"
               >
                 <div
-                  className={`w-20 h-20 cursor-pointer rounded-lg transition-opacity ${
+                  className={`h-20 w-20 cursor-pointer rounded-lg transition-opacity ${
                     layoutType === "TRANSVERSE" ? "bg-red-200" : "bg-slate-200"
                   }`}
                   onClick={() => handleLayout("TRANSVERSE")}
                 >
-                  <div className="h-full grid grid-flow-col grid-rows-4 gap-1.5 p-2">
+                  <div className="grid h-full grid-flow-col grid-rows-4 gap-1.5 p-2">
                     {/* menu */}
-                    <div className="col-span-1 row-span-4 bg-blue-600 rounded"></div>
+                    <div className="col-span-1 row-span-4 rounded bg-blue-600"></div>
                     {/* header */}
-                    <div className="col-span-3 row-span-1 bg-blue-800 rounded"></div>
+                    <div className="col-span-3 row-span-1 rounded bg-blue-800"></div>
                     {/* content */}
-                    <div className="col-span-3 row-span-3 bg-blue-200 border border-blue-600 border-dashed rounded border-1"></div>
+                    <div className="border-1 col-span-3 row-span-3 rounded border border-dashed border-blue-600 bg-blue-200"></div>
                   </div>
                 </div>
               </Tooltip2>

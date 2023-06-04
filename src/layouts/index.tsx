@@ -5,10 +5,10 @@ import { HotkeysProvider, Spinner, SpinnerSize } from "@blueprintjs/core";
 import LayoutColumn from "./LayoutColumn";
 import LayoutTransverse from "./LayoutTransverse";
 import LayoutVertical from "./LayoutVertical";
-import useGlobalStore from "../hooks/useGlobalStore";
 import "./style.scss";
 import GlobalAlert from "../components/GlobalAlert";
 import { AliveScope } from "react-activation";
+import { useGlobalStore } from "../hooks/useStore";
 
 export type TLayout = "CLASSIC" | "COLUMN" | "VERTICAL" | "TRANSVERSE";
 

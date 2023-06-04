@@ -1,5 +1,6 @@
 import { http } from "./http";
 import { users } from "./../../mock/user";
+import { permisson } from "../../mock/permission";
 export interface IResponse {
   code: ResCodeEnum;
   msg: string;
@@ -56,6 +57,9 @@ export const api = {
   deleteUser(id: string) {
     console.log("id", id);
     return mockFetch(null);
+  },
+  getPermission() {
+    return mockFetch(permisson);
   },
 };
 

@@ -3,8 +3,8 @@ import menu, { IMenu } from "../../../config/menu";
 import { useLocation, useNavigate } from "react-router-dom";
 import CollapseMenu from "./CollapseMenu";
 import { MenuItem2 } from "@blueprintjs/popover2";
-import useGlobalStore from "../../../hooks/useGlobalStore";
 import { useTranslation } from "react-i18next";
+import { useGlobalStore } from "../../../hooks/useStore";
 
 const ClassicSider = () => {
   const {

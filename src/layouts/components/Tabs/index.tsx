@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ITab, removeTab, setTab } from "../../../stores/global";
-import useGlobalStore from "../../../hooks/useGlobalStore";
 import { RootState } from "../../../stores";
 import { useTranslation } from "react-i18next";
 import "./style.scss";
+import { useGlobalStore } from "../../../hooks/useStore";
 
 const TabsSection = () => {
   const {
@@ -22,7 +22,7 @@ const TabsSection = () => {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = useState(false);
-  const [overflowClass, setOverflowClass] = useState("");
+  const [activeTab, setActiveTab] = useState(location.pathname);
 
   const computeOverflow = () => {
     if (!tabContainerRef.current) return;
@@ -38,16 +38,26 @@ const TabsSection = () => {
     );
     const tabContainer = document.querySelector(".bp4-tabs") as HTMLElement;
     if (!tabContainer) return;
-    tabContainer.removeAttribute("style");
+    const targetTab = tabContainer.querySelector(
+      `[id="bp4-tab-title_tabs_${activeTab}"]`
+    ) as HTMLElement;
+    if (!targetTab) return;
+    if (!leftRef.current || !rightRef.current) return;
     if (
       tabContainerRef.current.clientWidth - 40 === tab.getClientRects()[0].width
         ? tab.scrollWidth > tabContainerRef.current.clientWidth - 40
         : tabContainerRef.current.clientWidth - 40 <
           tab.getClientRects()[0].width
     ) {
-      setOverflowClass("translate-x-6");
+      console.log("tab.clientWidth", tab.clientWidth);
+      console.log(
+        "tabContainer.getBoundingClientRect().width",
+        tab.getBoundingClientRect().width
+      );
+      tabContainer.style.transform =
+        "translateX(" + (tab.clientWidth - tabContainer.clientWidth) + "px)";
     } else {
-      setOverflowClass("translate-x-0");
+      tabContainer.style.transform = "translateX(0px)";
     }
     console.log("overflow", overflow);
   };
@@ -66,6 +76,7 @@ const TabsSection = () => {
   }, []);
 
   useEffect(() => {
+    setActiveTab(location.pathname);
     dispatch(setTab(location.pathname));
   }, [location]);
 
@@ -90,7 +101,7 @@ const TabsSection = () => {
       leftBoundary < targetTabRightBoundary
     ) {
       console.log("1", 1);
-      setOverflowClass("translate-x-[30px]");
+      tabContainer.style.transform = "translateX(30px)";
     } else if (
       targetTabLeftBoundary < rightBoundary &&
       rightBoundary < targetTabRightBoundary
@@ -145,7 +156,7 @@ const TabsSection = () => {
             large={assemblyLarge}
             onChange={(nextTabId: string) => handleChange(nextTabId)}
             selectedTabId={location.pathname}
-            className={`transition-all ${overflowClass}`}
+            className="transition-all"
           >
             {tabList.length &&
               tabList.map((tab: ITab, i: number) => (

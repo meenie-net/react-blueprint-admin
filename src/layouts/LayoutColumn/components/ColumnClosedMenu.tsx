@@ -1,9 +1,9 @@
 import { Menu } from "@blueprintjs/core";
-import useGlobalStore from "../../../hooks/useGlobalStore";
 import { useTranslation } from "react-i18next";
 import { IMenu } from "../../../config/menu";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MenuItem2 } from "@blueprintjs/popover2";
+import { useGlobalStore } from "../../../hooks/useStore";
 
 const ColumnClosedMenu = (props: { subMenu: IMenu[] }) => {
   const { subMenu } = props;
