@@ -76,17 +76,6 @@ const generateRoutes = (menus: IMenu[]): IRoute[] => {
 const sub = generateRoutes(menus);
 const routes = [
   {
-    path: "/",
-    name: "home",
-    element: <Layout />,
-    children: [...sub],
-    handle: {
-      name: "home",
-      icon: "home",
-      title: "首页",
-    },
-  },
-  {
     path: "/login",
     name: "login",
     element: <Login />,
@@ -97,9 +86,28 @@ const routes = [
     },
   },
   {
+    path: "/",
+    name: "home",
+    element: (
+      <RouteBeforeEach>
+        <Layout />
+      </RouteBeforeEach>
+    ),
+    children: [...sub],
+    handle: {
+      name: "home",
+      icon: "home",
+      title: "首页",
+    },
+  },
+  {
     path: "/*",
     name: "404",
-    element: <NotFound />,
+    element: (
+      <RouteBeforeEach>
+        <NotFound />
+      </RouteBeforeEach>
+    ),
     handle: {
       name: "404",
       icon: "home",

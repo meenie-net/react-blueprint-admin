@@ -40,6 +40,18 @@ function mockFetch(data: any) {
   });
 }
 export const api = {
+  login(data: { username: string; password: string }) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { username } = data;
+    return mockFetch({
+      username,
+      avatar: "",
+    });
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  register(_data: { username: string; password: string }) {
+    return mockFetch(null);
+  },
   getUserList(req: IPaginationRequest) {
     return mockFetch({
       total: users.length,

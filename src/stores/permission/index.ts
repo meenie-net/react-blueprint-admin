@@ -22,15 +22,16 @@ const permissionStore = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(fetchPermisson.fulfilled, (_state, action) => {
-      return action.payload;
+    builder.addCase(fetchPermisson.fulfilled, (_state, payload) => {
+      console.log("payload", payload);
+      // state.buttonPermission = payload;
     });
   },
 });
 
-export const fetchPermisson = createAsyncThunk("permission", async () => {
-  const { data } = await api.getPermission();
-  if (data.status === ResCodeEnum.SUCCESS) {
+export const fetchPermisson: any = createAsyncThunk("permission", async () => {
+  const data = await api.getPermission();
+  if (data.code === ResCodeEnum.SUCCESS) {
     return data.data;
   }
 });

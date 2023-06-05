@@ -12,6 +12,7 @@ const userStore = createSlice({
   initialState,
   reducers: {
     setUser: (state, payload) => {
+      console.log("payload", payload);
       state.user = payload;
     },
   },

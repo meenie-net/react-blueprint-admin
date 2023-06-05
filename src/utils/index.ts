@@ -146,3 +146,8 @@ export const assetsUrl = (url: string) => {
     ? url
     : `${import.meta.env.VITE_BASE_PATH}${url}`;
 };
+
+export const handleStringChange = (handler: (value: string) => void) => {
+  return (event: React.FormEvent<HTMLElement>) =>
+    handler((event.target as HTMLInputElement).value);
+};
