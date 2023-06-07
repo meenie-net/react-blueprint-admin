@@ -151,3 +151,17 @@ export const handleStringChange = (handler: (value: string) => void) => {
   return (event: React.FormEvent<HTMLElement>) =>
     handler((event.target as HTMLInputElement).value);
 };
+
+export const handleBooleanChange = (handler: (checked: boolean) => void) => {
+  return (event: React.FormEvent<HTMLElement>) =>
+    handler((event.target as HTMLInputElement).checked);
+};
+
+export const handleValueChange = <T>(handler: (value: T) => void) => {
+  return (event: React.FormEvent<HTMLElement>) =>
+    handler((event.target as HTMLInputElement).value as unknown as T);
+};
+
+export const handleNumberChange = (handler: (value: number) => void) => {
+  return handleStringChange((value) => handler(+value));
+};
