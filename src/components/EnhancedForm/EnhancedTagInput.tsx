@@ -1,17 +1,17 @@
 import {
   FormGroup,
   FormGroupProps,
-  InputGroup,
-  InputGroupProps2,
+  TagInputProps,
+  TagInput,
+  TagProps,
 } from "@blueprintjs/core";
-import { handleStringChange } from "../../utils";
 import { Control, FieldValues, useController } from "react-hook-form";
 
-const EnhancedInput = (props: {
+const EnhancedTagInput = (props: {
   control: Control<FieldValues> | undefined;
   name: string;
   formgroupProps: FormGroupProps;
-  childrenProps: InputGroupProps2;
+  childrenProps: TagInputProps;
 }) => {
   const { name, formgroupProps, childrenProps, control } = props;
   const {
@@ -33,24 +33,26 @@ const EnhancedInput = (props: {
       },
     },
   });
-  const handleChange = handleStringChange((value) => {
-    field.onChange(value);
-    console.log("error", error);
-  });
+  const handleChange = (values: React.ReactNode[]) => {
+    console.log("values", values);
+  };
   return (
     <FormGroup
       {...formgroupProps}
-      helperText={error?.message ? error?.message : formgroupProps.helperText}
       intent={field.value ? (error ? "danger" : "success") : "none"}
     >
-      <InputGroup
+      <TagInput
         {...childrenProps}
-        inputRef={field.ref}
+        ref={field.ref}
         onChange={handleChange}
-        intent={field.value ? (error ? "danger" : "success") : "none"}
+        tagProps={{
+          intent: field.value ? (error ? "danger" : "success") : "none",
+          large: (childrenProps.tagProps as TagProps).large || false,
+          minimal: (childrenProps.tagProps as TagProps).minimal || true,
+        }}
       />
     </FormGroup>
   );
 };
 
-export default EnhancedInput;
+export default EnhancedTagInput;

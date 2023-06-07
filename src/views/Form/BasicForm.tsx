@@ -3,50 +3,30 @@ import {
   Switch,
   ControlGroup,
   Button,
-  Slider,
-  Intent,
   Card,
-  NumericInput,
-  TagInput,
-  FileInput,
 } from "@blueprintjs/core";
 import { useState } from "react";
-import DateRangeInput from "../../components/temporary/DateRangeInput";
-import { DateRange } from "react-day-picker";
-import DatePicker from "../../components/temporary/DatePicker";
 import { useForm } from "react-hook-form";
 import EnhancedInput from "../../components/EnhancedForm/EnhancedInput";
 import EnhancedSwitch from "../../components/EnhancedForm/EnhancedSwitch";
 import EnhancedCheckBoxGroup from "../../components/EnhancedForm/EnhancedCheckBoxGroup";
 import EnhancedRadioGroup from "../../components/EnhancedForm/EnhancedRadioGroup";
+import EnhancedSlider from "../../components/EnhancedForm/EnhancedSlider";
+import EnhancedFileInput from "../../components/EnhancedForm/EnhancedFileInput";
+import EnhancedNumericInput from "../../components/EnhancedForm/EnhancedNumericInput";
+import EnhancedTagInput from "../../components/EnhancedForm/EnhancedTagInput";
+import EnhancedDatePicker from "../../components/EnhancedForm/EnhancedDatePicker";
+import EnhancedDateRangeInput from "../../components/EnhancedForm/EnhancedDateRangeInput";
 
 const BasicForm = () => {
   const [disabled, setDisabled] = useState(false);
   const [inline, setInline] = useState(true);
   const [vertical, setVertical] = useState(false);
-  const [intent] = useState<Intent | undefined>("success");
 
   const { handleSubmit, control } = useForm({ mode: "all" });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     console.log(data);
-  };
-
-  const handleAgeChange = (age: number) => {
-    console.log("age", age);
-  };
-  const handleFileNumChange = (v: number, value: string) => {
-    console.log("v", v);
-    console.log("value", value);
-  };
-  const handleTagChange = (values: React.ReactNode[]) => {
-    console.log("values", values);
-  };
-  const handleDateChange = (date: Date | undefined) => {
-    console.log("date: ", date);
-  };
-  const handleRangeChange = (range: DateRange | undefined) => {
-    console.log("range: ", range);
   };
   return (
     <div className="flex h-full flex-col">
@@ -54,7 +34,6 @@ const BasicForm = () => {
         <div>
           <FormGroup
             inline={inline}
-            intent={intent}
             label={<div className="w-16">样式设置</div>}
           >
             <Switch
@@ -82,6 +61,7 @@ const BasicForm = () => {
         <div className="border border-indigo-500 p-5">
           <EnhancedInput
             control={control}
+            name="username"
             formgroupProps={{
               helperText:
                 "填写说明：用户名为用户登录时的账号，英文数字，不得以符号开头，长度5-10位",
@@ -92,11 +72,11 @@ const BasicForm = () => {
             childrenProps={{
               placeholder: "请输入用户名",
               disabled,
-              name: "username",
             }}
           />
           <EnhancedSwitch
             control={control}
+            name="admin"
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -107,19 +87,16 @@ const BasicForm = () => {
               label: "管理员",
               disabled,
               inline,
-              name: "admin",
             }}
           />
           <EnhancedCheckBoxGroup
             control={control}
+            name="permission"
             formgroupProps={{
               helperText: "填写说明：",
               inline,
               label: <div className="w-16">权限设置</div>,
               labelInfo: <div className="w-16">(必填)</div>,
-            }}
-            childrenProps={{
-              name: "permission",
             }}
             childrenList={[
               {
@@ -141,6 +118,7 @@ const BasicForm = () => {
           />
           <EnhancedRadioGroup
             control={control}
+            name="gender"
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -149,99 +127,96 @@ const BasicForm = () => {
             }}
             childrenProps={{
               inline,
-              name: "gender",
             }}
             childrenList={[
               {
                 label: "男",
                 value: "male",
+                disabled,
               },
               {
                 label: "女",
                 value: "female",
+                disabled,
               },
               {
                 label: "不填",
                 value: "none",
+                disabled,
               },
             ]}
           />
-          <FormGroup
-            helperText={
-              "填写说明：用户名为用户登录时的账号，英文数字，不得以符号开头，长度5-10位"
-            }
-            inline={inline}
-            intent={intent}
-            label={<div className="w-16">年龄</div>}
-            labelFor="username"
-            labelInfo={<div className="w-16">(必填)</div>}
-          >
-            <Slider
-              min={0}
-              max={120}
-              stepSize={1}
-              labelStepSize={10}
-              onChange={handleAgeChange}
-              value={5}
-              vertical={vertical}
-              className="min-w-[450px]"
-              handleHtmlProps={{ "aria-label": "example 1" }}
-            />
-          </FormGroup>
-          <FormGroup
-            helperText={
-              "填写说明：用户名为用户登录时的账号，英文数字，不得以符号开头，长度5-10位"
-            }
-            inline={inline}
-            intent={intent}
-            label={<div className="w-16">营业执照</div>}
-            labelFor="username"
-            labelInfo={<div className="w-16">(必填)</div>}
-          >
-            <FileInput
-              text={"请选择要上传的文件"}
-              buttonText={"点击选择"}
-              small
-            />
-          </FormGroup>
-          <FormGroup
-            helperText={
-              "填写说明：用户名为用户登录时的账号，英文数字，不得以符号开头，长度5-10位"
-            }
-            inline={inline}
-            intent={intent}
-            label={<div className="w-16">份数</div>}
-            labelFor="username"
-            labelInfo={<div className="w-16">(必填)</div>}
-          >
-            <NumericInput
-              placeholder="请输入审批的份数"
-              onValueChange={handleFileNumChange}
-            />
-          </FormGroup>
-          <FormGroup
-            helperText={
-              "填写说明：用户名为用户登录时的账号，英文数字，不得以符号开头，长度5-10位"
-            }
-            inline={inline}
-            intent={intent}
-            label={<div className="w-16">标签</div>}
-            labelFor="username"
-            labelInfo={<div className="w-16">(必填)</div>}
-          >
-            <TagInput
-              leftIcon={"user"}
-              onChange={handleTagChange}
-              placeholder="Separate values with commas..."
-              rightElement={
+          <EnhancedSlider
+            control={control}
+            name="age"
+            formgroupProps={{
+              helperText: "填写说明：",
+              inline,
+              label: <div className="w-16">权限设置</div>,
+              labelInfo: <div className="w-16">(必填)</div>,
+            }}
+            childrenProps={{
+              min: 0,
+              max: 120,
+              stepSize: 2,
+              labelStepSize: 20,
+              vertical: vertical,
+              disabled,
+              className: "min-w-[450px]",
+              handleHtmlProps: { "aria-label": "example 1" },
+            }}
+          />
+          <EnhancedFileInput
+            control={control}
+            name="file"
+            formgroupProps={{
+              helperText: "填写说明：",
+              inline,
+              label: <div className="w-16">权限设置</div>,
+              labelInfo: <div className="w-16">(必填)</div>,
+            }}
+            childrenProps={{
+              text: "请选择要上传的文件",
+              buttonText: "点击选择",
+              small: true,
+              disabled,
+            }}
+          />
+          <EnhancedNumericInput
+            control={control}
+            name="fileCount"
+            formgroupProps={{
+              helperText: "填写说明：",
+              inline,
+              label: <div className="w-16">权限设置</div>,
+              labelInfo: <div className="w-16">(必填)</div>,
+            }}
+            childrenProps={{
+              placeholder: "请输入审批的份数",
+              disabled,
+            }}
+          />
+          <EnhancedTagInput
+            control={control}
+            name="tag"
+            formgroupProps={{
+              helperText: "填写说明：",
+              inline,
+              label: <div className="w-16">权限设置</div>,
+              labelInfo: <div className="w-16">(必填)</div>,
+            }}
+            childrenProps={{
+              leftIcon: "user",
+              placeholder: "请选择标签",
+              rightElement: (
                 <Button disabled={false} icon={"cross"} minimal={true} />
-              }
-              tagProps={{
-                intent: intent,
+              ),
+              disabled,
+              tagProps: {
                 large: false,
                 minimal: true,
-              }}
-              values={[
+              },
+              values: [
                 // supports single JSX elements
                 <strong key="al">急件</strong>,
                 // supports JSX "fragments" (don't forget `key` on elements in arrays!)
@@ -250,45 +225,36 @@ const BasicForm = () => {
                 "待审核",
                 // falsy values are not rendered and ignored by the keyboard
                 undefined,
-              ]}
-            />
-          </FormGroup>
-          {/* warning: datatime do not support react 18 */}
-          {/* todo:wait for blueprint support react 18 */}
-          {/* 1.run `npm uninstall react-day-picker date-fns`
-            2.remove <~/components/temporary> dir
-            3.adaptive official component */}
-          <FormGroup
-            helperText={
-              "填写说明：用户名为用户登录时的账号，英文数字，不得以符号开头，长度5-10位"
-            }
-            inline={inline}
-            intent={intent}
-            label={<div className="w-16">签约时间</div>}
-            labelFor="username"
-            labelInfo={<div className="w-16">(必填)</div>}
-          >
-            <DatePicker
-              onChange={(date: Date | undefined) => handleDateChange(date)}
-            />
-          </FormGroup>
-          <FormGroup
-            helperText={
-              "填写说明：用户名为用户登录时的账号，英文数字，不得以符号开头，长度5-10位"
-            }
-            inline={inline}
-            intent={intent}
-            label={<div className="w-16">有效期</div>}
-            labelFor="username"
-            labelInfo={<div className="w-16">(必填)</div>}
-          >
-            <DateRangeInput
-              onChange={(range: DateRange | undefined) =>
-                handleRangeChange(range)
-              }
-            />
-          </FormGroup>
-          <FormGroup inline={inline} intent={intent}>
+              ],
+            }}
+          />
+          <EnhancedDatePicker
+            control={control}
+            name="date"
+            formgroupProps={{
+              helperText: "填写说明：",
+              inline,
+              label: <div className="w-16">权限设置</div>,
+              labelInfo: <div className="w-16">(必填)</div>,
+            }}
+            childrenProps={{
+              disabled,
+            }}
+          />
+          <EnhancedDateRangeInput
+            control={control}
+            name="range"
+            formgroupProps={{
+              helperText: "填写说明：",
+              inline,
+              label: <div className="w-16">权限设置</div>,
+              labelInfo: <div className="w-16">(必填)</div>,
+            }}
+            childrenProps={{
+              disabled,
+            }}
+          />
+          <FormGroup inline={inline}>
             <ControlGroup>
               <Button icon="refresh" text="清空" />
               <Button

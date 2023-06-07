@@ -8,13 +8,13 @@ import { Control, FieldValues, useController } from "react-hook-form";
 
 const EnhancedCheckBoxGroup = (props: {
   control: Control<FieldValues> | undefined;
+  name: string;
   formgroupProps: FormGroupProps;
-  childrenProps: { name: string };
   childrenList: CheckboxProps[];
 }) => {
-  const { formgroupProps, childrenProps, control, childrenList } = props;
+  const { name, formgroupProps, control, childrenList } = props;
   const { field } = useController({
-    name: childrenProps.name!,
+    name,
     control,
     defaultValue: [],
   });

@@ -1,17 +1,16 @@
 import {
   FormGroup,
   FormGroupProps,
-  InputGroup,
-  InputGroupProps2,
+  SliderProps,
+  Slider,
 } from "@blueprintjs/core";
-import { handleStringChange } from "../../utils";
 import { Control, FieldValues, useController } from "react-hook-form";
 
-const EnhancedInput = (props: {
+const EnhancedSlider = (props: {
   control: Control<FieldValues> | undefined;
   name: string;
   formgroupProps: FormGroupProps;
-  childrenProps: InputGroupProps2;
+  childrenProps: SliderProps;
 }) => {
   const { name, formgroupProps, childrenProps, control } = props;
   const {
@@ -20,32 +19,21 @@ const EnhancedInput = (props: {
   } = useController({
     name,
     control,
-    defaultValue: "",
-    rules: {
-      required: true,
-      minLength: {
-        value: 5,
-        message: "最小长度为5",
-      },
-      maxLength: {
-        value: 10,
-        message: "最大长度为10",
-      },
-    },
+    defaultValue: childrenProps.min,
   });
-  const handleChange = handleStringChange((value) => {
+  const handleChange = (value: number) => {
     field.onChange(value);
-    console.log("error", error);
-  });
+  };
+
   return (
     <FormGroup
       {...formgroupProps}
-      helperText={error?.message ? error?.message : formgroupProps.helperText}
       intent={field.value ? (error ? "danger" : "success") : "none"}
     >
-      <InputGroup
+      <Slider
         {...childrenProps}
-        inputRef={field.ref}
+        ref={field.ref}
+        value={field.value}
         onChange={handleChange}
         intent={field.value ? (error ? "danger" : "success") : "none"}
       />
@@ -53,4 +41,4 @@ const EnhancedInput = (props: {
   );
 };
 
-export default EnhancedInput;
+export default EnhancedSlider;

@@ -9,12 +9,13 @@ import { handleBooleanChange } from "../../utils";
 
 const EnhancedSwitch = (props: {
   control: Control<FieldValues> | undefined;
+  name: string;
   formgroupProps: FormGroupProps;
   childrenProps: SwitchProps;
 }) => {
-  const { formgroupProps, childrenProps, control } = props;
+  const { name, formgroupProps, childrenProps, control } = props;
   const { field } = useController({
-    name: childrenProps.name!,
+    name,
     control,
     defaultValue: false,
   });

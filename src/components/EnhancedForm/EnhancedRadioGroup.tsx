@@ -11,13 +11,14 @@ import { handleStringChange } from "../../utils";
 
 const EnhancedRadioGroup = (props: {
   control: Control<FieldValues> | undefined;
+  name: string;
   formgroupProps: FormGroupProps;
   childrenProps: Omit<RadioGroupProps, "onChange">;
   childrenList: RadioProps[];
 }) => {
-  const { formgroupProps, childrenProps, control, childrenList } = props;
+  const { name, formgroupProps, childrenProps, control, childrenList } = props;
   const { field } = useController({
-    name: childrenProps.name!,
+    name,
     control,
     defaultValue: childrenList[0].value,
   });

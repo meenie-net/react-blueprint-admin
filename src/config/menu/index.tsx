@@ -101,16 +101,16 @@ const menus: IMenu[] = [
         path: "/form/basic",
         element: "../views/Form/BasicForm.tsx",
         meta: {
-          name: "formBasic",
+          name: "basicForm",
           title: "基础表单",
           icon: "th",
         },
       },
       {
-        path: "/form/validate",
-        element: "../views/Form/ValidatedForm.tsx",
+        path: "/form/configurable",
+        element: "../views/Form/ConfigurableForm.tsx",
         meta: {
-          name: "formValidate",
+          name: "configurableForm",
           title: "表单验证",
           icon: "edit",
         },

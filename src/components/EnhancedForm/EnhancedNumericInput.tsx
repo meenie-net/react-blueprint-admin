@@ -1,17 +1,17 @@
 import {
   FormGroup,
   FormGroupProps,
-  InputGroup,
-  InputGroupProps2,
+  NumericInput,
+  HTMLInputProps,
+  NumericInputProps,
 } from "@blueprintjs/core";
-import { handleStringChange } from "../../utils";
 import { Control, FieldValues, useController } from "react-hook-form";
 
-const EnhancedInput = (props: {
+const EnhancedNumericInput = (props: {
   control: Control<FieldValues> | undefined;
   name: string;
   formgroupProps: FormGroupProps;
-  childrenProps: InputGroupProps2;
+  childrenProps: HTMLInputProps & NumericInputProps;
 }) => {
   const { name, formgroupProps, childrenProps, control } = props;
   const {
@@ -20,37 +20,37 @@ const EnhancedInput = (props: {
   } = useController({
     name,
     control,
-    defaultValue: "",
+    defaultValue: 0,
     rules: {
       required: true,
-      minLength: {
+      min: {
         value: 5,
         message: "最小长度为5",
       },
-      maxLength: {
+      max: {
         value: 10,
         message: "最大长度为10",
       },
     },
   });
-  const handleChange = handleStringChange((value) => {
+  const handleChange = (value: number) => {
     field.onChange(value);
-    console.log("error", error);
-  });
+  };
+
   return (
     <FormGroup
       {...formgroupProps}
       helperText={error?.message ? error?.message : formgroupProps.helperText}
       intent={field.value ? (error ? "danger" : "success") : "none"}
     >
-      <InputGroup
+      <NumericInput
         {...childrenProps}
-        inputRef={field.ref}
-        onChange={handleChange}
-        intent={field.value ? (error ? "danger" : "success") : "none"}
+        ref={field.ref}
+        value={field.value}
+        onValueChange={handleChange}
       />
     </FormGroup>
   );
 };
 
-export default EnhancedInput;
+export default EnhancedNumericInput;
