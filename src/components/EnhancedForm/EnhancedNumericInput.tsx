@@ -5,35 +5,26 @@ import {
   HTMLInputProps,
   NumericInputProps,
 } from "@blueprintjs/core";
-import { Control, FieldValues, useController } from "react-hook-form";
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from "react-hook-form";
 
 const EnhancedNumericInput = (props: {
-  control: Control<FieldValues> | undefined;
-  name: string;
+  controllerConfig: UseControllerProps<FieldValues, any>;
   formgroupProps: FormGroupProps;
   childrenProps: HTMLInputProps & NumericInputProps;
+  onBeforeChange?: (value: number) => void;
 }) => {
-  const { name, formgroupProps, childrenProps, control } = props;
+  const { controllerConfig, formgroupProps, childrenProps, onBeforeChange } =
+    props;
   const {
     field,
     fieldState: { error },
-  } = useController({
-    name,
-    control,
-    defaultValue: 0,
-    rules: {
-      required: true,
-      min: {
-        value: 5,
-        message: "最小长度为5",
-      },
-      max: {
-        value: 10,
-        message: "最大长度为10",
-      },
-    },
-  });
+  } = useController(controllerConfig);
   const handleChange = (value: number) => {
+    onBeforeChange && onBeforeChange(value);
     field.onChange(value);
   };
 
@@ -45,7 +36,7 @@ const EnhancedNumericInput = (props: {
     >
       <NumericInput
         {...childrenProps}
-        ref={field.ref}
+        inputRef={field.ref}
         value={field.value}
         onValueChange={handleChange}
       />

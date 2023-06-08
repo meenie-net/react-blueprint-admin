@@ -17,11 +17,16 @@ import EnhancedNumericInput from "../../components/EnhancedForm/EnhancedNumericI
 import EnhancedTagInput from "../../components/EnhancedForm/EnhancedTagInput";
 import EnhancedDatePicker from "../../components/EnhancedForm/EnhancedDatePicker";
 import EnhancedDateRangeInput from "../../components/EnhancedForm/EnhancedDateRangeInput";
+import EnhancedSelect from "../../components/EnhancedForm/EnhancedSelect";
 
 const BasicForm = () => {
   const [disabled, setDisabled] = useState(false);
   const [inline, setInline] = useState(true);
   const [vertical, setVertical] = useState(false);
+
+  const handleBeforeUsernameChange = (value: string) => {
+    console.log("value", value);
+  };
 
   const { handleSubmit, control } = useForm({ mode: "all" });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -60,8 +65,22 @@ const BasicForm = () => {
       <Card className="mt-3 overflow-y-auto">
         <div className="border border-indigo-500 p-5">
           <EnhancedInput
-            control={control}
-            name="username"
+            controllerConfig={{
+              name: "username",
+              control,
+              defaultValue: "",
+              rules: {
+                required: true,
+                minLength: {
+                  value: 5,
+                  message: "最小长度为5",
+                },
+                maxLength: {
+                  value: 10,
+                  message: "最大长度为10",
+                },
+              },
+            }}
             formgroupProps={{
               helperText:
                 "填写说明：用户名为用户登录时的账号，英文数字，不得以符号开头，长度5-10位",
@@ -73,10 +92,14 @@ const BasicForm = () => {
               placeholder: "请输入用户名",
               disabled,
             }}
+            onBeforeChange={handleBeforeUsernameChange}
           />
           <EnhancedSwitch
-            control={control}
-            name="admin"
+            controllerConfig={{
+              name: "admin",
+              control,
+              defaultValue: false,
+            }}
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -90,8 +113,11 @@ const BasicForm = () => {
             }}
           />
           <EnhancedCheckBoxGroup
-            control={control}
-            name="permission"
+            controllerConfig={{
+              name: "permission",
+              control,
+              defaultValue: [],
+            }}
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -117,8 +143,11 @@ const BasicForm = () => {
             ]}
           />
           <EnhancedRadioGroup
-            control={control}
-            name="gender"
+            controllerConfig={{
+              name: "gender",
+              control,
+              defaultValue: "none",
+            }}
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -146,9 +175,29 @@ const BasicForm = () => {
               },
             ]}
           />
+          <EnhancedSelect
+            controllerConfig={{
+              name: "degree",
+              control,
+              defaultValue: "",
+            }}
+            formgroupProps={{
+              helperText: "填写说明：",
+              inline,
+              label: <div className="w-16">权限设置</div>,
+              labelInfo: <div className="w-16">(必填)</div>,
+            }}
+            childrenProps={{
+              placeholder: "请选择学位",
+              options: ["本科", "硕士", "高中"],
+            }}
+          />
           <EnhancedSlider
-            control={control}
-            name="age"
+            controllerConfig={{
+              name: "age",
+              control,
+              defaultValue: 0,
+            }}
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -167,8 +216,11 @@ const BasicForm = () => {
             }}
           />
           <EnhancedFileInput
-            control={control}
-            name="file"
+            controllerConfig={{
+              name: "file",
+              control,
+              defaultValue: "",
+            }}
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -183,8 +235,11 @@ const BasicForm = () => {
             }}
           />
           <EnhancedNumericInput
-            control={control}
-            name="fileCount"
+            controllerConfig={{
+              name: "fileCount",
+              control,
+              defaultValue: 0,
+            }}
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -197,8 +252,11 @@ const BasicForm = () => {
             }}
           />
           <EnhancedTagInput
-            control={control}
-            name="tag"
+            controllerConfig={{
+              name: "tag",
+              control,
+              defaultValue: "",
+            }}
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -229,8 +287,11 @@ const BasicForm = () => {
             }}
           />
           <EnhancedDatePicker
-            control={control}
-            name="date"
+            controllerConfig={{
+              name: "date",
+              control,
+              defaultValue: "",
+            }}
             formgroupProps={{
               helperText: "填写说明：",
               inline,
@@ -242,8 +303,11 @@ const BasicForm = () => {
             }}
           />
           <EnhancedDateRangeInput
-            control={control}
-            name="range"
+            controllerConfig={{
+              name: "range",
+              control,
+              defaultValue: {},
+            }}
             formgroupProps={{
               helperText: "填写说明：",
               inline,

@@ -5,34 +5,22 @@ import {
   TagInput,
   TagProps,
 } from "@blueprintjs/core";
-import { Control, FieldValues, useController } from "react-hook-form";
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from "react-hook-form";
 
 const EnhancedTagInput = (props: {
-  control: Control<FieldValues> | undefined;
-  name: string;
+  controllerConfig: UseControllerProps<FieldValues, any>;
   formgroupProps: FormGroupProps;
   childrenProps: TagInputProps;
 }) => {
-  const { name, formgroupProps, childrenProps, control } = props;
+  const { controllerConfig, formgroupProps, childrenProps } = props;
   const {
     field,
     fieldState: { error },
-  } = useController({
-    name,
-    control,
-    defaultValue: "",
-    rules: {
-      required: true,
-      minLength: {
-        value: 5,
-        message: "最小长度为5",
-      },
-      maxLength: {
-        value: 10,
-        message: "最大长度为10",
-      },
-    },
-  });
+  } = useController(controllerConfig);
   const handleChange = (values: React.ReactNode[]) => {
     console.log("values", values);
   };

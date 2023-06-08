@@ -1,22 +1,21 @@
 import { FormGroup, FormGroupProps } from "@blueprintjs/core";
-import { Control, FieldValues, useController } from "react-hook-form";
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from "react-hook-form";
 import DatePicker from "../temporary/DatePicker";
 
 const EnhancedDatePicker = (props: {
-  control: Control<FieldValues> | undefined;
-  name: string;
+  controllerConfig: UseControllerProps<FieldValues, any>;
   formgroupProps: FormGroupProps;
   childrenProps?: object;
 }) => {
-  const { name, formgroupProps, childrenProps, control } = props;
+  const { controllerConfig, formgroupProps, childrenProps } = props;
   const {
     field,
     fieldState: { error },
-  } = useController({
-    name,
-    control,
-    defaultValue: "",
-  });
+  } = useController(controllerConfig);
   const handleChange = (date: Date | undefined) => {
     console.log("date: ", date);
   };

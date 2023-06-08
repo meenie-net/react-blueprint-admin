@@ -4,20 +4,19 @@ import {
   FormGroup,
   FormGroupProps,
 } from "@blueprintjs/core";
-import { Control, FieldValues, useController } from "react-hook-form";
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from "react-hook-form";
 
 const EnhancedCheckBoxGroup = (props: {
-  control: Control<FieldValues> | undefined;
-  name: string;
+  controllerConfig: UseControllerProps<FieldValues, any>;
   formgroupProps: FormGroupProps;
   childrenList: CheckboxProps[];
 }) => {
-  const { name, formgroupProps, control, childrenList } = props;
-  const { field } = useController({
-    name,
-    control,
-    defaultValue: [],
-  });
+  const { controllerConfig, formgroupProps, childrenList } = props;
+  const { field } = useController(controllerConfig);
   const handleChange = (key: string) => {
     const newValue = new Set(field.value);
     if (newValue.has(key)) {

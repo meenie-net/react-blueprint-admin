@@ -4,23 +4,22 @@ import {
   SliderProps,
   Slider,
 } from "@blueprintjs/core";
-import { Control, FieldValues, useController } from "react-hook-form";
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from "react-hook-form";
 
 const EnhancedSlider = (props: {
-  control: Control<FieldValues> | undefined;
-  name: string;
+  controllerConfig: UseControllerProps<FieldValues, any>;
   formgroupProps: FormGroupProps;
   childrenProps: SliderProps;
 }) => {
-  const { name, formgroupProps, childrenProps, control } = props;
+  const { controllerConfig, formgroupProps, childrenProps } = props;
   const {
     field,
     fieldState: { error },
-  } = useController({
-    name,
-    control,
-    defaultValue: childrenProps.min,
-  });
+  } = useController(controllerConfig);
   const handleChange = (value: number) => {
     field.onChange(value);
   };

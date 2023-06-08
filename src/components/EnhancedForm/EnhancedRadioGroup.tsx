@@ -6,22 +6,22 @@ import {
   RadioGroupProps,
   RadioProps,
 } from "@blueprintjs/core";
-import { Control, FieldValues, useController } from "react-hook-form";
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from "react-hook-form";
 import { handleStringChange } from "../../utils";
 
 const EnhancedRadioGroup = (props: {
-  control: Control<FieldValues> | undefined;
-  name: string;
+  controllerConfig: UseControllerProps<FieldValues, any>;
   formgroupProps: FormGroupProps;
   childrenProps: Omit<RadioGroupProps, "onChange">;
   childrenList: RadioProps[];
 }) => {
-  const { name, formgroupProps, childrenProps, control, childrenList } = props;
-  const { field } = useController({
-    name,
-    control,
-    defaultValue: childrenList[0].value,
-  });
+  const { controllerConfig, formgroupProps, childrenProps, childrenList } =
+    props;
+  const { field } = useController(controllerConfig);
   const handleChange = handleStringChange((gender) => {
     field.onChange(gender);
   });
