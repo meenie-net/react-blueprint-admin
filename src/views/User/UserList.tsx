@@ -15,6 +15,7 @@ import emitter, { EmitEventEnum } from "../../utils/EventEmitter";
 import Pagination from "./../../components/Pagination/index";
 import { useHandleConfirm } from "../../hooks/useHandleConfirm";
 import { IUser } from "./user";
+import { useButtonPermission } from "../../hooks/useButtonPermission";
 
 const UserList = () => {
   // 使用useTable Hooks获取table数据及相关方法
@@ -30,6 +31,12 @@ const UserList = () => {
     api.getUserList, // 表格数据接口
     {} // 表格配置
   );
+  const { BUTTONS } = useButtonPermission();
+  const operatorWidth = (() => {
+    return Object.keys(BUTTONS).reduce((prev, current) => {
+      return prev + current.length * 14 + 43;
+    }, 100);
+  })();
   // 点击“添加用户”按钮操作
   const handleAdd = () => {
     emitter.emit(EmitEventEnum.OpenUserDrawer, {
@@ -88,27 +95,33 @@ const UserList = () => {
         >
           查看
         </Button>
-        <Button
-          onClick={() => handleEdit(userData[rowIndex])}
-          intent="primary"
-          icon="edit"
-        >
-          编辑
-        </Button>
-        <Button
-          onClick={() => handleResetPassword(userData[rowIndex])}
-          intent="success"
-          icon="refresh"
-        >
-          重置密码
-        </Button>
-        <Button
-          onClick={() => handleDelete(userData[rowIndex])}
-          intent="danger"
-          icon="delete"
-        >
-          删除
-        </Button>
+        {BUTTONS.edit && (
+          <Button
+            onClick={() => handleEdit(userData[rowIndex])}
+            intent="primary"
+            icon="edit"
+          >
+            编辑
+          </Button>
+        )}
+        {BUTTONS.edit && (
+          <Button
+            onClick={() => handleResetPassword(userData[rowIndex])}
+            intent="success"
+            icon="refresh"
+          >
+            重置密码
+          </Button>
+        )}
+        {BUTTONS.delete && (
+          <Button
+            onClick={() => handleDelete(userData[rowIndex])}
+            intent="danger"
+            icon="delete"
+          >
+            删除
+          </Button>
+        )}
       </ButtonGroup>
     </Cell>
   );
@@ -132,7 +145,7 @@ const UserList = () => {
   );
   return (
     // 用户列表container
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col">
       {/* 用户列表操作区 */}
       <Card className="flex justify-between pb-0">
         {/* 用户列表操作区左边 */}
@@ -173,22 +186,26 @@ const UserList = () => {
         </div>
       </Card>
       {/* 用户列表内容区 */}
-      <Card className="flex flex-col flex-auto min-h-0 mt-3">
+      <Card className="mt-3 flex min-h-0 flex-auto flex-col">
         {/* 用户列表内容区头部 */}
         <div className="flex">
-          <FormGroup inline={true} className="mr-2">
-            <Button onClick={handleAdd} icon="search" text="新增用户" />
-          </FormGroup>
-          <FormGroup inline={true} className="mr-2">
-            <Button
-              icon="search"
-              text="批量删除"
-              disabled={multiSelectedArr.length === 0}
-            />
-          </FormGroup>
+          {BUTTONS.delete && (
+            <>
+              <FormGroup inline={true} className="mr-2">
+                <Button onClick={handleAdd} icon="search" text="新增用户" />
+              </FormGroup>
+              <FormGroup inline={true} className="mr-2">
+                <Button
+                  icon="search"
+                  text="批量删除"
+                  disabled={multiSelectedArr.length === 0}
+                />
+              </FormGroup>
+            </>
+          )}
         </div>
         {/* 用户列表内容区表格 */}
-        <div className="flex-auto min-h-0">
+        <div className="min-h-0 flex-auto">
           <HotkeysProvider>
             <Table2
               ref={tableRef}
@@ -199,7 +216,7 @@ const UserList = () => {
               rowHeaderCellRenderer={userRowHeaderRenderer}
               onSelection={(_) => onSelection(_, "id")} // 多选数组值对应的key
               selectionModes={SelectionModes.ROWS_ONLY}
-              columnWidths={[350, 50, 100, 100]} // 列宽
+              columnWidths={[operatorWidth, 50, 100, 100]} // 列宽
               numFrozenColumns={1} // 首列（操作列）冻结
               cellRendererDependencies={[userData]}
             >
@@ -224,7 +241,7 @@ const UserList = () => {
           </HotkeysProvider>
         </div>
         {/* 用户列表内容区分页 */}
-        <div className="flex justify-center mt-4">
+        <div className="mt-4 flex justify-center">
           <Pagination
             {...pager}
             pagerCount={7} // 分页器页码按钮最大显示数：奇数 || 偶数--

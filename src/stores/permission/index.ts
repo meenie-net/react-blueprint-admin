@@ -22,9 +22,8 @@ const permissionStore = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(fetchPermisson.fulfilled, (_state, payload) => {
-      console.log("payload", payload);
-      // state.buttonPermission = payload;
+    builder.addCase(fetchPermisson.fulfilled, (state, { payload }) => {
+      state.buttonPermission = payload;
     });
   },
 });
