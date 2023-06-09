@@ -1,1 +1,0 @@
-import{j as s,aF as r}from"./index-f65f0e54.js";import{T as e,C as o}from"./table2-a814500a.js";const x=()=>s.jsx("div",{children:s.jsx(r,{children:s.jsxs(e,{numRows:5,children:[s.jsx(o,{}),s.jsx(o,{}),s.jsx(o,{})]})})});export{x as default};
