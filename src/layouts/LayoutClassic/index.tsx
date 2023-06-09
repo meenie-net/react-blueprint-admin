@@ -56,7 +56,7 @@ const LayoutClassic = () => {
           {/* OpenIcon & Breadcrumb */}
           <div className="flex items-center">
             {/* OpenIcon */}
-            <Button minimal={true} onClick={handleMenuOpen}>
+            <Button id="open-icon" minimal={true} onClick={handleMenuOpen}>
               <Icon
                 icon={menuOpen ? "menu-closed" : "menu-open"}
                 className="animate-appear_right"

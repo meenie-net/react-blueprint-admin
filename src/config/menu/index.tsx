@@ -3,7 +3,6 @@ import { IconName, MaybeElement } from "@blueprintjs/core";
 export interface IMenu {
   path: string;
   element?: string; // 为了支持React.lazy, 此处的字符串必须带上后缀  .tsx
-  nodeRef?: React.RefObject<unknown>;
   meta: {
     name: string;
     title: string;
@@ -14,6 +13,12 @@ export interface IMenu {
   children?: IMenu[];
 }
 
+// 菜单说明：
+// 1.有子菜单的菜单无element项
+// 2.步骤：
+// a)按IMenu在menus中添加或修改菜单；
+// b)在~/views下添加路径（element）对应页面
+// c)在项目~/public/locals中按meta.name添加或修改国际化配置
 const menus: IMenu[] = [
   {
     path: "/",
@@ -84,6 +89,34 @@ const menus: IMenu[] = [
         meta: {
           name: "buttonPermission",
           title: "按钮权限",
+          icon: "edit",
+        },
+      },
+    ],
+  },
+  {
+    path: "/commonComponents",
+    meta: {
+      name: "commonComponents",
+      title: "常用组件",
+      icon: "shop",
+    },
+    children: [
+      {
+        path: "/commonComponents/guide",
+        element: "../views/CommonComponents/Guide.tsx",
+        meta: {
+          name: "guide",
+          title: "引导页",
+          icon: "th",
+        },
+      },
+      {
+        path: "/commonComponents/editor",
+        element: "../views/CommonComponents/MTEditor.tsx",
+        meta: {
+          name: "editor",
+          title: "富文本编辑器",
           icon: "edit",
         },
       },

@@ -34,7 +34,7 @@ const Setting = (props: { mode: "dark" | "light" }) => {
   return (
     <>
       <ButtonGroup minimal={true} large={assemblyLarge}>
-        <Button>
+        <Button id="global-search">
           <Icon
             icon="search"
             color={mode === "dark" ? undefined : "#ffffff"}
@@ -42,7 +42,7 @@ const Setting = (props: { mode: "dark" | "light" }) => {
           />
         </Button>
         <Popover2 content={LanguageMenu} fill={true} placement="bottom">
-          <Button>
+          <Button id="i18n">
             <Icon
               icon="translate"
               color={mode === "dark" ? undefined : "#ffffff"}
@@ -50,23 +50,22 @@ const Setting = (props: { mode: "dark" | "light" }) => {
             />
           </Button>
         </Popover2>
-        <Button>
+        <Button id="full-screen">
           <Icon
             icon="zoom-to-fit"
             color={mode === "dark" ? undefined : "#ffffff"}
             size={assemblyLarge ? 24 : 18}
           />
         </Button>
-        <Button onClick={handleThemeClick}>
+        <Button id="theme" onClick={handleThemeClick}>
           <Icon
             icon="contrast"
             color={mode === "dark" ? undefined : "#ffffff"}
             size={assemblyLarge ? 24 : 18}
           />
         </Button>
-
         <Popover2 content={<Notification />} placement="bottom">
-          <Button className="relative" title="消息">
+          <Button id="message" className="relative" title="消息">
             <Icon
               icon="notifications"
               color={mode === "dark" ? undefined : "#ffffff"}

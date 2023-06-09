@@ -27,7 +27,8 @@ i18n
   });
 
 export default i18n;
-
+// 添加国际化语言说明：
+// 1.此处为menu、header、tab部分注册国际化，编辑器在~/src/APP.tsx中设置
 export const lngs = {
   en: { nativeName: "English" },
   zh: { nativeName: "中文" },

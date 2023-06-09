@@ -9,7 +9,9 @@ const Breadcrumb = (props: { mode: "dark" | "light" }) => {
   } = useGlobalStore();
   const crumbs = useBreadcrumbs({ mode });
   return showBreadcrumbs ? (
-    <Breadcrumbs2 className="select-none" items={crumbs} />
+    <div id="breadcrumbs">
+      <Breadcrumbs2 className="select-none" items={crumbs} />
+    </div>
   ) : null;
 };
 
