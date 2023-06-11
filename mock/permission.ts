@@ -6,6 +6,10 @@ type IButtonPermission = "add" | "edit" | "delete" | "import" | "export";
 type IPermission = {
   userList: IButtonPermission[];
 };
-export const permisson: IPermission = {
-  userList: ["add", "edit", "delete"],
+export const permisson: {
+  admin: IPermission;
+  guest: IPermission;
+} = {
+  admin: { userList: ["add", "edit", "delete"] },
+  guest: { userList: ["add"] },
 };

@@ -70,8 +70,9 @@ export const api = {
     console.log("id", id);
     return mockFetch(null);
   },
-  getPermission() {
-    return mockFetch(permisson);
+  getPermission(type: "admin" | "guest") {
+    console.log("type", type);
+    return mockFetch(permisson[type]);
   },
 };
 

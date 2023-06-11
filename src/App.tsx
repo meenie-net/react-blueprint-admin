@@ -1,15 +1,11 @@
 import "./App.scss";
 import { RouterProvider } from "react-router-dom";
 import router from "./routers";
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchPermisson } from "./stores/permission";
 import { i18nAddResources } from "@wangeditor/editor";
 
 function App() {
-  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchPermisson());
     const locales = import.meta.glob(`../public/locales/*/*.json`);
     for (const path in locales) {
       if (
