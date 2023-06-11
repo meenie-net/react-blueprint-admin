@@ -3,24 +3,21 @@ import { ResCodeEnum, api } from "../../api";
 
 export interface IPermissionStore {
   ready: boolean;
+  permission: string;
   buttonPermission: { [key: string]: string[] };
-  menuPermission: object;
 }
 
 const initialState: IPermissionStore = {
   ready: false,
+  permission: "",
   buttonPermission: {},
-  menuPermission: {},
 };
 const permissionStore = createSlice({
   name: "permission-store",
   initialState,
   reducers: {
-    setButtonPermission: (state) => {
-      state.buttonPermission = {};
-    },
-    setMenuPermission: (state) => {
-      state.menuPermission = [];
+    setPermission: (state, { payload }) => {
+      state.permission = payload;
     },
   },
   extraReducers(builder) {
@@ -29,7 +26,8 @@ const permissionStore = createSlice({
         state.ready = false;
       })
       .addCase(fetchPermisson.fulfilled, (state, { payload }) => {
-        state.buttonPermission = payload;
+        state.permission = payload.type;
+        state.buttonPermission = payload.data;
         state.ready = true;
       })
       .addCase(fetchPermisson.rejected, (state) => {
@@ -43,11 +41,10 @@ export const fetchPermisson: any = createAsyncThunk(
   async (type: "admin" | "guest") => {
     const data = await api.getPermission(type);
     if (data.code === ResCodeEnum.SUCCESS) {
-      return data.data;
+      return { data: data.data, type };
     }
   }
 );
 
-export const { setButtonPermission, setMenuPermission } =
-  permissionStore.actions;
+export const { setPermission } = permissionStore.actions;
 export default permissionStore;

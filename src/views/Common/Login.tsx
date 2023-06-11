@@ -43,7 +43,7 @@ const Login = () => {
     console.log("data", data);
     if (data.code === ResCodeEnum.SUCCESS) {
       dispatch(setUser(data.data));
-      dispatch(fetchPermisson("admin"));
+      dispatch(fetchPermisson(data.data.permission));
       navigate("/");
       setIsLoading(false);
     }

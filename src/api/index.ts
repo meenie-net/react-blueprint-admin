@@ -46,6 +46,7 @@ export const api = {
     return mockFetch({
       username,
       avatar: "",
+      permission: username === "admin" ? "admin" : "guest",
     });
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

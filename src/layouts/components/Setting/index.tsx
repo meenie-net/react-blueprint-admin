@@ -16,6 +16,7 @@ const Setting = (props: { mode: "dark" | "light" }) => {
   };
   const handleLanguageClick = (lng: TLngsKey) => {
     i18n.changeLanguage(lng);
+    emitter.emit(EmitEventEnum.LanguageChange);
   };
   const LanguageMenu = (
     <Menu className="min-w-[60px]">

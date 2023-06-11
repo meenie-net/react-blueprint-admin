@@ -10,4 +10,6 @@ export const enum EmitEventEnum {
   GlobalAlertConfirm = "GlobalAlertConfirm",
   CloseGlobalAlert = "CloseGlobalAlert",
   GlobalAlertCancel = "GlobalAlertCancel",
+  LanguageChange = "LanguageChange",
+  RefreshRoute = "RefreshRoute",
 }

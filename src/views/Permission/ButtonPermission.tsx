@@ -26,7 +26,12 @@ const ButtonPermission = () => {
         点击切换权限
       </Button>
       <pre>{JSON.stringify(BUTTONS)}</pre>
-      <FormGroup label={`当前用户按钮权限: ${current}`} className="mt-4">
+      <FormGroup
+        label={`当前权限路由：userList，当前用户按钮权限: ${
+          ready ? current : "……"
+        }`}
+        className="mt-4"
+      >
         <ControlGroup vertical={false}>
           {BUTTONS.add && (
             <Button icon="plus" intent="primary">
