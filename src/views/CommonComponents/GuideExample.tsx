@@ -3,7 +3,7 @@ import Driver from "driver.js";
 import "driver.js/dist/driver.min.css";
 import { useGlobalStore } from "../../hooks/useStore";
 
-const Guide = () => {
+const GuideExample = () => {
   const {
     layoutType,
     setting: { darkTheme },
@@ -101,4 +101,4 @@ const Guide = () => {
   );
 };
 
-export default Guide;
+export default GuideExample;

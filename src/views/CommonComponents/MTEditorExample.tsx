@@ -5,7 +5,7 @@ import "@wangeditor/editor/dist/css/style.css";
 import { useMTEditor } from "../../hooks/useMTEditor";
 import i18n from "../../i18n";
 
-const MTEditor = () => {
+const MTEditorExample = () => {
   const { editor, setEditor, html, setHtml } = useMTEditor({
     initialValue: "<p>hello</p>",
   });
@@ -46,4 +46,4 @@ const MTEditor = () => {
   );
 };
 
-export default MTEditor;
+export default MTEditorExample;

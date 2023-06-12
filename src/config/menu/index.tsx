@@ -104,7 +104,7 @@ const menus: IMenu[] = [
     children: [
       {
         path: "/commonComponents/guide",
-        element: "../views/CommonComponents/Guide.tsx",
+        element: "../views/CommonComponents/GuideExample.tsx",
         meta: {
           name: "guide",
           title: "引导页",
@@ -113,10 +113,37 @@ const menus: IMenu[] = [
       },
       {
         path: "/commonComponents/editor",
-        element: "../views/CommonComponents/MTEditor.tsx",
+        element: "../views/CommonComponents/MTEditorExample.tsx",
         meta: {
           name: "editor",
           title: "富文本编辑器",
+          icon: "edit",
+        },
+      },
+      {
+        path: "/commonComponents/selectFilter",
+        element: "../views/CommonComponents/SelectFilterExample.tsx",
+        meta: {
+          name: "selectFilter",
+          title: "分类筛选",
+          icon: "edit",
+        },
+      },
+      {
+        path: "/commonComponents/treeFilter",
+        element: "../views/CommonComponents/TreeFilterExample.tsx",
+        meta: {
+          name: "treeFilter",
+          title: "树形筛选",
+          icon: "edit",
+        },
+      },
+      {
+        path: "/commonComponents/uploadFile",
+        element: "../views/CommonComponents/UploadFileExample.tsx",
+        meta: {
+          name: "uploadFile",
+          title: "文件上传",
           icon: "edit",
         },
       },
