@@ -1,1 +1,0 @@
-import{j as e}from"./index-d8d7bd45.js";import{u as s}from"./useRouteHandle-91f0f52c.js";const r=()=>{const t=s();return e.jsxs("div",{children:["这是嵌套菜单",t.name,e.jsx("input",{placeholder:"input",type:"text"})]})};export{r as default};
