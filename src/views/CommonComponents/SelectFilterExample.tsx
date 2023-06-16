@@ -1,6 +1,6 @@
 import { Card } from "@blueprintjs/core";
 import SelectFilter, {
-  IFilterResult,
+  ISelectFilterResult,
   ISelectFilter,
 } from "../../components/SelectFilter";
 import { useState } from "react";
@@ -53,7 +53,7 @@ const SelectFilterExample = () => {
     },
   ];
   const [res, setRes] = useState({});
-  const handleChange = (result: IFilterResult) => {
+  const handleChange = (result: ISelectFilterResult) => {
     setRes(result);
   };
   return (
