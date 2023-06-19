@@ -2,8 +2,8 @@ import { Classes, Tree, TreeNodeInfo } from "@blueprintjs/core";
 import { useCallback, useEffect } from "react";
 import { useImmerReducer } from "use-immer";
 import "./style.scss";
-type NodePath = number[];
 
+type NodePath = number[];
 type TreeAction =
   | {
       type: "SET_IS_EXPANDED";
@@ -12,7 +12,11 @@ type TreeAction =
   | { type: "DESELECT_ALL" }
   | {
       type: "SET_IS_SELECTED";
-      payload: { path: NodePath; isSelected: boolean; multiple: boolean };
+      payload: {
+        path: NodePath;
+        isSelected: boolean;
+        multiple: boolean;
+      };
     };
 
 function forEachNode(
@@ -53,15 +57,65 @@ function treeReducer(state: TreeNodeInfo[], action: TreeAction) {
       break;
     case "SET_IS_SELECTED":
       // eslint-disable-next-line no-case-declarations
-      // const newState3 = cloneDeep(state);
       forNodeAtPath(state, action.payload.path, (node) => {
         node.isSelected = action.payload.isSelected;
-        node.icon = action.payload.isSelected ? (
-          <input type="checkbox" checked className="mr-2" readOnly />
-        ) : (
-          <input type="checkbox" className="mr-2" readOnly />
-        );
-        node.className = "tree-bg-none";
+        if (action.payload.multiple && node.childNodes) {
+          // 多选
+          node.className = "tree-bg-none";
+          // 多选有子选项
+          if (action.payload.isSelected) {
+            // 不全选改全选
+            node.icon = (
+              <input type="checkbox" checked className="mr-2" readOnly />
+            );
+            node.childNodes.forEach((element) => {
+              element.isSelected = true;
+              element.icon = (
+                <input type="checkbox" checked className="mr-2" readOnly />
+              );
+            });
+          } else {
+            // 全选改全不选
+            node.icon = (
+              <input
+                type="checkbox"
+                checked={false}
+                className="mr-2"
+                readOnly
+              />
+            );
+            node.childNodes.forEach((element) => {
+              element.isSelected = false;
+              element.icon = (
+                <input
+                  type="checkbox"
+                  checked={false}
+                  className="mr-2"
+                  readOnly
+                />
+              );
+            });
+          }
+        } else if (action.payload.multiple && !node.childNodes) {
+          node.className = "tree-bg-none";
+          // 多选无子选项
+          if (action.payload.isSelected) {
+            // 不选改选
+            node.icon = (
+              <input type="checkbox" checked className="mr-2" readOnly />
+            );
+          } else {
+            // 选改不选
+            node.icon = (
+              <input
+                type="checkbox"
+                checked={false}
+                className="mr-2"
+                readOnly
+              />
+            );
+          }
+        }
       });
       return state;
     default:
@@ -85,16 +139,18 @@ const TreeFilter = ({ options = [], multiple, onChange }: ITreeFilterProps) => {
         childNodes = ganerateTree(node.childNodes);
         return {
           ...node,
+          isSelected: false,
           icon: multiple ? (
-            <input type="checkbox" className="mr-2" readOnly />
+            <input type="checkbox" checked={false} className="mr-2" readOnly />
           ) : null,
           childNodes,
         };
       } else {
         return {
           ...node,
+          isSelected: false,
           icon: multiple ? (
-            <input type="checkbox" className="mr-2" readOnly />
+            <input type="checkbox" checked={false} className="mr-2" readOnly />
           ) : null,
         };
       }
@@ -140,9 +196,21 @@ const TreeFilter = ({ options = [], multiple, onChange }: ITreeFilterProps) => {
     },
     []
   );
+
   useEffect(() => {
-    onChange([]);
-    console.log("nodes", nodes);
+    const getSelectedId = (nodes: TreeNodeInfo[]) => {
+      const res: any[] = [];
+      nodes.forEach((element) => {
+        if (element.childNodes) {
+          res.push(getSelectedId(element.childNodes));
+        }
+        if (element.isSelected && !element.childNodes) {
+          res.push(element.id);
+        }
+      });
+      return res.flat();
+    };
+    onChange(getSelectedId(nodes));
   }, [nodes]);
   return (
     <Tree

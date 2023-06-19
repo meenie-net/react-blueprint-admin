@@ -138,13 +138,13 @@ const SelectFilter = (props: {
     <div>
       {options
         ? options.map((item, i) => (
-            <div key={i} className="mt-4 flex items-center">
+            <div key={i} className="mt-4 flex flex-wrap items-center">
               <span className="text-base">
                 {item.title}（{`${item.multiple ? "多" : "单"}`}）：
               </span>
               {item.multiple && (
                 <Button
-                  className="mr-4 rounded-full"
+                  className="mr-4 whitespace-nowrap rounded-full"
                   intent="primary"
                   outlined
                   active={
@@ -161,7 +161,7 @@ const SelectFilter = (props: {
               {item.options.map((option, k) => (
                 <Button
                   key={k}
-                  className="mr-4 rounded-full"
+                  className="mr-4 whitespace-nowrap rounded-full"
                   intent="primary"
                   outlined
                   active={
