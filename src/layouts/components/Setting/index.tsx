@@ -1,22 +1,41 @@
-import { ButtonGroup, Button, Icon, Menu } from "@blueprintjs/core";
+import { ButtonGroup, Button, Icon, Menu, Divider } from "@blueprintjs/core";
 import emitter, { EmitEventEnum } from "../../../utils/EventEmitter";
 import { MenuItem2, Popover2 } from "@blueprintjs/popover2";
 import Notification from "./components/Notification";
 import i18n, { lngs, type TLngsKey } from "../../../i18n";
 import { assetsUrl } from "../../../utils";
 import { useGlobalStore } from "../../../hooks/useStore";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../../../stores/user";
+import { useNavigate } from "react-router-dom";
+import { useHandleConfirm } from "../../../hooks/useHandleConfirm";
 
 const Setting = (props: { mode: "dark" | "light" }) => {
   const { mode } = props;
   const {
     setting: { assemblyLarge },
   } = useGlobalStore();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleThemeClick = () => {
     emitter.emit(EmitEventEnum.OpenThemeDrawer);
   };
   const handleLanguageClick = (lng: TLngsKey) => {
     i18n.changeLanguage(lng);
     emitter.emit(EmitEventEnum.LanguageChange);
+  };
+  const handleLogout = async () => {
+    await useHandleConfirm({
+      handler: () => {
+        return new Promise(() => {
+          dispatch(removeUser());
+          navigate("/login");
+        });
+      },
+      param: {},
+      message: `确认退出吗？`,
+      intent: "warning",
+    });
   };
   const LanguageMenu = (
     <Menu className="min-w-[60px]">
@@ -30,6 +49,14 @@ const Setting = (props: { mode: "dark" | "light" }) => {
           onClick={() => handleLanguageClick(lng as TLngsKey)}
         />
       ))}
+    </Menu>
+  );
+  const AccountMenu = (
+    <Menu className="min-w-[60px]" large={assemblyLarge}>
+      <MenuItem2 text="个人中心" />
+      <MenuItem2 text="修改密码" />
+      <Divider />
+      <MenuItem2 text="退出登录" onClick={handleLogout} />
     </Menu>
   );
   return (
@@ -79,7 +106,7 @@ const Setting = (props: { mode: "dark" | "light" }) => {
           </Button>
         </Popover2>
         <span className="ml-3 flex items-center font-semibold">Meenie</span>
-        <Popover2 content={LanguageMenu} placement="bottom">
+        <Popover2 content={AccountMenu} placement="bottom">
           <Button>
             <img
               src={assetsUrl("/assets/avatar.png")}

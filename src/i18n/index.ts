@@ -32,6 +32,7 @@ export default i18n;
 export const lngs = {
   en: { nativeName: "English" },
   zh: { nativeName: "中文" },
+  ja: { nativeName: "日文" },
 };
 
 export type TLngsKey = keyof typeof lngs;

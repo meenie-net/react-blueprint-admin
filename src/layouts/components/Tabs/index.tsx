@@ -1,4 +1,4 @@
-import { Button, Tabs, Tab, Icon } from "@blueprintjs/core";
+import { Button, Tabs, Tab, Icon, Menu, Divider } from "@blueprintjs/core";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { RootState } from "../../../stores";
 import { useTranslation } from "react-i18next";
 import "./style.scss";
 import { useGlobalStore } from "../../../hooks/useStore";
+import { MenuItem2, Popover2 } from "@blueprintjs/popover2";
 
 const TabsSection = () => {
   const {
@@ -137,13 +138,13 @@ const TabsSection = () => {
             <>
               <span
                 ref={leftRef}
-                className="absolute left-0 z-50 flex h-full w-fit items-center bg-white pr-2"
+                className="dark absolute left-0 z-10 flex h-full w-fit items-center bg-white pr-2"
               >
                 <Icon icon="arrow-left" />
               </span>
               <span
                 ref={rightRef}
-                className="absolute right-0 z-50 flex h-full w-fit items-center bg-white px-2"
+                className="dark absolute right-0 z-10 flex h-full w-fit items-center bg-white px-2"
               >
                 <Icon icon="arrow-right" />
               </span>
@@ -165,7 +166,7 @@ const TabsSection = () => {
                   id={tab.path}
                   title={t(`menu.${tab.meta.name}`)}
                   icon={showTabIcon && tab.meta.icon}
-                  className="group select-none"
+                  className="group select-none text-gray-400"
                 >
                   <Icon
                     icon="small-cross"
@@ -180,12 +181,25 @@ const TabsSection = () => {
           </Tabs>
         </div>
         <div className="mr-1 flex items-center">
-          <Button
-            icon="more"
-            minimal={true}
-            large={assemblyLarge}
-            small={!assemblyLarge}
-          />
+          <Popover2
+            content={
+              <Menu className="min-w-[60px]" large={assemblyLarge}>
+                <MenuItem2 text="关闭当前" />
+                <MenuItem2 text="关闭所有" />
+                <Divider />
+                <MenuItem2 text="关闭当前" />
+              </Menu>
+            }
+            fill={true}
+            placement="bottom-end"
+          >
+            <Button
+              icon="more"
+              minimal={true}
+              large={assemblyLarge}
+              small={!assemblyLarge}
+            />
+          </Popover2>
         </div>
       </div>
     </>

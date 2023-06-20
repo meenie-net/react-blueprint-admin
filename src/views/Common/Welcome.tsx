@@ -4,7 +4,7 @@ const Welcome = () => {
   const { t } = useTranslation();
   return (
     <div className="h-full text-center">
-      <h1 className="text-2xl font-bold">{t("welcome")}</h1>
+      <h1 className="mt-24 text-2xl font-bold">{t("welcome")}</h1>
       <div className="my-4">
         <span className="bg-black px-4 font-serif text-6xl font-bold text-white">
           Mee Admin
@@ -22,7 +22,7 @@ const Welcome = () => {
       </div>
       <div>
         <span className="font-serif text-xl">
-          Mee Admin是一个<strong>清爽</strong>并且<strong>舒服的</strong>
+          Mee Admin是一个<strong>清爽</strong>，<strong>视觉效果舒适的</strong>
           后台模板，它使用了
           <a className="text-orange-400" href="https://blueprintjs.com/">
             blueprint

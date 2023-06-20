@@ -12,11 +12,13 @@ const userStore = createSlice({
   initialState,
   reducers: {
     setUser: (state, payload) => {
-      console.log("payload", payload);
       state.user = payload;
+    },
+    removeUser: (state) => {
+      state.user = {};
     },
   },
 });
 
-export const { setUser } = userStore.actions;
+export const { setUser, removeUser } = userStore.actions;
 export default userStore;
