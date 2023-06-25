@@ -151,7 +151,7 @@ const UserList = () => {
         {/* 用户列表操作区左边 */}
         <div className="flex">
           <FormGroup
-            inline={true}
+            inline
             label={"姓名"}
             labelFor="search-input"
             className="mr-2"
@@ -163,7 +163,7 @@ const UserList = () => {
             />
           </FormGroup>
           <FormGroup
-            inline={true}
+            inline
             label={"电话"}
             labelFor="text-input"
             className="mr-2"
@@ -177,10 +177,10 @@ const UserList = () => {
         </div>
         {/* 用户列表操作区右边 */}
         <div className="flex">
-          <FormGroup inline={true} className="mr-2">
+          <FormGroup inline className="mr-2">
             <Button icon="search" text="搜索" />
           </FormGroup>
-          <FormGroup inline={true}>
+          <FormGroup inline>
             <Button icon="reset" text="重置" />
           </FormGroup>
         </div>
@@ -191,10 +191,10 @@ const UserList = () => {
         <div className="flex">
           {BUTTONS.delete && (
             <>
-              <FormGroup inline={true} className="mr-2">
+              <FormGroup inline className="mr-2">
                 <Button onClick={handleAdd} icon="search" text="新增用户" />
               </FormGroup>
-              <FormGroup inline={true} className="mr-2">
+              <FormGroup inline className="mr-2">
                 <Button
                   icon="search"
                   text="批量删除"

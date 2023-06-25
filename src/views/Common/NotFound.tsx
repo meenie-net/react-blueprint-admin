@@ -16,7 +16,7 @@ const NotFound = () => {
   );
   const action = (
     <Button
-      outlined={true}
+      outlined
       onClick={() => navigate("/")}
       text="Go Home"
       icon="home"

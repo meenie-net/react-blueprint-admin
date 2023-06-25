@@ -60,7 +60,7 @@ const Pagination = (props: {
           options={pageSizeArr.map((v) => {
             return { labal: v, value: `${v}条/页` };
           })}
-          fill={true}
+          fill
           onChange={handleSelect}
         />
       </ControlGroup>

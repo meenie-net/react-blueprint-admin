@@ -2,6 +2,7 @@ import { ButtonGroup, Button, Icon, Menu, Divider } from "@blueprintjs/core";
 import emitter, { EmitEventEnum } from "../../../utils/EventEmitter";
 import { MenuItem2, Popover2 } from "@blueprintjs/popover2";
 import Notification from "./components/Notification";
+import { Icon as Iconify } from "@iconify/react";
 import i18n, { lngs, type TLngsKey } from "../../../i18n";
 import { assetsUrl } from "../../../utils";
 import { useGlobalStore } from "../../../hooks/useStore";
@@ -33,6 +34,7 @@ const Setting = (props: { mode: "dark" | "light" }) => {
         });
       },
       param: {},
+      icon: <Iconify icon="ph:question" height="1.5em" />,
       message: `确认退出吗？`,
       intent: "warning",
     });
@@ -41,9 +43,9 @@ const Setting = (props: { mode: "dark" | "light" }) => {
     <Menu className="min-w-[60px]">
       {Object.keys(lngs).map((lng) => (
         <MenuItem2
-          className={`${
+          className={
             i18n.resolvedLanguage === lng ? "font-bold" : "font-normal"
-          }`}
+          }
           key={lng}
           text={lngs[lng as TLngsKey].nativeName}
           onClick={() => handleLanguageClick(lng as TLngsKey)}
@@ -61,7 +63,7 @@ const Setting = (props: { mode: "dark" | "light" }) => {
   );
   return (
     <>
-      <ButtonGroup minimal={true} large={assemblyLarge}>
+      <ButtonGroup minimal large={assemblyLarge}>
         <Button id="global-search">
           <Icon
             icon="search"
@@ -69,7 +71,7 @@ const Setting = (props: { mode: "dark" | "light" }) => {
             size={assemblyLarge ? 24 : 18}
           />
         </Button>
-        <Popover2 content={LanguageMenu} fill={true} placement="bottom">
+        <Popover2 content={LanguageMenu} fill placement="bottom">
           <Button id="i18n">
             <Icon
               icon="translate"
@@ -105,7 +107,7 @@ const Setting = (props: { mode: "dark" | "light" }) => {
             </span>
           </Button>
         </Popover2>
-        <span className="ml-3 flex items-center font-semibold">Meenie</span>
+        <span className="flex items-center ml-3 font-semibold">Meenie</span>
         <Popover2 content={AccountMenu} placement="bottom">
           <Button>
             <img

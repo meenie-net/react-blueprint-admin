@@ -29,9 +29,7 @@ const NotificationPanel = () => (
   <Menu className="min-w-[60px]">
     {Object.keys(lngs).map((lng) => (
       <MenuItem2
-        className={`${
-          i18n.resolvedLanguage === lng ? "font-bold" : "font-normal"
-        }`}
+        className={i18n.resolvedLanguage === lng ? "font-bold" : "font-normal"}
         key={lng}
         text={lngs[lng as TLngsKey].nativeName}
       />

@@ -49,7 +49,7 @@ const GlobalAlert = (props: AlertProps) => {
   return (
     <Alert
       {...props}
-      className={`${darkTheme ? "bp4-dark" : ""}`}
+      className={darkTheme ? "bp4-dark" : ""}
       cancelButtonText="取消"
       confirmButtonText="确认"
       icon={icon}

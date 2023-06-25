@@ -232,9 +232,7 @@ const ConfigurableForm = () => {
         childrenProps: {
           leftIcon: "user",
           placeholder: "请选择标签",
-          rightElement: (
-            <Button disabled={false} icon={"cross"} minimal={true} />
-          ),
+          rightElement: <Button disabled={false} icon={"cross"} />,
           tagProps: {
             large: false,
             minimal: true,
@@ -295,7 +293,7 @@ const ConfigurableForm = () => {
     <div className="flex h-full flex-col">
       <Card className="pb-0">
         <div>
-          <FormGroup inline={true} label={<div className="w-16">样式设置</div>}>
+          <FormGroup inline label={<div className="w-16">样式设置</div>}>
             <Switch
               inline
               label="disabled"

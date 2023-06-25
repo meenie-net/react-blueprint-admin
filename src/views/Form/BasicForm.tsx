@@ -266,9 +266,7 @@ const BasicForm = () => {
             childrenProps={{
               leftIcon: "user",
               placeholder: "请选择标签",
-              rightElement: (
-                <Button disabled={false} icon={"cross"} minimal={true} />
-              ),
+              rightElement: <Button disabled={false} icon={"cross"} minimal />,
               disabled,
               tagProps: {
                 large: false,

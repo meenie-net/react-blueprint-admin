@@ -43,7 +43,7 @@ const ColumnClosedMenu = (props: { subMenu: IMenu[] }) => {
   return (
     <Menu
       large={assemblyLarge}
-      className={`${assemblyLarge ? "min-w-[60px]" : "min-w-[50px]"}`}
+      className={assemblyLarge ? "min-w-[60px]" : "min-w-[50px]"}
     >
       {subMenu.map((item) =>
         item.children ? (

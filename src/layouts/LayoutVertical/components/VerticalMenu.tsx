@@ -106,7 +106,7 @@ const VerticalMenu = () => {
           item.children ? (
             <Popover2
               key={item.path}
-              minimal={true}
+              minimal
               interactionKind="hover"
               content={item.children && generateSubMenu(item.children)}
               placement="bottom"

@@ -190,12 +190,12 @@ const TabsSection = () => {
                 <MenuItem2 text="关闭当前" />
               </Menu>
             }
-            fill={true}
+            fill
             placement="bottom-end"
           >
             <Button
               icon="more"
-              minimal={true}
+              minimal
               large={assemblyLarge}
               small={!assemblyLarge}
             />

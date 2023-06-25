@@ -40,9 +40,9 @@ const LayoutTransverse = () => {
           <img
             src={assetsUrl("/assets/avatar.png")}
             alt=""
-            className={`${
+            className={
               assemblyLarge ? "h-8 w-8 rounded-full" : "h-7 w-7 rounded-full"
-            }`}
+            }
           />
           {menuOpen && <span className="whitespace-nowrap">Mee Admin</span>}
         </div>
@@ -64,7 +64,7 @@ const LayoutTransverse = () => {
             {/* OpenIcon & Breadcrumb */}
             <div className="flex items-center">
               {/* OpenIcon */}
-              <Button id="open-icon" minimal={true} onClick={handleMenuOpen}>
+              <Button id="open-icon" minimal onClick={handleMenuOpen}>
                 <Icon
                   icon={menuOpen ? "menu-closed" : "menu-open"}
                   className="animate-appear_right"

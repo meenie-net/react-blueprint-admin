@@ -4,9 +4,9 @@ const Welcome = () => {
   const { t } = useTranslation();
   return (
     <div className="h-full text-center">
-      <h1 className="mt-24 text-2xl font-bold">{t("welcome")}</h1>
+      <h1 className="text-2xl font-bold">{t("welcome")}</h1>
       <div className="my-4">
-        <span className="bg-black px-4 font-serif text-6xl font-bold text-white">
+        <span className="px-4 font-serif text-6xl font-bold text-white bg-black">
           Mee Admin
         </span>
       </div>

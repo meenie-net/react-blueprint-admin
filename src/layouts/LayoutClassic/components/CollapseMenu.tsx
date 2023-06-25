@@ -83,7 +83,7 @@ const CollapseMenu = (props: { key: string; item: IMenu }) => {
           icon={item.meta.icon}
           active={collapseActive}
           onClick={handleCollapse}
-          selected={true}
+          selected
           popoverProps={{
             popoverClassName: "fix-popmenu-min-w",
           }}

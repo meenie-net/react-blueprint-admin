@@ -140,7 +140,7 @@ const SelectFilter = (props: {
         ? options.map((item, i) => (
             <div key={i} className="mt-4 flex flex-wrap items-center">
               <span className="text-base">
-                {item.title}（{`${item.multiple ? "多" : "单"}`}）：
+                {item.title}（{item.multiple ? "多" : "单"}）：
               </span>
               {item.multiple && (
                 <Button
