@@ -22,7 +22,7 @@ const EnhancedFileInput = (props: {
     fieldState: { error },
   } = useController(controllerConfig);
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
-    console.log("e.target", e.target.value!);
+    // console.log("e.target", e.target.value!);
     // field.onChange(value);
   };
 

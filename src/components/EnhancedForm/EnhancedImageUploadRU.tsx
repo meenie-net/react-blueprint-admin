@@ -36,18 +36,18 @@ const EnhancedImageUpload = ({
   childrenProps: {
     uploadButton,
     type = "thumbnail",
-    crop = false,
-    preview = false,
+    // crop = false,
+    // preview = false,
   },
 }: IEnhancedImageUploadProps) => {
   const {
     field,
     fieldState: { error },
   } = useController(controllerConfig);
-  const mockSenderEnhancer = getMockSenderEnhancer({
-    delay: 1500,
-    progressIntervals: [20, 40, 75, 80, 90, 99],
-  });
+  // const mockSenderEnhancer = getMockSenderEnhancer({
+  //   delay: 1500,
+  //   progressIntervals: [20, 40, 75, 80, 90, 99],
+  // });
   const LogProgress = () => {
     const [value, setValue] = useState(0);
     useItemProgressListener((item) => {

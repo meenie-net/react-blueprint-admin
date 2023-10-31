@@ -5,11 +5,11 @@ import EnhancedImageUploadRU from "../../components/EnhancedForm/EnhancedImageUp
 import { Icon } from "@iconify/react";
 
 const UploadFileExample = () => {
-  const { handleSubmit, control } = useForm({ mode: "all" });
+  const { control } = useForm({ mode: "all" });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
+  // const onSubmit = (data: any) => {
+  //   console.log(data);
+  // };
   return (
     <Card className="h-full overflow-y-auto">
       <div className="grid grid-cols-1 gap-2 px-2">
