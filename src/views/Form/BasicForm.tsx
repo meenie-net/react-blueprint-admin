@@ -18,6 +18,7 @@ import EnhancedTagInput from "../../components/EnhancedForm/EnhancedTagInput";
 import EnhancedDatePicker from "../../components/EnhancedForm/EnhancedDatePicker";
 import EnhancedDateRangeInput from "../../components/EnhancedForm/EnhancedDateRangeInput";
 import EnhancedSelect from "../../components/EnhancedForm/EnhancedSelect";
+import EnhancedTextArea from "../../components/EnhancedForm/EnhancedTextArea";
 
 const BasicForm = () => {
   const [disabled, setDisabled] = useState(false);
@@ -313,6 +314,23 @@ const BasicForm = () => {
               labelInfo: <div className="w-16">(必填)</div>,
             }}
             childrenProps={{
+              disabled,
+            }}
+          />
+          <EnhancedTextArea
+            controllerConfig={{
+              name: "desc",
+              control,
+              defaultValue: "",
+            }}
+            formgroupProps={{
+              helperText: "填写说明：",
+              inline,
+              label: <div className="w-16">描述</div>,
+              labelInfo: <div className="w-16">(必填)</div>,
+            }}
+            childrenProps={{
+              placeholder: "请输入产品描述",
               disabled,
             }}
           />

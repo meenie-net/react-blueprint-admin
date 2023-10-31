@@ -13,6 +13,7 @@
     "editor": "Editor",
     "selectFilter": "SelectFilter",
     "treeFilter": "TreeFilter",
+    "lazyLoad": "LazyLoad",
     "uploadFile": "UploadFile",
     "form": "Form",
     "basicForm": "BasicForm",

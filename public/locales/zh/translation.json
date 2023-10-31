@@ -13,6 +13,7 @@
     "editor": "富文本编辑器",
     "selectFilter": "分类筛选",
     "treeFilter": "树形筛选",
+    "lazyLoad": "图片懒加载",
     "uploadFile": "文件上传",
     "form": "常用表单",
     "basicForm": "基础表单",

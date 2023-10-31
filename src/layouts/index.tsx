@@ -28,7 +28,7 @@ export const Layout = () => {
     <AliveScope>
       <Suspense
         fallback={
-          <div className="flex h-full items-center justify-center">
+          <div className="flex items-center justify-center h-full">
             <Spinner size={SpinnerSize.LARGE} />
           </div>
         }

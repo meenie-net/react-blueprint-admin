@@ -139,6 +139,15 @@ const menus: IMenu[] = [
         },
       },
       {
+        path: "/commonComponents/lazyLoad",
+        element: "../views/CommonComponents/LazyLoadExample.tsx",
+        meta: {
+          name: "lazyLoad",
+          title: "图片懒加载",
+          icon: "edit",
+        },
+      },
+      {
         path: "/commonComponents/uploadFile",
         element: "../views/CommonComponents/UploadFileExample.tsx",
         meta: {
