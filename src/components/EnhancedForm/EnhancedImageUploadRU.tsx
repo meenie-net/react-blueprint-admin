@@ -4,7 +4,7 @@ import {
   Button,
   ProgressBar,
 } from "@blueprintjs/core";
-import { getMockSenderEnhancer } from "@rpldy/mock-sender";
+// import { getMockSenderEnhancer } from "@rpldy/mock-sender";
 import { asUploadButton } from "@rpldy/upload-button";
 import UploadPreview from "@rpldy/upload-preview";
 import Uploady, {

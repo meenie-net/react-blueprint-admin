@@ -4,7 +4,7 @@ import {
   FileInputProps,
   FileInput,
 } from "@blueprintjs/core";
-import { FormEvent } from "react";
+// import { FormEvent } from "react";
 import {
   FieldValues,
   UseControllerProps,
@@ -21,7 +21,7 @@ const EnhancedFileInput = (props: {
     field,
     fieldState: { error },
   } = useController(controllerConfig);
-  const handleChange = (e: FormEvent<HTMLInputElement>) => {
+  const handleChange = () => {
     // console.log("e.target", e.target.value!);
     // field.onChange(value);
   };
