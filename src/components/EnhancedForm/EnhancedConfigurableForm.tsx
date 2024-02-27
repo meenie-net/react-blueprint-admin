@@ -11,14 +11,14 @@ import EnhancedSlider from "./EnhancedSlider";
 import EnhancedSwitch from "./EnhancedSwitch";
 import EnhancedTagInput from "./EnhancedTagInput";
 import { FieldValues, UseControllerProps } from "react-hook-form";
-import EnhancedSelect from "./EnhancedSelect";
+import EnhancedHTMLSelect from "./EnhancedHTMLSelect";
 export interface FormFieldOption {
   type:
     | "input"
     | "switch"
     | "checkbox"
     | "radioGroup"
-    | "select"
+    | "HTMLSelect"
     | "slider"
     | "fileInput"
     | "numericInput"
@@ -76,9 +76,12 @@ const EnhancedConfigurableForm = (props: {
                 childrenList={field.childrenList!}
               />
             );
-          case "select":
+          case "HTMLSelect":
             return (
-              <EnhancedSelect key={field.controllerConfig.name} {...field} />
+              <EnhancedHTMLSelect
+                key={field.controllerConfig.name}
+                {...field}
+              />
             );
           case "slider":
             return (

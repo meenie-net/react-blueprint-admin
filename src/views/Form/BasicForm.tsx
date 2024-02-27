@@ -17,8 +17,9 @@ import EnhancedNumericInput from "../../components/EnhancedForm/EnhancedNumericI
 import EnhancedTagInput from "../../components/EnhancedForm/EnhancedTagInput";
 import EnhancedDatePicker from "../../components/EnhancedForm/EnhancedDatePicker";
 import EnhancedDateRangeInput from "../../components/EnhancedForm/EnhancedDateRangeInput";
-import EnhancedSelect from "../../components/EnhancedForm/EnhancedSelect";
 import EnhancedTextArea from "../../components/EnhancedForm/EnhancedTextArea";
+import EnhancedHTMLSelect from "../../components/EnhancedForm/EnhancedHTMLSelect";
+import EnhancedSelect from "../../components/EnhancedForm/EnhancedSelect";
 
 const BasicForm = () => {
   const [disabled, setDisabled] = useState(false);
@@ -176,7 +177,7 @@ const BasicForm = () => {
               },
             ]}
           />
-          <EnhancedSelect
+          <EnhancedHTMLSelect
             controllerConfig={{
               name: "degree",
               control,
@@ -191,6 +192,38 @@ const BasicForm = () => {
             childrenProps={{
               placeholder: "请选择学位",
               options: ["本科", "硕士", "高中"],
+            }}
+          />
+          <EnhancedSelect
+            controllerConfig={{
+              name: "degree",
+              control,
+              defaultValue: "",
+            }}
+            formgroupProps={{
+              helperText: "填写说明：",
+              inline,
+              label: <div className="w-16">权限设置</div>,
+              labelInfo: <div className="w-16">(必填)</div>,
+            }}
+            childrenProps={{
+              config: {
+                titleKey: "name",
+                groupKey: "category",
+                filterKeys: ["name", "category"],
+                optionKeysKey: "id",
+                resultKey: "id",
+              },
+              selectProps: {
+                items: [
+                  { level: "1-1", name: "普通本科", category: "本科", id: 1 },
+                  { level: "1-2", name: "专升本", category: "本科", id: 2 },
+                  { level: "2-1", name: "学术硕士", category: "硕士", id: 3 },
+                  { level: "2-2", name: "专业硕士", category: "硕士", id: 4 },
+                  { level: "3", name: "博士", category: "博士", id: 5 },
+                ],
+                resetOnClose: true,
+              },
             }}
           />
           <EnhancedSlider

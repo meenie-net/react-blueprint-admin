@@ -133,7 +133,7 @@ const ConfigurableForm = () => {
         ],
       }, // degree
       {
-        type: "select",
+        type: "HTMLSelect",
         controllerConfig: {
           name: "degree",
           control,
