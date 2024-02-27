@@ -72,7 +72,7 @@ const EnhancedSelect = (props: {
   };
 
   const renderOption = useCallback<ItemRenderer<any>>(
-    (option, { handleClick, handleFocus, modifiers, query }) => {
+    (option, { handleClick, handleFocus, modifiers }) => {
       if (!modifiers.matchesPredicate) {
         return null;
       }
