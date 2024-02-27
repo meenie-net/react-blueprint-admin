@@ -1,0 +1,1 @@
+import{u as m}from"./useRouteHandle33551.js";import{bb as a}from"./index33551.js";const b=t=>{const e=(t==null?void 0:t.name)||m().name,{buttonPermission:o,ready:s}=a(),r=o[e]||[];return console.log("2222",2222),{BUTTONS:(()=>{const n={};return r.forEach(u=>{n[u]=!0}),n})(),ready:s}};export{b as u};
